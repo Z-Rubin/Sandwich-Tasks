@@ -1,0 +1,14 @@
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\Simple Calculator\Simple Calculator\obj\Debug\net8.0\Simple Calculator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\Simple Calculator\Simple Calculator\obj\Debug\net8.0\Simple Calculator.AssemblyInfoInputs.cache
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\Simple Calculator\Simple Calculator\obj\Debug\net8.0\Simple Calculator.AssemblyInfo.cs
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\Simple Calculator\Simple Calculator\obj\Debug\net8.0\Simple Calculator.csproj.CoreCompileInputs.cache
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\Simple Calculator\Simple Calculator\bin\Debug\net8.0\Simple Calculator.exe
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\Simple Calculator\Simple Calculator\bin\Debug\net8.0\Simple Calculator.deps.json
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\Simple Calculator\Simple Calculator\bin\Debug\net8.0\Simple Calculator.runtimeconfig.json
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\Simple Calculator\Simple Calculator\bin\Debug\net8.0\Simple Calculator.dll
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\Simple Calculator\Simple Calculator\bin\Debug\net8.0\Simple Calculator.pdb
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\Simple Calculator\Simple Calculator\obj\Debug\net8.0\Simple Calculator.dll
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\Simple Calculator\Simple Calculator\obj\Debug\net8.0\refint\Simple Calculator.dll
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\Simple Calculator\Simple Calculator\obj\Debug\net8.0\Simple Calculator.pdb
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\Simple Calculator\Simple Calculator\obj\Debug\net8.0\Simple Calculator.genruntimeconfig.cache
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\Simple Calculator\Simple Calculator\obj\Debug\net8.0\ref\Simple Calculator.dll
