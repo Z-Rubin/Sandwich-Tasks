@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 
 class Simple_Calculator
@@ -9,12 +10,97 @@ class Simple_Calculator
 
     static char[] Add_Sub = { '+', '-' };
     static char[] Times_Div = { '*', '/' };
+    static char[] Brackets = { '(', ')' };
 
 
 
     static double Evaluate(string s)
     {
+        double bracket_result;
+        string innermost_bracket;
+
+        s = RemoveSpaces(s);
+        Console.WriteLine(s);
+        s = InsertTimes(s);
+        Console.WriteLine(s);
+
+
+        if (s.IndexOfAny(Brackets) == -1) {
+            return Split_Add_Sub(s);
+        }
+        while (s.IndexOfAny(Brackets) != -1)
+        {
+            innermost_bracket = FindInnermostBracketedPart(s);
+            bracket_result = Split_Add_Sub(innermost_bracket);
+           
+            // Replace the innermost bracketed part with the string representation of bracket_result
+            s = s.Replace("(" + innermost_bracket + ")", bracket_result.ToString());
+        }
         return Split_Add_Sub(s);
+
+    }
+
+    static string RemoveSpaces(string input)
+    {
+        return input.Replace(" ", "");
+    }
+
+    static string FindInnermostBracketedPart(string equation)
+    {
+        Stack<int> stack = new Stack<int>();
+        int start = -1;
+        int end = -1;
+
+        for (int i = 0; i < equation.Length; i++)
+        {
+            char ch = equation[i];
+
+            if (ch == '(')
+            {
+                stack.Push(i);
+            }
+            else if (ch == ')')
+            {
+                if (stack.Count > 0)
+                {
+                    start = stack.Pop();
+                    end = i;
+                }
+            }
+        }
+        string result = equation.Substring(start + 1, end - start - 1);
+        if (result.IndexOfAny(Brackets) == -1)
+        {
+            return result;
+        }
+        else
+        {
+            return FindInnermostBracketedPart(result);
+        }
+    }
+
+    static string InsertTimes(string s)
+    {
+        StringBuilder result = new StringBuilder();
+
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (s[i] == '(' && i + 1 < s.Length && Char.IsDigit(s[i - 1]))
+            {
+                // Insert '*' before the opening bracket if the previous character is a digit
+                result.Append('*');
+            }
+
+            result.Append(s[i]);
+
+            if (s[i] == ')' && i + 1 < s.Length && Char.IsDigit(s[i + 1]))
+            {
+                // Insert '*' after the closing bracket if the next character is a digit and not at the end of the string
+                result.Append('*');
+            }
+        }
+
+        return result.ToString();
     }
 
     static double Split_Add_Sub(string s)
@@ -59,7 +145,6 @@ class Simple_Calculator
       
 
                 eval_string = s.Substring(1, pos - 1);
-                Console.WriteLine(eval_string);
 
                 if (sub_s.IndexOfAny(Times_Div) == -1)
                 {
@@ -146,7 +231,6 @@ class Simple_Calculator
             
             equation  = Console.ReadLine();
             double output = Evaluate(equation);
-            //double output = Solve_Times_Div(equation);
             Console.WriteLine("Result:");
             Console.WriteLine(output);
      

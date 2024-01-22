@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Simple Calculator\\Simple Calculator\\Simple Calculator.csproj",
+      "projectUniqueName": "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Sandwich-tasks\\Sandwich-Tasks\\Simple Calculator\\Simple Calculator\\Simple Calculator.csproj",
       "projectName": "Simple Calculator",
-      "projectPath": "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Simple Calculator\\Simple Calculator\\Simple Calculator.csproj",
+      "projectPath": "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Sandwich-tasks\\Sandwich-Tasks\\Simple Calculator\\Simple Calculator\\Simple Calculator.csproj",
       "packagesPath": "C:\\Users\\cazni\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Simple Calculator\\Simple Calculator\\obj\\",
+      "outputPath": "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Sandwich-tasks\\Sandwich-Tasks\\Simple Calculator\\Simple Calculator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
