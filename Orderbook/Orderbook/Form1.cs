@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.Net.WebSockets;
 using System.Text;
+using static System.Text.Json.JsonElement;
 
 
 namespace Orderbook
@@ -13,14 +14,16 @@ namespace Orderbook
 
     public partial class Orderbook : Form
     {
-
+        public Orderbook orderbookInstance;
         public Orderbook()
         {
             InitializeComponent();
+            orderbookInstance = this;  // Initialize the instance variable
         }
 
 
-        private DataTable ConvertJsonDocumentToDataTable(JsonDocument jsonDocument)
+
+        public DataTable ConvertJsonDocumentToDataTable(JsonDocument jsonDocument)
         {
             DataTable dataTable = new DataTable();
 
@@ -77,11 +80,10 @@ namespace Orderbook
                     {
                         // Read the response content as a string
                         responseBody = response.Content.ReadAsStringAsync().Result;
+                        OutputRichTextBox.Text = responseBody;
                         JsonDocument jsonResponse = JsonDocument.Parse(responseBody);
 
                         var dataTable = ConvertJsonDocumentToDataTable(jsonResponse);
-
-                        //OutputRichTextBox.Text = orderBook
                         dataGridView1.DataSource = dataTable;
 
 
@@ -106,12 +108,12 @@ namespace Orderbook
         {
             string socketUrl = "wss://ws.bitmex.com/realtime?subscribe=instrument,orderBookL2_25:XBTUSD";
 
-            await ConnectWebSocket(socketUrl);
+            await ConnectWebSocket(socketUrl, orderbookInstance);
         }
 
 
 
-        static async Task ConnectWebSocket(string socketUrl)
+        static async Task ConnectWebSocket(string socketUrl, Orderbook orderbookInstance)
         {
             using (ClientWebSocket webSocket = new ClientWebSocket())
             {
@@ -120,7 +122,7 @@ namespace Orderbook
                     await webSocket.ConnectAsync(new Uri(socketUrl), CancellationToken.None);
                     Console.WriteLine("WebSocket connected.");
 
-                    await ReceiveMessages(webSocket);
+                    await ReceiveMessages(webSocket, orderbookInstance);
                 }
                 catch (Exception ex)
                 {
@@ -129,25 +131,111 @@ namespace Orderbook
             }
         }
 
-        static async Task ReceiveMessages(ClientWebSocket webSocket)
+        static async Task ReceiveMessages(ClientWebSocket webSocket, Orderbook orderbookInstance)
         {
-            byte[] buffer = new byte[16384];
+            const int bufferSize = 16384;
+            byte[] buffer = new byte[bufferSize];
+            StringBuilder messageBuilder = new StringBuilder();
+
             while (webSocket.State == WebSocketState.Open)
             {
                 WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
                 if (result.MessageType == WebSocketMessageType.Text)
                 {
-                    string message = Encoding.UTF8.GetString(buffer, 0, result.Count);
-                    MessageBox.Show(message, "WebSocket Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string fragment = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                    messageBuilder.Append(fragment);
 
-                    Console.WriteLine($"Received message: {message}");
+                    if (result.EndOfMessage)
+                    {
+
+                        string completeMessage = messageBuilder.ToString();
+                        //MessageBox.Show(completeMessage, "WebSocket Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Convert complete string to json
+                        JsonDocument completeJson = JsonDocument.Parse(completeMessage);
+                        var dataTableSocket = orderbookInstance.ConvertJsonDocumentToDataTable(completeJson);
+
+                        JsonElement root = completeJson.RootElement;
+
+                        List<string> keysList = new List<string>();
+
+
+                        // Iterate over the properties and add the keys to the list
+                        foreach (JsonProperty property in root.EnumerateObject())
+                        {
+                            string key = property.Name;
+                            keysList.Add(key);
+
+                        }
+
+
+
+                        if (keysList.Contains("action")) {
+
+                            JsonElement dataElement = root.GetProperty("data");
+
+                            if (root.GetProperty("action").GetString() == "partial")
+                            {
+                                orderbookInstance.OutputRichtextBox2.Text = completeMessage;
+
+                                // Extract the "data" property
+                                orderbookInstance.OutputRichtextBox2.Text = dataElement.ToString();
+
+                                // Create a new JSON object with only the "data" property
+                                JsonDocument newDataJsonDocument = JsonDocument.Parse(dataElement.ToString());
+
+
+
+                                dataTableSocket = orderbookInstance.ConvertJsonDocumentToDataTable(newDataJsonDocument);
+                                orderbookInstance.dataGridView2.DataSource = dataTableSocket;
+
+                            }
+                            else if (root.GetProperty("action").GetString() == "update")
+                            {
+                                messageBuilder.Clear();
+
+                            }
+                            else if (root.GetProperty("action").GetString() == "insert")
+                            {
+                                AddJsonToDataTable(dataElement.ToString(), dataTableSocket);
+                                //MessageBox.Show(dataElement.ToString(), "insert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                
+                            }
+                            else if (root.GetProperty("action").GetString() == "delete")
+                            {
+                                messageBuilder.Clear();
+
+                            }
+                        }
+
+                        // Clear the StringBuilder for the next message
+                        messageBuilder.Clear();
+                    }
                 }
             }
         }
+        static void AddJsonToDataTable(string json, DataTable dataTable)
+        {
+            JsonDocument jsonDocument = JsonDocument.Parse(json);
+            JsonElement jsonElement = jsonDocument.RootElement;
+
+            DataRow newRow = dataTable.NewRow();
+
+            // Assuming the keys in the JSON match the column names in the DataTable
+            newRow["symbol"] = jsonElement.GetProperty("symbol").GetString();
+            newRow["id"] = jsonElement.GetProperty("id").GetInt64();
+            newRow["side"] = jsonElement.GetProperty("side").GetString();
+            newRow["size"] = jsonElement.GetProperty("size").GetInt64();
+            newRow["price"] = jsonElement.GetProperty("price").GetSingle();
+            newRow["timestamp"] = jsonElement.GetProperty("timestamp").GetDateTime();
+
+            // Add the new row to the DataTable
+            dataTable.Rows.Add(newRow);
+        }
 
 
-
+   
 
 
     }

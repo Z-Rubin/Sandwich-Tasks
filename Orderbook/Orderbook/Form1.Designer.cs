@@ -35,11 +35,11 @@
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
+            OutputRichtextBox2 = new RichTextBox();
             checkedListBox1 = new CheckedListBox();
             SubscribeButton = new Button();
             dataGridView2 = new DataGridView();
             dataGridView3 = new DataGridView();
-            OutputRichtextBox2 = new RichTextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -74,7 +74,7 @@
             dataGridView1.Location = new Point(358, 21);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(1656, 835);
+            dataGridView1.Size = new Size(1332, 835);
             dataGridView1.TabIndex = 3;
             // 
             // OutputRichTextBox
@@ -92,7 +92,7 @@
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(2044, 918);
+            tabControl1.Size = new Size(1722, 918);
             tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -104,7 +104,7 @@
             tabPage1.Location = new Point(4, 34);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(2036, 880);
+            tabPage1.Size = new Size(1714, 880);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
@@ -118,10 +118,18 @@
             tabPage2.Location = new Point(4, 34);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(2036, 880);
+            tabPage2.Size = new Size(1714, 880);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // OutputRichtextBox2
+            // 
+            OutputRichtextBox2.Location = new Point(20, 336);
+            OutputRichtextBox2.Name = "OutputRichtextBox2";
+            OutputRichtextBox2.Size = new Size(245, 499);
+            OutputRichtextBox2.TabIndex = 11;
+            OutputRichtextBox2.Text = "";
             // 
             // checkedListBox1
             // 
@@ -148,7 +156,7 @@
             dataGridView2.Location = new Point(271, 21);
             dataGridView2.Name = "dataGridView2";
             dataGridView2.RowHeadersWidth = 62;
-            dataGridView2.Size = new Size(1729, 765);
+            dataGridView2.Size = new Size(1401, 765);
             dataGridView2.TabIndex = 7;
             // 
             // dataGridView3
@@ -160,19 +168,11 @@
             dataGridView3.Size = new Size(8, 8);
             dataGridView3.TabIndex = 7;
             // 
-            // OutputRichtextBox2
-            // 
-            OutputRichtextBox2.Location = new Point(20, 336);
-            OutputRichtextBox2.Name = "OutputRichtextBox2";
-            OutputRichtextBox2.Size = new Size(150, 144);
-            OutputRichtextBox2.TabIndex = 11;
-            OutputRichtextBox2.Text = "";
-            // 
             // Orderbook
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2044, 930);
+            ClientSize = new Size(1730, 930);
             Controls.Add(dataGridView3);
             Controls.Add(tabControl1);
             Name = "Orderbook";
@@ -196,10 +196,10 @@
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
-        private DataGridView dataGridView2;
         private DataGridView dataGridView3;
         private Button SubscribeButton;
         private CheckedListBox checkedListBox1;
         private RichTextBox OutputRichtextBox2;
+        public DataGridView dataGridView2;
     }
 }

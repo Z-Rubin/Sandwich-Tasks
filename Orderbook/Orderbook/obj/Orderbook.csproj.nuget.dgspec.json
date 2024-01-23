@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Orderbook\\Orderbook\\Orderbook.csproj": {}
+    "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Sandwich-tasks\\Sandwich-Tasks\\Orderbook\\Orderbook\\Orderbook.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Orderbook\\Orderbook\\Orderbook.csproj": {
+    "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Sandwich-tasks\\Sandwich-Tasks\\Orderbook\\Orderbook\\Orderbook.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Orderbook\\Orderbook\\Orderbook.csproj",
+        "projectUniqueName": "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Sandwich-tasks\\Sandwich-Tasks\\Orderbook\\Orderbook\\Orderbook.csproj",
         "projectName": "Orderbook",
-        "projectPath": "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Orderbook\\Orderbook\\Orderbook.csproj",
+        "projectPath": "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Sandwich-tasks\\Sandwich-Tasks\\Orderbook\\Orderbook\\Orderbook.csproj",
         "packagesPath": "C:\\Users\\cazni\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Orderbook\\Orderbook\\obj\\",
+        "outputPath": "C:\\Users\\cazni\\Desktop\\2024\\Sandwich Tasks\\Sandwich-tasks\\Sandwich-Tasks\\Orderbook\\Orderbook\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
