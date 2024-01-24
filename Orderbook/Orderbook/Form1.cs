@@ -18,7 +18,7 @@ namespace Orderbook
         public Orderbook()
         {
             InitializeComponent();
-            orderbookInstance = this;  // Initialize the instance variable
+            orderbookInstance = this; 
         }
 
 
@@ -37,10 +37,10 @@ namespace Orderbook
                 {
                     var firstElement = arrayEnumerator.Current;
 
-                    // Assume the structure is uniform, and use the first element to create columns
+                    // use the first element to create columns
                     foreach (var property in firstElement.EnumerateObject())
                     {
-                        dataTable.Columns.Add(property.Name, typeof(string)); // Adjust the data type as needed
+                        dataTable.Columns.Add(property.Name, typeof(string)); 
                     }
 
                     // Populate the DataTable with JSON data
@@ -72,13 +72,10 @@ namespace Orderbook
             {
                 try
                 {
-                    // Send a GET request to the API
                     HttpResponseMessage response = client.GetAsync(apiUrl).Result;
 
-                    // Check if the request was successful (status code 200 OK)
                     if (response.IsSuccessStatusCode)
                     {
-                        // Read the response content as a string
                         responseBody = response.Content.ReadAsStringAsync().Result;
                         OutputRichTextBox.Text = responseBody;
                         JsonDocument jsonResponse = JsonDocument.Parse(responseBody);
@@ -87,18 +84,15 @@ namespace Orderbook
                         dataGridView1.DataSource = dataTable;
 
 
-                        // Display the response string
                         Console.WriteLine(responseBody);
                     }
                     else
                     {
-                        // Display an error message if the request was not successful
                         Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Display any exception that occurred during the request
                     Console.WriteLine($"Exception: {ex.Message}");
                 }
             }
@@ -152,7 +146,6 @@ namespace Orderbook
                         string completeMessage = messageBuilder.ToString();
                         //MessageBox.Show(completeMessage, "WebSocket Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        // Convert complete string to json
                         JsonDocument completeJson = JsonDocument.Parse(completeMessage);
                         var dataTableSocket = orderbookInstance.ConvertJsonDocumentToDataTable(completeJson);
 
@@ -161,7 +154,6 @@ namespace Orderbook
                         List<string> keysList = new List<string>();
 
 
-                        // Iterate over the properties and add the keys to the list
                         foreach (JsonProperty property in root.EnumerateObject())
                         {
                             string key = property.Name;
@@ -179,10 +171,8 @@ namespace Orderbook
                             {
                                 orderbookInstance.OutputRichtextBox2.Text = completeMessage;
 
-                                // Extract the "data" property
                                 orderbookInstance.OutputRichtextBox2.Text = dataElement.ToString();
 
-                                // Create a new JSON object with only the "data" property
                                 JsonDocument newDataJsonDocument = JsonDocument.Parse(dataElement.ToString());
 
 
@@ -193,18 +183,15 @@ namespace Orderbook
                             }
                             else if (root.GetProperty("action").GetString() == "update")
                             {
-                                messageBuilder.Clear();
 
                             }
                             else if (root.GetProperty("action").GetString() == "insert")
                             {
                                 AddJsonToDataTable(dataElement.ToString(), dataTableSocket);
-                                //MessageBox.Show(dataElement.ToString(), "insert Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 
                             }
                             else if (root.GetProperty("action").GetString() == "delete")
                             {
-                                messageBuilder.Clear();
 
                             }
                         }
@@ -222,7 +209,6 @@ namespace Orderbook
 
             DataRow newRow = dataTable.NewRow();
 
-            // Assuming the keys in the JSON match the column names in the DataTable
             newRow["symbol"] = jsonElement.GetProperty("symbol").GetString();
             newRow["id"] = jsonElement.GetProperty("id").GetInt64();
             newRow["side"] = jsonElement.GetProperty("side").GetString();
@@ -230,7 +216,6 @@ namespace Orderbook
             newRow["price"] = jsonElement.GetProperty("price").GetSingle();
             newRow["timestamp"] = jsonElement.GetProperty("timestamp").GetDateTime();
 
-            // Add the new row to the DataTable
             dataTable.Rows.Add(newRow);
         }
 

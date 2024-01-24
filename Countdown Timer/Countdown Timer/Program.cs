@@ -25,28 +25,21 @@ class Countdown_Timer
     }
     static void Initialize_timer(int N, int step)
     {
-        // Create a timer with the specified interval (step size)
-        countdownTimer = new System.Timers.Timer(step * 1000); // Timer works with milliseconds
+        // Create a timer with the specified step
+        countdownTimer = new System.Timers.Timer(step * 1000); 
 
-        // Set the event handler for the Elapsed event
         countdownTimer.Elapsed += CountdownTimerElapsed;
 
-        // Set the countdown duration and initialize the current count
         counts_left = N / step;
 
-        // Start the timer
         countdownTimer.Start();
     }
 
     static void CountdownTimerElapsed(object sender, ElapsedEventArgs e)
     {
-        // Print the current count and decrement it
         Console.WriteLine(counts_left);
-
-        // Check if countdown is complete
         if (--counts_left == -1)
         {
-            // Stop the timer when countdown is complete
             countdownTimer.Stop();    
 
             // Exit the application

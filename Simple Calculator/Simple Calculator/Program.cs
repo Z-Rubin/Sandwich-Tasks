@@ -33,7 +33,6 @@ class Simple_Calculator
             innermost_bracket = FindInnermostBracketedPart(s);
             bracket_result = Split_Add_Sub(innermost_bracket);
            
-            // Replace the innermost bracketed part with the string representation of bracket_result
             s = s.Replace("(" + innermost_bracket + ")", bracket_result.ToString());
         }
         return Split_Add_Sub(s);
@@ -107,7 +106,6 @@ class Simple_Calculator
     {
         string sub_s;
         string eval_string;
-        string temp_s;
         double sum = 0;
         int pos = s.IndexOfAny(Add_Sub);
 
