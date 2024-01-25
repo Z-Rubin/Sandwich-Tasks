@@ -7,7 +7,6 @@ using System.Timers;
 class Countdown_Timer
 {
     public static int pub_step;
-    static int counts_left;
     static int time_left;
     static System.Timers.Timer countdownTimer;
     static ManualResetEvent countdownCompleteEvent = new ManualResetEvent(false);
@@ -17,19 +16,22 @@ class Countdown_Timer
     {
         for (int i = N; i >= 0; i -= step)
         {
-            Console.WriteLine(i);
+            Console.WriteLine(time_left);
             if (N != 0)
             {
                 if (time_left > step)
                 {
                     Thread.Sleep(step * 1000);
-                } else
+                    time_left -= step;
+
+                }
+                else
                 {
-                    Console.WriteLine(time_left + "hello");
                     Thread.Sleep(time_left * 1000);
+                    time_left = 0;
+                    Console.WriteLine(time_left);
                 }
             }
-            time_left -= N;
 
         }
     }
@@ -40,9 +42,7 @@ class Countdown_Timer
 
         countdownTimer.Elapsed += CountdownTimerElapsed;
 
-        counts_left = N / step;
-        Console.WriteLine(counts_left * pub_step);
-        counts_left -= 1;
+        Console.WriteLine(time_left);
 
 
         countdownTimer.Start();
@@ -50,8 +50,20 @@ class Countdown_Timer
 
     static void CountdownTimerElapsed(object sender, ElapsedEventArgs e)
     {
-        Console.WriteLine(counts_left*pub_step);
-        if (--counts_left == -1)
+        time_left -= pub_step;
+        if (time_left >= 0) {
+            Console.WriteLine(time_left);
+        }
+        else
+        {
+            Console.WriteLine(0);
+
+        }
+        if (time_left < pub_step && time_left > 0)
+        {
+            countdownTimer.Interval = time_left * 1000;
+        }
+        if (time_left <= 0)
         {
             countdownTimer.Stop();    
 

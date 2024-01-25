@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Countdown Timer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+954afd37fe34fb64e2632636672fa1a0571f50b8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ff8fba0128d1196d361a0cc6b3b1e593bf58f907")]
 [assembly: System.Reflection.AssemblyProductAttribute("Countdown Timer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Countdown Timer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
