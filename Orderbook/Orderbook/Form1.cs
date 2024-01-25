@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net.WebSockets;
 using System.Text;
 using static System.Text.Json.JsonElement;
+using System.Timers;
 
 
 namespace Orderbook
@@ -18,9 +19,10 @@ namespace Orderbook
         public Orderbook()
         {
             InitializeComponent();
-            orderbookInstance = this; 
+            orderbookInstance = this;
         }
 
+        private System.Timers.Timer RefreshTimer;
 
 
         public DataTable ConvertJsonDocumentToDataTable(JsonDocument jsonDocument)
@@ -40,7 +42,7 @@ namespace Orderbook
                     // use the first element to create columns
                     foreach (var property in firstElement.EnumerateObject())
                     {
-                        dataTable.Columns.Add(property.Name, typeof(string)); 
+                        dataTable.Columns.Add(property.Name, typeof(string));
                     }
 
                     // Populate the DataTable with JSON data
@@ -65,47 +67,76 @@ namespace Orderbook
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string apiUrl = "https://www.bitmex.com/api/v1/orderBook/L2?symbol=XBT&depth=25";
-            string responseBody;
-
-            using (HttpClient client = new HttpClient())
+            if (TokenSelectionComboBox.SelectedIndex == -1)
             {
-                try
+
+            }
+            else
+            {
+                string apiUrl = $"https://www.bitmex.com/api/v1/orderBook/L2?symbol={TokenSelectionComboBox.Text}&depth=25";
+                string responseBody;
+
+                using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = client.GetAsync(apiUrl).Result;
-
-                    if (response.IsSuccessStatusCode)
+                    try
                     {
-                        responseBody = response.Content.ReadAsStringAsync().Result;
-                        OutputRichTextBox.Text = responseBody;
-                        JsonDocument jsonResponse = JsonDocument.Parse(responseBody);
+                        HttpResponseMessage response = client.GetAsync(apiUrl).Result;
 
-                        var dataTable = ConvertJsonDocumentToDataTable(jsonResponse);
-                        dataGridView1.DataSource = dataTable;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            responseBody = response.Content.ReadAsStringAsync().Result;
+                            OutputRichTextBox.Text = responseBody;
+                            JsonDocument jsonResponse = JsonDocument.Parse(responseBody);
+
+                            var dataTable = ConvertJsonDocumentToDataTable(jsonResponse);
+                            dataGridView1.DataSource = dataTable;
 
 
-                        Console.WriteLine(responseBody);
+                            Console.WriteLine(responseBody);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                        Console.WriteLine($"Exception: {ex.Message}");
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Exception: {ex.Message}");
                 }
             }
         }
 
-        private async void SubscribeButton_Click(object sender, EventArgs e)
+        public async void SubscribeButton_Click(object sender, EventArgs e)
         {
-            string socketUrl = "wss://ws.bitmex.com/realtime?subscribe=instrument,orderBookL2_25:XBTUSD";
+            RefreshData();
+            RefreshTimer = new System.Timers.Timer(5000);
+
+            RefreshTimer.Elapsed += OnTimerElapsed;
+            RefreshTimer.AutoReset = true;
+
+            RefreshTimer.Start();
+        }
+
+        private void OnTimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            // Ensure RefreshData is called on the UI thread
+            Invoke(new Action(async () => RefreshData()));
+        }
+
+        private async void RefreshData()
+        {
+            // Ensure UI-related operations are performed on the UI thread
+            if (InputTokenRichTextBox.InvokeRequired)
+            {
+                InputTokenRichTextBox.Invoke(new Action(() => RefreshData()));
+                return;
+            }
+
+            string socketUrl = $"wss://ws.bitmex.com/realtime?subscribe=instrument,orderBookL2_25:{InputTokenRichTextBox.Text}";
 
             await ConnectWebSocket(socketUrl, orderbookInstance);
         }
-
-
 
         static async Task ConnectWebSocket(string socketUrl, Orderbook orderbookInstance)
         {
@@ -163,7 +194,8 @@ namespace Orderbook
 
 
 
-                        if (keysList.Contains("action")) {
+                        if (keysList.Contains("action"))
+                        {
 
                             JsonElement dataElement = root.GetProperty("data");
 
@@ -188,7 +220,7 @@ namespace Orderbook
                             else if (root.GetProperty("action").GetString() == "insert")
                             {
                                 AddJsonToDataTable(dataElement.ToString(), dataTableSocket);
-                                
+
                             }
                             else if (root.GetProperty("action").GetString() == "delete")
                             {
@@ -219,9 +251,12 @@ namespace Orderbook
             dataTable.Rows.Add(newRow);
         }
 
-
-   
-
-
+        private void ToggleButton_Click(object sender, EventArgs e)
+        {
+            if (RefreshTimer.Enabled)
+            {
+                RefreshTimer.Enabled = false;
+            } else { RefreshTimer.Enabled = true; }
+        }
     }
 }
