@@ -84,18 +84,24 @@ class Simple_Calculator
 
         for (int i = 0; i < s.Length; i++)
         {
-            if (s[i] == '(' && i + 1 < s.Length && Char.IsDigit(s[i - 1]))
+            if (i != 0)
             {
-                // Insert '*' before the opening bracket if the previous character is a digit
-                result.Append('*');
-            }
+                if (s[i] == '(' && i + 1 < s.Length && Char.IsDigit(s[i - 1]))
+                {
+                    // Insert '*' before the opening bracket if the previous character is a digit
+                    result.Append('*');
+                }
 
-            result.Append(s[i]);
+                result.Append(s[i]);
 
-            if (s[i] == ')' && i + 1 < s.Length && Char.IsDigit(s[i + 1]))
+                if (s[i] == ')' && i + 1 < s.Length && Char.IsDigit(s[i + 1]))
+                {
+                    // Insert '*' after the closing bracket if the next character is a digit and not at the end of the string
+                    result.Append('*');
+                }
+            } else
             {
-                // Insert '*' after the closing bracket if the next character is a digit and not at the end of the string
-                result.Append('*');
+                result.Append(s[i]);
             }
         }
 

@@ -6,7 +6,9 @@ using System.Timers;
 
 class Countdown_Timer
 {
+    public static int pub_step;
     static int counts_left;
+    static int time_left;
     static System.Timers.Timer countdownTimer;
     static ManualResetEvent countdownCompleteEvent = new ManualResetEvent(false);
 
@@ -18,8 +20,16 @@ class Countdown_Timer
             Console.WriteLine(i);
             if (N != 0)
             {
-                Thread.Sleep(step * 1000);
+                if (time_left > step)
+                {
+                    Thread.Sleep(step * 1000);
+                } else
+                {
+                    Console.WriteLine(time_left + "hello");
+                    Thread.Sleep(time_left * 1000);
+                }
             }
+            time_left -= N;
 
         }
     }
@@ -31,13 +41,16 @@ class Countdown_Timer
         countdownTimer.Elapsed += CountdownTimerElapsed;
 
         counts_left = N / step;
+        Console.WriteLine(counts_left * pub_step);
+        counts_left -= 1;
+
 
         countdownTimer.Start();
     }
 
     static void CountdownTimerElapsed(object sender, ElapsedEventArgs e)
     {
-        Console.WriteLine(counts_left);
+        Console.WriteLine(counts_left*pub_step);
         if (--counts_left == -1)
         {
             countdownTimer.Stop();    
@@ -60,7 +73,7 @@ class Countdown_Timer
         try
         {
             int N = int.Parse(sN);
-
+            time_left = N;
             Console.WriteLine("Input an integer for step size:");
 
             string sStep = Console.ReadLine();
@@ -75,6 +88,7 @@ class Countdown_Timer
             }
             else
             {
+                pub_step = Step;
                 Initialize_timer(N, Step);
                 countdownCompleteEvent.WaitOne();
 
