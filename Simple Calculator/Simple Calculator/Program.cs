@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -20,9 +21,7 @@ class Simple_Calculator
         string innermost_bracket;
 
         s = RemoveSpaces(s);
-        Console.WriteLine(s);
         s = InsertTimes(s);
-        Console.WriteLine(s);
 
 
         if (s.IndexOfAny(Brackets) == -1) {
@@ -213,6 +212,7 @@ class Simple_Calculator
             {
                 s = s.Substring(pos+1);
                 pos = s.IndexOfAny(Times_Div);
+
                 if (pos != -1)
                 {
                     total /= double.Parse(s.Substring(0, pos));
@@ -221,6 +221,7 @@ class Simple_Calculator
                 {
                     total /= double.Parse(s);
                 }
+
  
             }
         }
@@ -234,9 +235,15 @@ class Simple_Calculator
             Console.WriteLine("Input a mathematical equation to calculate:");
             
             equation  = Console.ReadLine();
-            double output = Evaluate(equation);
-            Console.WriteLine("Result:");
-            Console.WriteLine(output);
+            if (IsValidEquation(equation))
+            {
+                double output = Evaluate(equation);
+                Console.WriteLine("Result:");
+                Console.WriteLine(output);
+            } else
+            {
+                Console.WriteLine("The equation you have entered is not a valid equation. Please try again. \n");
+            }
      
 
 
@@ -244,6 +251,19 @@ class Simple_Calculator
         }
 
 
+    }
+    static bool IsValidEquation(string equation)
+    {
+        try
+        {
+            DataTable table = new DataTable();
+            double result = Convert.ToDouble(table.Compute(equation, string.Empty));
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
 
