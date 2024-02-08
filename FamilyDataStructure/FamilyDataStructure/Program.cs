@@ -13,6 +13,7 @@ public class Person
     // Properties
     public string Name { get; set; }
     public string Surname { get; set; }
+    public Person Spouse { get; set; }
     public DateTime DateOfBirth { get; set; }
     public Gender Sex { get; set; }
 
@@ -46,6 +47,45 @@ public class Person
             }
         }
     }
+    public bool isMarried()
+    {
+        if (Spouse.Equals(null))
+        {
+            return false;
+        } else
+        {
+            return true;
+        }
+    }
+
+    public bool isPersonsEqual(Person person)
+    {
+        if (person == null)
+        {
+            return false;
+        }
+
+        // Compare each property
+        bool areNamesEqual = string.Equals(this.Name, person.Name);
+        bool areSurnamesEqual = string.Equals(this.Surname, person.Surname);
+        bool areDatesOfBirthEqual = DateTime.Equals(this.DateOfBirth, person.DateOfBirth);
+        bool areSexEqual = this.Sex == person.Sex;
+
+        // Check if spouses are equal (consider null if both are null)
+        bool areSpousesEqual = object.Equals(this.Spouse, person.Spouse);
+
+        // Check if parents are equal (consider null if both are null)
+        bool areParentsEqual = object.Equals(this.Parents, person.Parents);
+
+        // Check if children are equal (consider null if both are null)
+        bool areChildrenEqual = object.Equals(this.Children, person.Children);
+
+       
+
+        // Return true only if all properties are equal
+        return areNamesEqual && areSurnamesEqual && areDatesOfBirthEqual && areSexEqual && areSpousesEqual && areParentsEqual && areChildrenEqual;
+    }
+
 
     // Override ToString() for better representation
     public override string ToString()
@@ -109,6 +149,9 @@ class Program
         Person doeChild1 = new Person("Alice", "Doe", new DateTime(2010, 3, 8), Gender.Female);
         Person doeChild2 = new Person("Bob", "Doe", new DateTime(2012, 7, 12), Gender.Male);
         Person doeChild3 = new Person("Mike", "Doe", new DateTime(2015, 12, 3), Gender.Female);
+        Person doeChild4 = new Person("Alice", "Doe", new DateTime(2010, 3, 8), Gender.Female);
+        Console.WriteLine(doeChild1.isPersonsEqual(doeChild4));
+
 
         // Establishing relationships
         doeFather.AddChild(doeChild1);
@@ -120,12 +163,21 @@ class Program
         doeFather.AddChild(doeChild3);
         doeMother.AddChild(doeChild3);
 
+        doeFather.AddChild(doeChild4);
+        doeMother.AddChild(doeChild4);
+
         Family doeFamily = new Family();
         doeFamily.AddPerson(doeFather);
         doeFamily.AddPerson(doeMother);
         doeFamily.AddPerson(doeChild1);
         doeFamily.AddPerson(doeChild2);
         doeFamily.AddPerson(doeChild3);
+        doeFamily.AddPerson(doeChild4);
+
+        Console.WriteLine(doeChild1.ToString());
+
+        Console.WriteLine(doeChild4.ToString());
+        Console.WriteLine(doeChild1.isPersonsEqual(doeChild4));
 
     }
 }
