@@ -1,0 +1,17 @@
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\bin\Debug\net8.0-windows\CombinedTasks.exe
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\bin\Debug\net8.0-windows\CombinedTasks.deps.json
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\bin\Debug\net8.0-windows\CombinedTasks.runtimeconfig.json
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\bin\Debug\net8.0-windows\CombinedTasks.dll
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\bin\Debug\net8.0-windows\CombinedTasks.pdb
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\obj\Debug\net8.0-windows\CombinedTasks.csproj.GenerateResource.cache
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\obj\Debug\net8.0-windows\CombinedTasks.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\obj\Debug\net8.0-windows\CombinedTasks.AssemblyInfoInputs.cache
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\obj\Debug\net8.0-windows\CombinedTasks.AssemblyInfo.cs
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\obj\Debug\net8.0-windows\CombinedTasks.csproj.CoreCompileInputs.cache
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\obj\Debug\net8.0-windows\CombinedTasks.sourcelink.json
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\obj\Debug\net8.0-windows\CombinedTasks.dll
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\obj\Debug\net8.0-windows\refint\CombinedTasks.dll
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\obj\Debug\net8.0-windows\CombinedTasks.pdb
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\obj\Debug\net8.0-windows\CombinedTasks.genruntimeconfig.cache
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\obj\Debug\net8.0-windows\ref\CombinedTasks.dll
+C:\Users\cazni\Desktop\2024\Sandwich Tasks\CombinedTasks\CombinedTasks\obj\Debug\net8.0-windows\CombinedTasks.Form1.resources
