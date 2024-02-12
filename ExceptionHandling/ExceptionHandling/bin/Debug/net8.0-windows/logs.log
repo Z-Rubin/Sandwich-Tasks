@@ -85,3 +85,15 @@
 2024-02-12 14:43:43,458 ERROR - Cross-thread operation not valid: Control 'button20' accessed from a thread other than the thread it was created on.
 2024-02-12 14:43:48,961 ERROR - Cross-thread operation not valid: Control 'button20' accessed from a thread other than the thread it was created on.
 2024-02-12 14:46:17,938 ERROR - Cross-thread operation not valid: Control 'button20' accessed from a thread other than the thread it was created on.
+2024-02-12 15:09:16,992 INFO - Logger logging
+2024-02-12 15:09:21,379 ERROR - No Catch
+2024-02-12 15:09:25,093 ERROR - No Catch
+2024-02-12 15:10:07,539 ERROR - No Catch Caught
+2024-02-12 15:10:09,832 ERROR - Divide by zero error
+2024-02-12 15:10:17,175 INFO - 00:00:03.5476470
+2024-02-12 15:10:17,912 INFO - 00:00:00.0000684
+2024-02-12 15:10:19,162 ERROR - Method C throwing
+2024-02-12 15:10:33,160 ERROR - Method C throwing
+2024-02-12 15:10:41,193 INFO - FormTimer tick
+2024-02-12 15:10:41,195 INFO - asyncFormTimer tick
+2024-02-12 15:10:47,928 ERROR - Form Timer is already disabled

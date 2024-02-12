@@ -23,7 +23,7 @@ namespace ExceptionHandling
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Logger.Info("Logger logging");
+            Logger?.Info("Logger logging");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -39,7 +39,7 @@ namespace ExceptionHandling
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger?.Error(ex.Message + " Caught");
             }
         }
 
@@ -60,7 +60,7 @@ namespace ExceptionHandling
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger?.Error(ex.Message);
             }
         }
 
@@ -68,13 +68,13 @@ namespace ExceptionHandling
         {
             try
             {
-                Logger.Info("asyncFormTimer tick");
+                Logger?.Info("asyncFormTimer tick");
                 forX(100000000);
 
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                Logger?.Error(ex);
             }
         }
         private async Task asyncTaskOnFormTimer(object sender, EventArgs e)
@@ -85,13 +85,13 @@ namespace ExceptionHandling
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger?.Error(ex.Message);
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Logger.Info("FormTimer tick");
+            Logger?.Info("FormTimer tick");
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -110,7 +110,7 @@ namespace ExceptionHandling
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger?.Error(ex.Message);
             }
         }
 
@@ -129,7 +129,7 @@ namespace ExceptionHandling
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger?.Error(ex.Message);
             }
         }
 
@@ -146,7 +146,7 @@ namespace ExceptionHandling
 
         private void OnSystemTimer(object sender, EventArgs e)
         {
-            Logger.Info("SystemTimer tick");
+            Logger?.Info("SystemTimer tick");
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -164,7 +164,7 @@ namespace ExceptionHandling
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger?.Error(ex.Message);
             }
         }
 
@@ -175,7 +175,7 @@ namespace ExceptionHandling
 
         private void OnThreadTimer(object sender)
         {
-            Logger.Info("ThreadTimer tick");
+            Logger?.Info("ThreadTimer tick");
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -190,7 +190,7 @@ namespace ExceptionHandling
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger?.Error(ex.Message);
             }
         }
 
@@ -223,7 +223,7 @@ namespace ExceptionHandling
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger?.Error(ex.Message);
             }
         }
 
@@ -246,25 +246,32 @@ namespace ExceptionHandling
             }
 
             watch.Stop();
-            Logger.Info(watch.Elapsed.ToString());
+            Logger?.Info(watch.Elapsed.ToString());
         }
 
         private async void button14_Click(object sender, EventArgs e)
         {
             // Splits the five forXs onto 5 different threads for concurrent computing
-            var watch = new System.Diagnostics.Stopwatch();
-
-            watch.Start();
-
-            for (int i = 0; i < 5; i++)
+            try
             {
-                Task.Run(async () => { forX(1000000000); });
+                var watch = new System.Diagnostics.Stopwatch();
+
+                watch.Start();
+
+                for (int i = 0; i < 5; i++)
+                {
+                    Task.Run(async () => { forX(1000000000); });
+                }
+
+
+
+                watch.Stop();
+                Logger?.Info(watch.Elapsed.ToString());
+            } 
+            catch (Exception ex)
+            {
+                Logger?.Error(ex.Message);
             }
-
-
-
-            watch.Stop();
-            Logger.Info(watch.Elapsed.ToString());
         }
 
 
@@ -291,7 +298,7 @@ namespace ExceptionHandling
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger?.Error(ex.Message);
             }
         }
 
@@ -307,7 +314,7 @@ namespace ExceptionHandling
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger?.Error(ex.Message);
             }
         }
 
@@ -321,7 +328,7 @@ namespace ExceptionHandling
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex.Message);
+                    Logger?.Error(ex.Message);
                 }
             });
         }
@@ -336,7 +343,7 @@ namespace ExceptionHandling
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex.Message);
+                    Logger?.Error(ex.Message);
                 }
             });
         }
@@ -366,7 +373,7 @@ namespace ExceptionHandling
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex.Message);
+                    Logger?.Error(ex.Message);
                 }
             });
         }
