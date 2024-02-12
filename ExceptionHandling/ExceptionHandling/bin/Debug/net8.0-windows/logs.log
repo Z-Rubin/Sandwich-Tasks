@@ -14,3 +14,74 @@
 2024-02-12 12:21:57,100 INFO - SystemTimer tick
 2024-02-12 12:21:58,091 INFO - SystemTimer tick
 2024-02-12 12:21:59,096 INFO - SystemTimer tick
+2024-02-12 12:30:17,587 INFO - ThreadTimer tick
+2024-02-12 12:30:22,580 INFO - ThreadTimer tick
+2024-02-12 12:34:25,848 ERROR - threadTimer is null
+2024-02-12 12:53:08,655 ERROR - Divide by zero error
+2024-02-12 12:56:35,601 INFO - 00:00:00.0829365
+2024-02-12 12:59:55,642 INFO - 00:00:00.8964332
+2024-02-12 13:01:30,141 INFO - 00:00:00.9141753
+2024-02-12 13:01:32,480 INFO - 00:00:00.7535609
+2024-02-12 13:03:46,621 INFO - 00:00:00.4739454
+2024-02-12 13:03:48,972 INFO - 00:00:00.4798090
+2024-02-12 13:03:50,788 INFO - 00:00:00.4782496
+2024-02-12 13:04:15,474 INFO - 00:00:00.7086764
+2024-02-12 13:04:19,071 INFO - 00:00:00.7256678
+2024-02-12 13:05:09,211 INFO - 00:00:07.2682717
+2024-02-12 13:05:23,996 INFO - 00:00:07.0832547
+2024-02-12 13:11:45,542 INFO - 00:00:00.0001207
+2024-02-12 13:11:51,892 INFO - 00:00:00.0001052
+2024-02-12 13:13:57,547 INFO - 00:00:00.0000824
+2024-02-12 13:14:02,421 INFO - 00:00:03.6343368
+2024-02-12 13:14:08,947 INFO - 00:00:03.5986158
+2024-02-12 13:14:14,354 INFO - 00:00:03.7540607
+2024-02-12 13:18:37,607 ERROR - System.Exception: Method C throwing
+   at ExceptionHandling.Form1.MethodC() in C:\Users\zac\OneDrive\Desktop\Tasks\Sandwich-Tasks\ExceptionHandling\ExceptionHandling\Form1.cs:line 264
+   at ExceptionHandling.Form1.MethodB() in C:\Users\zac\OneDrive\Desktop\Tasks\Sandwich-Tasks\ExceptionHandling\ExceptionHandling\Form1.cs:line 259
+   at ExceptionHandling.Form1.MethodA() in C:\Users\zac\OneDrive\Desktop\Tasks\Sandwich-Tasks\ExceptionHandling\ExceptionHandling\Form1.cs:line 254
+   at ExceptionHandling.Form1.button15_Click(Object sender, EventArgs e) in C:\Users\zac\OneDrive\Desktop\Tasks\Sandwich-Tasks\ExceptionHandling\ExceptionHandling\Form1.cs:line 271
+2024-02-12 13:20:51,404 INFO - 00:00:03.8381081
+2024-02-12 13:20:56,892 INFO - 00:00:03.4253137
+2024-02-12 13:22:32,313 INFO - 00:00:00.0000916
+2024-02-12 13:24:17,525 INFO - 00:00:03.6778030
+2024-02-12 13:25:06,758 INFO - 00:00:00.0090990
+2024-02-12 13:25:16,732 INFO - 00:00:00.0012435
+2024-02-12 13:25:18,762 INFO - 00:00:00.0006454
+2024-02-12 13:25:24,627 INFO - 00:00:03.4294445
+2024-02-12 13:26:22,587 INFO - 00:00:03.5568030
+2024-02-12 13:26:55,416 INFO - 00:00:00.0104855
+2024-02-12 13:26:58,454 INFO - 00:00:00.0035870
+2024-02-12 13:28:25,532 INFO - 00:00:00.0278103
+2024-02-12 13:28:26,834 INFO - 00:00:00.0007210
+2024-02-12 13:28:30,804 INFO - 00:00:02.5076731
+2024-02-12 13:28:53,698 INFO - 00:00:02.8198346
+2024-02-12 13:29:37,519 INFO - 00:00:00.0150758
+2024-02-12 13:33:27,399 INFO - 00:00:02.4305940
+2024-02-12 13:33:58,298 INFO - 00:00:00.0001890
+2024-02-12 13:34:04,640 ERROR - System.Exception: Method C throwing
+   at ExceptionHandling.Form1.MethodC() in C:\Users\zac\OneDrive\Desktop\Tasks\Sandwich-Tasks\ExceptionHandling\ExceptionHandling\Form1.cs:line 263
+   at ExceptionHandling.Form1.MethodB() in C:\Users\zac\OneDrive\Desktop\Tasks\Sandwich-Tasks\ExceptionHandling\ExceptionHandling\Form1.cs:line 258
+   at ExceptionHandling.Form1.MethodA() in C:\Users\zac\OneDrive\Desktop\Tasks\Sandwich-Tasks\ExceptionHandling\ExceptionHandling\Form1.cs:line 253
+   at ExceptionHandling.Form1.button15_Click(Object sender, EventArgs e) in C:\Users\zac\OneDrive\Desktop\Tasks\Sandwich-Tasks\ExceptionHandling\ExceptionHandling\Form1.cs:line 270
+2024-02-12 13:41:01,549 ERROR - Method C throwing
+2024-02-12 14:03:14,444 INFO - FormTimer tick
+2024-02-12 14:03:14,459 INFO - asyncFormTimer tick
+2024-02-12 14:03:15,364 INFO - FormTimer tick
+2024-02-12 14:03:15,364 INFO - asyncFormTimer tick
+2024-02-12 14:03:16,356 INFO - FormTimer tick
+2024-02-12 14:03:16,356 INFO - asyncFormTimer tick
+2024-02-12 14:03:17,365 INFO - FormTimer tick
+2024-02-12 14:03:17,365 INFO - asyncFormTimer tick
+2024-02-12 14:03:18,358 INFO - FormTimer tick
+2024-02-12 14:03:18,358 INFO - asyncFormTimer tick
+2024-02-12 14:22:31,396 ERROR - Cross-thread operation not valid: Control 'button20' accessed from a thread other than the thread it was created on.
+2024-02-12 14:22:58,033 ERROR - Cross-thread operation not valid: Control 'button20' accessed from a thread other than the thread it was created on.
+2024-02-12 14:39:54,364 ERROR - Cross-thread operation not valid: Control 'button20' accessed from a thread other than the thread it was created on.
+2024-02-12 14:42:11,037 ERROR - Cross-thread operation not valid: Control 'button20' accessed from a thread other than the thread it was created on.
+2024-02-12 14:42:40,756 ERROR - Cross-thread operation not valid: Control 'button19' accessed from a thread other than the thread it was created on.
+2024-02-12 14:42:57,621 ERROR - Cross-thread operation not valid: Control 'button20' accessed from a thread other than the thread it was created on.
+2024-02-12 14:43:02,891 ERROR - Cross-thread operation not valid: Control 'button20' accessed from a thread other than the thread it was created on.
+2024-02-12 14:43:19,256 ERROR - Cross-thread operation not valid: Control 'button20' accessed from a thread other than the thread it was created on.
+2024-02-12 14:43:43,458 ERROR - Cross-thread operation not valid: Control 'button20' accessed from a thread other than the thread it was created on.
+2024-02-12 14:43:48,961 ERROR - Cross-thread operation not valid: Control 'button20' accessed from a thread other than the thread it was created on.
+2024-02-12 14:46:17,938 ERROR - Cross-thread operation not valid: Control 'button20' accessed from a thread other than the thread it was created on.

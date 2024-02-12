@@ -39,6 +39,18 @@
             button7 = new Button();
             button8 = new Button();
             button9 = new Button();
+            button12 = new Button();
+            button13 = new Button();
+            button10 = new Button();
+            button11 = new Button();
+            button14 = new Button();
+            button15 = new Button();
+            button16 = new Button();
+            button17 = new Button();
+            button18 = new Button();
+            button19 = new Button();
+            button20 = new Button();
+            button21 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -98,7 +110,7 @@
             // 
             // timer1
             // 
-            timer1.Interval = 1000;
+            timer1.Interval = 5000;
             timer1.Tick += timer1_Tick;
             // 
             // button6
@@ -145,11 +157,153 @@
             button9.UseVisualStyleBackColor = true;
             button9.Click += button9_Click;
             // 
+            // button12
+            // 
+            button12.Location = new Point(547, 46);
+            button12.Margin = new Padding(2);
+            button12.Name = "button12";
+            button12.Size = new Size(147, 26);
+            button12.TabIndex = 10;
+            button12.Text = "Start  Threading Timer";
+            button12.UseVisualStyleBackColor = true;
+            button12.Click += button12_Click;
+            // 
+            // button13
+            // 
+            button13.Location = new Point(547, 76);
+            button13.Margin = new Padding(2);
+            button13.Name = "button13";
+            button13.Size = new Size(147, 26);
+            button13.TabIndex = 9;
+            button13.Text = "Stop Thread Timer";
+            button13.UseVisualStyleBackColor = true;
+            button13.Click += button13_Click;
+            // 
+            // button10
+            // 
+            button10.Location = new Point(56, 136);
+            button10.Margin = new Padding(2);
+            button10.Name = "button10";
+            button10.Size = new Size(147, 26);
+            button10.TabIndex = 11;
+            button10.Text = "Divide by Zero";
+            button10.UseVisualStyleBackColor = true;
+            button10.Click += button10_Click;
+            // 
+            // button11
+            // 
+            button11.Location = new Point(56, 166);
+            button11.Margin = new Padding(2);
+            button11.Name = "button11";
+            button11.Size = new Size(147, 26);
+            button11.TabIndex = 12;
+            button11.Text = "Call Task Sync";
+            button11.UseVisualStyleBackColor = true;
+            button11.Click += button11_Click_1;
+            // 
+            // button14
+            // 
+            button14.Location = new Point(56, 196);
+            button14.Margin = new Padding(2);
+            button14.Name = "button14";
+            button14.Size = new Size(147, 26);
+            button14.TabIndex = 13;
+            button14.Text = "Call Task Async";
+            button14.UseVisualStyleBackColor = true;
+            button14.Click += button14_Click;
+            // 
+            // button15
+            // 
+            button15.Location = new Point(56, 226);
+            button15.Margin = new Padding(2);
+            button15.Name = "button15";
+            button15.Size = new Size(147, 26);
+            button15.TabIndex = 14;
+            button15.Text = "Cascading Methods";
+            button15.UseVisualStyleBackColor = true;
+            button15.Click += button15_Click;
+            // 
+            // button16
+            // 
+            button16.Location = new Point(56, 256);
+            button16.Margin = new Padding(2);
+            button16.Name = "button16";
+            button16.Size = new Size(147, 26);
+            button16.TabIndex = 15;
+            button16.Text = "Catch Outside Task.Run";
+            button16.UseVisualStyleBackColor = true;
+            button16.Click += button16_Click;
+            // 
+            // button17
+            // 
+            button17.Location = new Point(56, 286);
+            button17.Margin = new Padding(2);
+            button17.Name = "button17";
+            button17.Size = new Size(147, 26);
+            button17.TabIndex = 16;
+            button17.Text = "Catch Inside Task.Run";
+            button17.UseVisualStyleBackColor = true;
+            button17.Click += button17_Click;
+            // 
+            // button18
+            // 
+            button18.Location = new Point(218, 106);
+            button18.Margin = new Padding(2);
+            button18.Name = "button18";
+            button18.Size = new Size(147, 26);
+            button18.TabIndex = 17;
+            button18.Text = "Catch Inside Task.Run";
+            button18.UseVisualStyleBackColor = true;
+            // 
+            // button19
+            // 
+            button19.Location = new Point(547, 256);
+            button19.Margin = new Padding(2);
+            button19.Name = "button19";
+            button19.Size = new Size(147, 26);
+            button19.TabIndex = 18;
+            button19.Text = "Toggle without Invoke";
+            button19.UseVisualStyleBackColor = true;
+            button19.Click += button19_Click;
+            // 
+            // button20
+            // 
+            button20.Location = new Point(547, 286);
+            button20.Margin = new Padding(2);
+            button20.Name = "button20";
+            button20.Size = new Size(147, 26);
+            button20.TabIndex = 19;
+            button20.Text = "On";
+            button20.UseVisualStyleBackColor = true;
+            // 
+            // button21
+            // 
+            button21.Location = new Point(381, 256);
+            button21.Margin = new Padding(2);
+            button21.Name = "button21";
+            button21.Size = new Size(147, 26);
+            button21.TabIndex = 20;
+            button21.Text = "Toggle with Invoke";
+            button21.UseVisualStyleBackColor = true;
+            button21.Click += button21_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(716, 351);
+            ClientSize = new Size(785, 351);
+            Controls.Add(button21);
+            Controls.Add(button20);
+            Controls.Add(button19);
+            Controls.Add(button18);
+            Controls.Add(button17);
+            Controls.Add(button16);
+            Controls.Add(button15);
+            Controls.Add(button14);
+            Controls.Add(button11);
+            Controls.Add(button10);
+            Controls.Add(button12);
+            Controls.Add(button13);
             Controls.Add(button9);
             Controls.Add(button8);
             Controls.Add(button7);
@@ -177,5 +331,17 @@
         private Button button7;
         private Button button8;
         private Button button9;
+        private Button button12;
+        private Button button13;
+        private Button button10;
+        private Button button11;
+        private Button button14;
+        private Button button15;
+        private Button button16;
+        private Button button17;
+        private Button button18;
+        private Button button19;
+        private Button button20;
+        private Button button21;
     }
 }
