@@ -1,0 +1,16 @@
+2024-02-12 11:36:25,972 WARN - hello
+2024-02-12 11:38:34,338 WARN - hello
+2024-02-12 11:38:34,990 WARN - hello
+2024-02-12 11:38:35,711 WARN - hello
+2024-02-12 11:46:32,169 ERROR - No Catch
+2024-02-12 11:46:33,950 ERROR - No Catch
+2024-02-12 11:46:35,796 INFO - Logger logging
+2024-02-12 11:46:36,843 INFO - Logger logging
+2024-02-12 11:46:37,443 INFO - Logger logging
+2024-02-12 11:57:45,736 ERROR - Timer is already enabled
+2024-02-12 11:57:46,632 ERROR - Timer is already enabled
+2024-02-12 11:57:48,501 ERROR - Timer is already disabled
+2024-02-12 11:57:49,290 ERROR - Timer is already disabled
+2024-02-12 12:21:57,100 INFO - SystemTimer tick
+2024-02-12 12:21:58,091 INFO - SystemTimer tick
+2024-02-12 12:21:59,096 INFO - SystemTimer tick
