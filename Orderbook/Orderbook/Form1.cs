@@ -110,19 +110,9 @@ namespace Orderbook
         public async void SubscribeButton_Click(object sender, EventArgs e)
         {
             RefreshData();
-            RefreshTimer = new System.Timers.Timer(5000);
-
-            RefreshTimer.Elapsed += OnTimerElapsed;
-            RefreshTimer.AutoReset = true;
-
-            RefreshTimer.Start();
         }
 
-        private void OnTimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            // Ensure RefreshData is called on the UI thread
-            Invoke(new Action(async () => RefreshData()));
-        }
+
 
         private async void RefreshData()
         {
@@ -133,7 +123,8 @@ namespace Orderbook
                 return;
             }
 
-            string socketUrl = $"wss://ws.bitmex.com/realtime?subscribe=instrument,orderBookL2_25:{InputTokenRichTextBox.Text}";
+            //string socketUrl = $"wss://ws.bitmex.com/realtime?subscribe=instrument,orderBookL2_25:{InputTokenRichTextBox.Text}";
+            string socketUrl = $"wss://ws.bitmex.com/realtime?subscribe=orderBookL2_25:{InputTokenRichTextBox.Text}";
 
             await ConnectWebSocket(socketUrl, orderbookInstance);
         }
@@ -219,6 +210,7 @@ namespace Orderbook
                             }
                             else if (root.GetProperty("action").GetString() == "insert")
                             {
+                                MessageBox.Show("insert recieved");
                                 AddJsonToDataTable(dataElement.ToString(), dataTableSocket);
 
                             }
