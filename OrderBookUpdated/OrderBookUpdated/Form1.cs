@@ -1,8 +1,13 @@
 using log4net.Core;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
+using System.ComponentModel;
+using System.Data;
 using System.Net.WebSockets;
 using System.Text;
 using System.Text.Json;
+using System.Windows.Forms;
 
 
 
@@ -25,10 +30,12 @@ namespace OrderBookUpdated
             InitializeComponent();
         }
 
-
         private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public static Orderbook orderbook = new Orderbook();
+
+        public static DataTable buyTable = new DataTable();
+        public static DataTable sellTable = new DataTable();
 
 
         private async void SubscribeButton_Click(object sender, EventArgs e)
@@ -40,7 +47,7 @@ namespace OrderBookUpdated
             await ConnectWebSocket(socketUrl);
         }
 
-        static async Task ConnectWebSocket(string socketUrl)
+        async Task ConnectWebSocket(string socketUrl)
         {
             using (ClientWebSocket webSocket = new ClientWebSocket())
             {
@@ -58,7 +65,7 @@ namespace OrderBookUpdated
             }
         }
 
-        static async Task ReceiveMessages(ClientWebSocket webSocket)
+        async Task ReceiveMessages(ClientWebSocket webSocket)
         {
             const int bufferSize = 8192;
             byte[] buffer = new byte[bufferSize];
@@ -89,6 +96,7 @@ namespace OrderBookUpdated
                             try
                             {
                                 processDataReceived(root);
+
                             }
                             catch (Exception ex)
                             {
@@ -96,17 +104,17 @@ namespace OrderBookUpdated
                             }
 
                         }
-       
-
-
-
                         messageBuilder.Clear();
                     }
                 }
             }
         }
 
-        public static void processDataReceived(JsonElement root)
+        public void updateOutput()
+        {           
+            label1.Text = orderbook.length.ToString();
+        }
+        public async Task processDataReceived(JsonElement root)
         {
             string action = root.GetProperty("action").ToString();
             try
@@ -114,6 +122,9 @@ namespace OrderBookUpdated
                 if (action == "partial")
                 {
                     partialAction(root);
+
+                    dataGridView1.DataSource = orderbook.orders;                                           
+
                 }
                 else if (action == "delete")
                 {
@@ -131,14 +142,22 @@ namespace OrderBookUpdated
                 {
                     Logger.Info($"{action} is not catered for yet");
                 }
-            } catch (Exception ex)
+
+                updateOutput();
+
+
+
+            }
+            catch (Exception ex)
             {
                 Logger.Error($"Error processing action {action}, exception: {ex}");
             }
 
         }
 
-        public static void partialAction(JsonElement root)
+
+        // Action methods:
+        public void partialAction(JsonElement root)
         {
             // loop through orders and add to orderbook object
             foreach (var dataPoint in root.GetProperty("data").EnumerateArray())
@@ -148,41 +167,77 @@ namespace OrderBookUpdated
                 orderbook.AddOrder(order);
             }
         }
-
-        public static void deleteAction(JsonElement root) 
+        public void deleteAction(JsonElement root)
         {
-            foreach (var dataPoint in root.GetProperty("data").EnumerateArray())
+            JsonElement data = root.GetProperty("data");
+            if (data.GetArrayLength() > 0)
             {
-                Order order = new Order(dataPoint);
-
-                orderbook.DeleteOrder(order.id);
+                foreach (var dataPoint in root.GetProperty("data").EnumerateArray())
+                {
+                    orderbook.DeleteOrder(dataPoint.GetProperty("id").ToString());
+                }
+            }
+            else
+            {
+                orderbook.DeleteOrder(data.GetProperty("id").ToString());
             }
         }
-        public static void insertAction(JsonElement root) 
+        public void insertAction(JsonElement root)
         {
-            //foreach (var dataPoint in root.GetProperty("data").EnumerateArray())
-            //{
-            //    Order order = new Order(dataPoint);
+            JsonElement data = root.GetProperty("data");
+            if (data.GetArrayLength() > 0)
+            {
+                foreach (var dataPoint in root.GetProperty("data").EnumerateArray())
+                {
+                    Order order = new Order(dataPoint);
 
-            //    orderbook.AddOrder(order);
-            //}
+                    orderbook.InsertOrder(order);
+                }
+            }
+            else
+            {
+                Order order = new Order(data);
+
+                orderbook.InsertOrder(order);
+            }
         }
-        public static void updateAction(JsonElement root)
+        public void updateAction(JsonElement root)
         {
-            //foreach (var dataPoint in root.GetProperty("data").EnumerateArray())
-            //{
-            //    Order order = new Order(dataPoint);
+            JsonElement data = root.GetProperty("data");
+            if (data.GetArrayLength() > 0)
+            {
+                foreach (var dataPoint in root.GetProperty("data").EnumerateArray())
+                {
+                    Order order = new Order(dataPoint);
 
-            //    orderbook.AddOrder(order);
-            //}
+                    orderbook.UpdateOrder(order);
+                }
+            }
+            else
+            {
+                Order order = new Order(data);
+
+                orderbook.UpdateOrder(order);
+            }
         }
 
+        private async void button1_Click(object sender, EventArgs e)
+        {
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
-
+        }
     }
 
-
+    public class OrderComparer : IComparer<Order>
+    {
+        public int Compare(Order x, Order y)
+        {
+            return y.price.CompareTo(x.price);
+        }
+    }
     public class Order
     {
         public string symbol { get; set; }
@@ -191,6 +246,8 @@ namespace OrderBookUpdated
         public int size { get; set; }
         public double price { get; set; }
         public DateTime timestamp { get; set; }
+
+
 
         public Order(string symbol, string id, string side, int size, double price, DateTime timestamp)
         {
@@ -225,8 +282,8 @@ namespace OrderBookUpdated
 
     public class Orderbook
     {
-        public List<Order> orders = new List<Order>();
-
+        public BindingList<Order> orders = new BindingList<Order>();
+        public int length { get; set; }
         public Orderbook()
         {
 
@@ -235,16 +292,49 @@ namespace OrderBookUpdated
         public void AddOrder(Order order)
         {
             orders.Add(order);
+            this.length++;
         }
         public void InsertOrder(Order order)
         {
-            // adjust this
-            orders.Insert(0, order);
-        }
+            OrderComparer orderComparer = new OrderComparer();
+            // convert to normal list to use binary search
+            List<Order> orderList = new List<Order>(orders);
 
+            int index = orderList.BinarySearch(order, orderComparer);
+            if (index < 0) 
+            { 
+                index = ~index; 
+            }
+
+            orders.Insert(index, order);
+            this.length++;
+        }
         public void DeleteOrder(string id)
         {
-            MessageBox.Show(id);
+            List<int> indiciesToRemove = new List<int>();
+            for (int i = 0; i < this.length; i++){
+                if (orders[i].id == id)
+                {
+                    indiciesToRemove.Add(i);
+                }
+            }
+            foreach (int index  in indiciesToRemove)
+            {
+                this.orders.RemoveAt(index);
+                this.length--;
+            }
+        }
+        public void UpdateOrder(Order order)
+        {
+            
+            for (int i = 0; i < this.length; i++){
+                {
+                    if (order.id == this.orders[i].id)
+                    {
+                        this.orders[i] = order;
+                    }
+                }
+            }
         }
 
         public override string ToString()
@@ -256,6 +346,36 @@ namespace OrderBookUpdated
             foreach (Order order in orders)
             {
                 sb.AppendLine(order.ToString());
+            }
+
+            return sb.ToString();
+        }
+
+        public string ToStringBuy()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("Orderbook:");
+
+            foreach (Order order in orders)
+            {
+                if (order.side == "Buy")
+                sb.AppendLine(order.ToString());
+            }
+
+            return sb.ToString();
+        }
+
+        public string ToStringSell()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("Orderbook:");
+
+            foreach (Order order in orders)
+            {
+                if (order.side == "Sell")
+                    sb.AppendLine(order.ToString());
             }
 
             return sb.ToString();
