@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    "net8.0-windows7.0": {
+    "net6.0-windows7.0": {
       "log4net/2.0.15": {
         "type": "package",
         "dependencies": {
@@ -4965,7 +4965,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net8.0-windows7.0": [
+    "net6.0-windows7.0": [
       "log4net >= 2.0.15",
       "log4net.Ext.Json >= 2.0.10.1"
     ]
@@ -4977,11 +4977,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zac\\OneDrive\\Desktop\\Tasks\\Sandwich-Tasks\\ExceptionHandling\\ExceptionHandling\\ExceptionHandling.csproj",
+      "projectUniqueName": "C:\\Users\\zac\\source\\repos\\Sandwich-Tasks\\ExceptionHandling\\ExceptionHandling\\ExceptionHandling.csproj",
       "projectName": "ExceptionHandling",
-      "projectPath": "C:\\Users\\zac\\OneDrive\\Desktop\\Tasks\\Sandwich-Tasks\\ExceptionHandling\\ExceptionHandling\\ExceptionHandling.csproj",
+      "projectPath": "C:\\Users\\zac\\source\\repos\\Sandwich-Tasks\\ExceptionHandling\\ExceptionHandling\\ExceptionHandling.csproj",
       "packagesPath": "C:\\Users\\zac\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\zac\\OneDrive\\Desktop\\Tasks\\Sandwich-Tasks\\ExceptionHandling\\ExceptionHandling\\obj\\",
+      "outputPath": "C:\\Users\\zac\\source\\repos\\Sandwich-Tasks\\ExceptionHandling\\ExceptionHandling\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4992,7 +4992,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net8.0-windows"
+        "net6.0-windows7.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -5000,8 +5000,8 @@
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net8.0-windows7.0": {
-          "targetAlias": "net8.0-windows",
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows7.0",
           "projectReferences": {}
         }
       },
@@ -5012,8 +5012,8 @@
       }
     },
     "frameworks": {
-      "net8.0-windows7.0": {
-        "targetAlias": "net8.0-windows",
+      "net6.0-windows7.0": {
+        "targetAlias": "net6.0-windows7.0",
         "dependencies": {
           "log4net": {
             "target": "Package",
@@ -5043,7 +5043,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
