@@ -38,6 +38,7 @@ namespace OrderBookUpdated
         public static DataTable sellTable = new DataTable();
 
 
+
         private async void SubscribeButton_Click(object sender, EventArgs e)
         {
             string Token = InputTokenRichTextBox.Text;
@@ -123,7 +124,8 @@ namespace OrderBookUpdated
                 {
                     partialAction(root);
 
-                    dataGridView1.DataSource = orderbook.orders;                                           
+                    dataGridViewSell.DataSource = orderbook.sellOrders;
+                    dataGridViewBuy.DataSource = orderbook.buyOrders;
 
                 }
                 else if (action == "delete")
@@ -164,8 +166,9 @@ namespace OrderBookUpdated
             {
                 Order order = new Order(dataPoint);
 
-                orderbook.AddOrder(order);
+                orderbook.AddOrder(order, orderbook.GetOrders(order.side));
             }
+            orderbook.sellOrders.Reverse();
         }
         public void deleteAction(JsonElement root)
         {
@@ -174,12 +177,12 @@ namespace OrderBookUpdated
             {
                 foreach (var dataPoint in root.GetProperty("data").EnumerateArray())
                 {
-                    orderbook.DeleteOrder(dataPoint.GetProperty("id").ToString());
+                    orderbook.DeleteOrder(dataPoint.GetProperty("id").ToString(), orderbook.GetOrders(dataPoint.GetProperty("side").ToString()));
                 }
             }
             else
             {
-                orderbook.DeleteOrder(data.GetProperty("id").ToString());
+                    orderbook.DeleteOrder(data.GetProperty("id").ToString(), orderbook.GetOrders(data.GetProperty("side").ToString()));
             }
         }
         public void insertAction(JsonElement root)
@@ -191,14 +194,14 @@ namespace OrderBookUpdated
                 {
                     Order order = new Order(dataPoint);
 
-                    orderbook.InsertOrder(order);
+                    orderbook.InsertOrder(order, orderbook.GetOrders(order.side));
                 }
             }
             else
             {
                 Order order = new Order(data);
 
-                orderbook.InsertOrder(order);
+                orderbook.InsertOrder(order, orderbook.GetOrders(order.side));
             }
         }
         public void updateAction(JsonElement root)
@@ -210,14 +213,14 @@ namespace OrderBookUpdated
                 {
                     Order order = new Order(dataPoint);
 
-                    orderbook.UpdateOrder(order);
+                    orderbook.UpdateOrder(order, orderbook.GetOrders(order.side));
                 }
             }
             else
             {
                 Order order = new Order(data);
 
-                orderbook.UpdateOrder(order);
+                orderbook.UpdateOrder(order, orderbook.GetOrders(order.side));
             }
         }
 
@@ -282,19 +285,32 @@ namespace OrderBookUpdated
 
     public class Orderbook
     {
-        public BindingList<Order> orders = new BindingList<Order>();
+        public BindingList<Order> sellOrders = new BindingList<Order>();
+        public BindingList<Order> buyOrders = new BindingList<Order>();
         public int length { get; set; }
         public Orderbook()
         {
 
         }
 
-        public void AddOrder(Order order)
+        public BindingList<Order> GetOrders(string orderType)
         {
+            if (orderType == "Buy")
+            {
+                return buyOrders;
+            } else
+            {
+                return sellOrders;
+            }
+        }
+        public void AddOrder(Order order, BindingList<Order> orders)
+        {
+    
             orders.Add(order);
+      
             this.length++;
         }
-        public void InsertOrder(Order order)
+        public void InsertOrder(Order order, BindingList<Order> orders)
         {
             OrderComparer orderComparer = new OrderComparer();
             // convert to normal list to use binary search
@@ -309,10 +325,11 @@ namespace OrderBookUpdated
             orders.Insert(index, order);
             this.length++;
         }
-        public void DeleteOrder(string id)
+        public void DeleteOrder(string id, BindingList<Order> orders)
         {
             List<int> indiciesToRemove = new List<int>();
-            for (int i = 0; i < this.length; i++){
+
+            for (int i = 0; i < orders.Count; i++){
                 if (orders[i].id == id)
                 {
                     indiciesToRemove.Add(i);
@@ -320,18 +337,18 @@ namespace OrderBookUpdated
             }
             foreach (int index  in indiciesToRemove)
             {
-                this.orders.RemoveAt(index);
+                orders.RemoveAt(index);
                 this.length--;
             }
         }
-        public void UpdateOrder(Order order)
+        public void UpdateOrder(Order order, BindingList<Order> orders)
         {
             
-            for (int i = 0; i < this.length; i++){
+            for (int i = 0; i < orders.Count; i++){
                 {
-                    if (order.id == this.orders[i].id)
+                    if (order.id == orders[i].id)
                     {
-                        this.orders[i] = order;
+                        orders[i] = order;
                     }
                 }
             }
@@ -343,7 +360,7 @@ namespace OrderBookUpdated
 
             sb.AppendLine("Orderbook:");
 
-            foreach (Order order in orders)
+            foreach (Order order in buyOrders)
             {
                 sb.AppendLine(order.ToString());
             }
@@ -357,7 +374,7 @@ namespace OrderBookUpdated
 
             sb.AppendLine("Orderbook:");
 
-            foreach (Order order in orders)
+            foreach (Order order in buyOrders)
             {
                 if (order.side == "Buy")
                 sb.AppendLine(order.ToString());
@@ -372,7 +389,7 @@ namespace OrderBookUpdated
 
             sb.AppendLine("Orderbook:");
 
-            foreach (Order order in orders)
+            foreach (Order order in buyOrders)
             {
                 if (order.side == "Sell")
                     sb.AppendLine(order.ToString());
