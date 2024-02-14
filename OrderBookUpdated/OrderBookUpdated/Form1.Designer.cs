@@ -35,6 +35,11 @@
             orderBindingSource = new BindingSource(components);
             orderbookBindingSource = new BindingSource(components);
             dgvSell = new DataGridView();
+            Price = new DataGridViewTextBoxColumn();
+            Size = new DataGridViewTextBoxColumn();
+            Side1 = new DataGridViewTextBoxColumn();
+            Symbol = new DataGridViewTextBoxColumn();
+            ID = new DataGridViewTextBoxColumn();
             checkBox1 = new CheckBox();
             dgvBuy = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -42,11 +47,7 @@
             Side = new DataGridViewTextBoxColumn();
             Size1 = new DataGridViewTextBoxColumn();
             Price1 = new DataGridViewTextBoxColumn();
-            Price = new DataGridViewTextBoxColumn();
-            Size = new DataGridViewTextBoxColumn();
-            Side1 = new DataGridViewTextBoxColumn();
-            Symbol = new DataGridViewTextBoxColumn();
-            ID = new DataGridViewTextBoxColumn();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)orderBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)orderbookBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvSell).BeginInit();
@@ -99,6 +100,41 @@
             dgvSell.RowTemplate.Height = 25;
             dgvSell.Size = new Size(543, 725);
             dgvSell.TabIndex = 8;
+            // 
+            // Price
+            // 
+            Price.DataPropertyName = "Price";
+            Price.HeaderText = "Price";
+            Price.Name = "Price";
+            Price.ReadOnly = true;
+            // 
+            // Size
+            // 
+            Size.DataPropertyName = "Size";
+            Size.HeaderText = "Size";
+            Size.Name = "Size";
+            Size.ReadOnly = true;
+            // 
+            // Side1
+            // 
+            Side1.DataPropertyName = "Side";
+            Side1.HeaderText = "Side";
+            Side1.Name = "Side1";
+            Side1.ReadOnly = true;
+            // 
+            // Symbol
+            // 
+            Symbol.DataPropertyName = "Symbol";
+            Symbol.HeaderText = "Symbol";
+            Symbol.Name = "Symbol";
+            Symbol.ReadOnly = true;
+            // 
+            // ID
+            // 
+            ID.DataPropertyName = "ID";
+            ID.HeaderText = "ID";
+            ID.Name = "ID";
+            ID.ReadOnly = true;
             // 
             // checkBox1
             // 
@@ -156,46 +192,22 @@
             Price1.Name = "Price1";
             Price1.ReadOnly = true;
             // 
-            // Price
+            // button1
             // 
-            Price.DataPropertyName = "Price";
-            Price.HeaderText = "Price";
-            Price.Name = "Price";
-            Price.ReadOnly = true;
-            // 
-            // Size
-            // 
-            Size.DataPropertyName = "Size";
-            Size.HeaderText = "Size";
-            Size.Name = "Size";
-            Size.ReadOnly = true;
-            // 
-            // Side1
-            // 
-            Side1.DataPropertyName = "Side";
-            Side1.HeaderText = "Side";
-            Side1.Name = "Side1";
-            Side1.ReadOnly = true;
-            // 
-            // Symbol
-            // 
-            Symbol.DataPropertyName = "Symbol";
-            Symbol.HeaderText = "Symbol";
-            Symbol.Name = "Symbol";
-            Symbol.ReadOnly = true;
-            // 
-            // ID
-            // 
-            ID.DataPropertyName = "ID";
-            ID.HeaderText = "ID";
-            ID.Name = "ID";
-            ID.ReadOnly = true;
+            button1.Location = new Point(20, 299);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 11;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1506, 749);
+            Controls.Add(button1);
             Controls.Add(dgvBuy);
             Controls.Add(checkBox1);
             Controls.Add(dgvSell);
@@ -238,5 +250,6 @@
         private DataGridViewTextBoxColumn Side;
         private DataGridViewTextBoxColumn Size1;
         private DataGridViewTextBoxColumn Price1;
+        private Button button1;
     }
 }

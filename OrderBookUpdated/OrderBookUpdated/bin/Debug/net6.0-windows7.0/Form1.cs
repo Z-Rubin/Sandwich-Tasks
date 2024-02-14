@@ -1,5 +1,4 @@
 using log4net.Core;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -9,6 +8,7 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Text.Json;
 using System.Windows.Forms;
+using System.Threading;
 using static System.Windows.Forms.AxHost;
 
 
@@ -41,13 +41,32 @@ namespace OrderBookUpdated
         public static DataTable buyTable = new DataTable();
         public static DataTable sellTable = new DataTable();
 
+
+
+
         public int BuySizeColumnIndex { get; private set; }
         public int SellSizeColumnIndex { get; private set; }
 
+        public static void OnHeartbeatTimer(object? state)
+        {
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception ex)
+            {
+
+                Logger?.Error(ex);
+            }
+        }
         private async void SubscribeButton_Click(object sender, EventArgs e)
         {
             try
             {
+                var autoEvent = new AutoResetEvent(false);
+
+                System.Threading.Timer HeartbeatTimer = new System.Threading.Timer(OnHeartbeatTimer, autoEvent, 5000, 5000);
+
                 dgvBuy.AutoGenerateColumns = false;
                 dgvSell.AutoGenerateColumns = false;
 
@@ -56,7 +75,9 @@ namespace OrderBookUpdated
                 string socketUrl = $"wss://ws.bitmex.com/realtime?subscribe=orderBookL2_25:{Token}";
 
                 await ConnectWebSocket(socketUrl);
-            } catch (Exception ex)
+
+            }
+            catch (Exception ex)
             {
                 Logger?.Error(ex);
             }
@@ -117,6 +138,7 @@ namespace OrderBookUpdated
                                         processDataReceived(root);
                                     });
 
+
                                 });
 
                             }
@@ -153,7 +175,7 @@ namespace OrderBookUpdated
                         // Use BeginInvoke to update the DataGridView on the UI thread
                         dgvSell.BeginInvoke(new Action(() => dgvSell.DataSource = orderbook.sellOrders));
                         dgvBuy.BeginInvoke(new Action(() => dgvBuy.DataSource = orderbook.buyOrders));
-                        
+
                     }
                     else if (action == "delete")
                     {
@@ -343,6 +365,11 @@ namespace OrderBookUpdated
         }
 
         private void orderBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }

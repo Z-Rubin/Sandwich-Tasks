@@ -1,2 +1,78 @@
 2024-02-14 12:57:16,150 ERROR - System.NullReferenceException: Object reference not set to an instance of an object.
    at OrderBookUpdated.Form1.SubscribeButton_Click(Object sender, EventArgs e) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 54
+2024-02-14 14:20:13,731 ERROR - System.Net.WebSockets.WebSocketException (0x80004005): The remote party closed the WebSocket connection without completing the close handshake.
+ ---> System.IO.IOException: Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host..
+ ---> System.Net.Sockets.SocketException (10054): An existing connection was forcibly closed by the remote host.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.CreateException(SocketError error, Boolean forAsyncThrow)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ReceiveAsync(Socket socket, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.ReceiveAsync(Memory`1 buffer, SocketFlags socketFlags, Boolean fromNetworkStream, CancellationToken cancellationToken)
+   at System.Net.Sockets.NetworkStream.ReadAsync(Memory`1 buffer, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Security.SslStream.ReadAsync(Memory`1 buffer, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnection.ReadBufferedAsyncCore(Memory`1 destination)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at System.Net.Http.HttpConnection.ReadBufferedAsyncCore(Memory`1 destination)
+   at System.Net.Http.HttpConnection.ReadBufferedAsync(Memory`1 destination)
+   at System.Net.Http.HttpConnection.RawConnectionStream.ReadAsync(Memory`1 buffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at System.Net.Http.HttpConnection.RawConnectionStream.ReadAsync(Memory`1 buffer, CancellationToken cancellationToken)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsync(ArraySegment`1 buffer, CancellationToken cancellationToken)
+   at System.Net.WebSockets.ClientWebSocket.ReceiveAsync(ArraySegment`1 buffer, CancellationToken cancellationToken)
+   at OrderBookUpdated.Form1.ReceiveMessages(ClientWebSocket webSocket) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 93
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Runtime.CompilerServices.TaskAwaiter.<>c.<OutputWaitEtwEvents>b__12_0(Action innerContinuation, Task innerTask)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.ContinuationWrapper.Invoke()
+   at System.Threading.Tasks.SynchronizationContextAwaitTaskContinuation.<>c__DisplayClass6_0.<GetActionLogDelegate>b__0()
+   at System.Threading.Tasks.SynchronizationContextAwaitTaskContinuation.<>c.<.cctor>b__8_0(Object state)
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Span`1& arguments, Signature sig, Boolean constructor, Boolean wrapExceptions)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Delegate.DynamicInvokeImpl(Object[] args)
+   at System.Delegate.DynamicInvoke(Object[] args)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbackDo(ThreadMethodEntry tme)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbackHelper(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Windows.Forms.Control.InvokeMarshaledCallback(ThreadMethodEntry tme)
+   at System.Windows.Forms.Control.InvokeMarshaledCallbacks()
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, WM msg, IntPtr wparam, IntPtr lparam)
+   at Interop.User32.DispatchMessageW(MSG& msg)
+   at Interop.User32.DispatchMessageW(MSG& msg)
+   at System.Windows.Forms.Application.ComponentManager.Interop.Mso.IMsoComponentManager.FPushMessageLoop(UIntPtr dwComponentID, msoloop uReason, Void* pvLoopData)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(msoloop reason, ApplicationContext context)
+   at System.Windows.Forms.Application.ThreadContext.RunMessageLoop(msoloop reason, ApplicationContext context)
+   at System.Windows.Forms.Application.Run(Form mainForm)
+   at OrderBookUpdated.Program.Main() in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Program.cs:line 14
+--- End of stack trace from previous location ---
+
+   --- End of inner exception stack trace ---
+   at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Http.HttpConnection.ReadBufferedAsyncCore(Memory`1 destination)
+   at System.Net.Http.HttpConnection.RawConnectionStream.ReadAsync(Memory`1 buffer, CancellationToken cancellationToken)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Net.WebSockets.ManagedWebSocket.ReceiveAsyncPrivate[TResult](Memory`1 payloadBuffer, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask`1.GetTaskForValueTaskSource(IValueTaskSource`1 t)
+--- End of stack trace from previous location ---
+   at OrderBookUpdated.Form1.ReceiveMessages(ClientWebSocket webSocket) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 93
+   at OrderBookUpdated.Form1.ConnectWebSocket(String socketUrl) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 74
+2024-02-14 14:34:01,402 ERROR - System.NotImplementedException: The method or operation is not implemented.
+   at OrderBookUpdated.Form1.OnHeartbeatTimer(Object state) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 55
+2024-02-14 14:34:06,410 ERROR - System.NotImplementedException: The method or operation is not implemented.
+   at OrderBookUpdated.Form1.OnHeartbeatTimer(Object state) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 55
+2024-02-14 15:53:34,396 ERROR - System.NotImplementedException: The method or operation is not implemented.
+   at OrderBookUpdated.Form1.OnHeartbeatTimer(Object state) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 54

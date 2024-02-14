@@ -7,7 +7,6 @@ C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\bin\D
 C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\bin\Debug\net6.0-windows7.0\OrderBookUpdated.pdb
 C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\bin\Debug\net6.0-windows7.0\log4net.dll
 C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\bin\Debug\net6.0-windows7.0\log4net.Ext.Json.dll
-C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\bin\Debug\net6.0-windows7.0\Newtonsoft.Json.dll
 C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\obj\Debug\net6.0-windows7.0\OrderBookUpdated.csproj.AssemblyReference.cache
 C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\obj\Debug\net6.0-windows7.0\OrderBookUpdated.Form1.resources
 C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\obj\Debug\net6.0-windows7.0\OrderBookUpdated.csproj.GenerateResource.cache
