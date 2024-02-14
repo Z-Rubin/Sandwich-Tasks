@@ -1,0 +1,10 @@
+2024-02-14 08:03:08,934 INFO - Logger logging
+2024-02-14 08:03:57,780 ERROR - No Catch Caught
+2024-02-14 08:04:00,384 ERROR - Divide by zero error
+2024-02-14 08:04:08,470 INFO - 00:00:06.4925896
+2024-02-14 08:04:10,967 INFO - 00:00:00.0228893
+2024-02-14 08:04:13,289 ERROR - Method C throwing
+2024-02-14 08:04:27,578 ERROR - Method C throwing
+2024-02-14 08:04:29,207 ERROR - Method C throwing
+2024-02-14 08:04:34,851 ERROR - Form Timer is already enabled
+2024-02-14 08:06:11,483 ERROR - Cross-thread operation not valid: Control 'button20' accessed from a thread other than the thread it was created on.

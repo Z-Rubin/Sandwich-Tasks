@@ -267,7 +267,7 @@ namespace ExceptionHandling
 
                 watch.Stop();
                 Logger?.Info(watch.Elapsed.ToString());
-            } 
+            }
             catch (Exception ex)
             {
                 Logger?.Error(ex.Message);
@@ -376,6 +376,11 @@ namespace ExceptionHandling
                     Logger?.Error(ex.Message);
                 }
             });
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
