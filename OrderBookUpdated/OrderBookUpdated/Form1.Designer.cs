@@ -32,7 +32,7 @@
             SubscribeButton = new Button();
             InputTokenRichTextBox = new RichTextBox();
             label1 = new Label();
-            dataGridView1 = new DataGridView();
+            dgvBuy = new DataGridView();
             symbolDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             sideDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -41,17 +41,17 @@
             timestampDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             orderBindingSource = new BindingSource(components);
             orderbookBindingSource = new BindingSource(components);
-            dataGridView2 = new DataGridView();
+            dgvSell = new DataGridView();
             dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvBuy).BeginInit();
             ((System.ComponentModel.ISupportInitialize)orderBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)orderbookBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvSell).BeginInit();
             SuspendLayout();
             // 
             // SubscribeButton
@@ -81,18 +81,18 @@
             label1.TabIndex = 5;
             label1.Text = "label1";
             // 
-            // dataGridView1
+            // dgvBuy
             // 
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { symbolDataGridViewTextBoxColumn, idDataGridViewTextBoxColumn, sideDataGridViewTextBoxColumn, sizeDataGridViewTextBoxColumn, priceDataGridViewTextBoxColumn, timestampDataGridViewTextBoxColumn });
-            dataGridView1.DataSource = orderBindingSource;
-            dataGridView1.Location = new Point(214, 12);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(643, 689);
-            dataGridView1.TabIndex = 7;
+            dgvBuy.AutoGenerateColumns = false;
+            dgvBuy.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvBuy.Columns.AddRange(new DataGridViewColumn[] { symbolDataGridViewTextBoxColumn, idDataGridViewTextBoxColumn, sideDataGridViewTextBoxColumn, sizeDataGridViewTextBoxColumn, priceDataGridViewTextBoxColumn, timestampDataGridViewTextBoxColumn });
+            dgvBuy.DataSource = orderBindingSource;
+            dgvBuy.Location = new Point(214, 12);
+            dgvBuy.Name = "dgvBuy";
+            dgvBuy.ReadOnly = true;
+            dgvBuy.RowTemplate.Height = 25;
+            dgvBuy.Size = new Size(643, 689);
+            dgvBuy.TabIndex = 7;
             // 
             // symbolDataGridViewTextBoxColumn
             // 
@@ -144,18 +144,18 @@
             // 
             orderbookBindingSource.DataSource = typeof(Orderbook);
             // 
-            // dataGridView2
+            // dgvSell
             // 
-            dataGridView2.AutoGenerateColumns = false;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6 });
-            dataGridView2.DataSource = orderBindingSource;
-            dataGridView2.Location = new Point(863, 12);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.ReadOnly = true;
-            dataGridView2.RowTemplate.Height = 25;
-            dataGridView2.Size = new Size(643, 689);
-            dataGridView2.TabIndex = 8;
+            dgvSell.AutoGenerateColumns = false;
+            dgvSell.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvSell.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6 });
+            dgvSell.DataSource = orderBindingSource;
+            dgvSell.Location = new Point(863, 12);
+            dgvSell.Name = "dgvSell";
+            dgvSell.ReadOnly = true;
+            dgvSell.RowTemplate.Height = 25;
+            dgvSell.Size = new Size(643, 689);
+            dgvSell.TabIndex = 8;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -204,18 +204,18 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1506, 749);
-            Controls.Add(dataGridView2);
-            Controls.Add(dataGridView1);
+            Controls.Add(dgvSell);
+            Controls.Add(dgvBuy);
             Controls.Add(label1);
             Controls.Add(InputTokenRichTextBox);
             Controls.Add(SubscribeButton);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvBuy).EndInit();
             ((System.ComponentModel.ISupportInitialize)orderBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)orderbookBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvSell).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -225,7 +225,7 @@
         private Button SubscribeButton;
         private RichTextBox InputTokenRichTextBox;
         private Label label1;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridViewBuy;
         private DataGridViewTextBoxColumn symbolDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn sideDataGridViewTextBoxColumn;
@@ -234,12 +234,14 @@
         private DataGridViewTextBoxColumn timestampDataGridViewTextBoxColumn;
         private BindingSource orderBindingSource;
         private BindingSource orderbookBindingSource;
-        private DataGridView dataGridView2;
+        private DataGridView dataGridViewSell;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private DataGridView dgvBuy;
+        private DataGridView dgvSell;
     }
 }
