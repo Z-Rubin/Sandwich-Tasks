@@ -37,7 +37,7 @@ namespace OrderBookUpdated
         public static DataTable buyTable = new DataTable();
         public static DataTable sellTable = new DataTable();
 
-
+        
 
         private async void SubscribeButton_Click(object sender, EventArgs e)
         {
@@ -115,7 +115,7 @@ namespace OrderBookUpdated
         {           
             label1.Text = orderbook.length.ToString();
         }
-        public async Task processDataReceived(JsonElement root)
+        public void processDataReceived(JsonElement root)
         {
             string action = root.GetProperty("action").ToString();
             try
@@ -124,8 +124,8 @@ namespace OrderBookUpdated
                 {
                     partialAction(root);
 
-                    dataGridViewSell.DataSource = orderbook.sellOrders;
-                    dataGridViewBuy.DataSource = orderbook.buyOrders;
+                    dgvSell.DataSource = orderbook.sellOrders;
+                    dgvBuy.DataSource = orderbook.buyOrders;
 
                 }
                 else if (action == "delete")
@@ -157,6 +157,7 @@ namespace OrderBookUpdated
 
         }
 
+        
 
         // Action methods:
         public void partialAction(JsonElement root)
@@ -165,10 +166,10 @@ namespace OrderBookUpdated
             foreach (var dataPoint in root.GetProperty("data").EnumerateArray())
             {
                 Order order = new Order(dataPoint);
-
-                orderbook.AddOrder(order, orderbook.GetOrders(order.side));
+                orderbook.AddOrder(order, orderbook.GetOrders(order.Side));
             }
-            orderbook.sellOrders.Reverse();
+   
+            Logger.Info(orderbook.sellOrders);
         }
         public void deleteAction(JsonElement root)
         {
@@ -194,14 +195,18 @@ namespace OrderBookUpdated
                 {
                     Order order = new Order(dataPoint);
 
-                    orderbook.InsertOrder(order, orderbook.GetOrders(order.side));
+                    orderbook.InsertOrder(order, orderbook.GetOrders(order.Side));
+                    UpdateCellColour(order);
+
                 }
             }
             else
             {
                 Order order = new Order(data);
 
-                orderbook.InsertOrder(order, orderbook.GetOrders(order.side));
+                orderbook.InsertOrder(order, orderbook.GetOrders(order.Side));
+                UpdateCellColour(order);
+
             }
         }
         public void updateAction(JsonElement root)
@@ -213,72 +218,153 @@ namespace OrderBookUpdated
                 {
                     Order order = new Order(dataPoint);
 
-                    orderbook.UpdateOrder(order, orderbook.GetOrders(order.side));
+                    orderbook.UpdateOrder(order, orderbook.GetOrders(order.Side));
+
+                    UpdateCellColour(order);
                 }
             }
             else
             {
                 Order order = new Order(data);
 
-                orderbook.UpdateOrder(order, orderbook.GetOrders(order.side));
+                orderbook.UpdateOrder(order, orderbook.GetOrders(order.Side));
+
+                UpdateCellColour(order);
             }
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        // Change Cell Colour on updates and inserts
+        public void UpdateCellColour(Order order)
         {
+            try
+           {
+                int CellColour = order.GetCellColour();
+                int CellIndex = orderbook.GetOrderIndex(order, orderbook.GetOrders(order.Side));
+                ChangeCellColour(order.Side, CellIndex, CellColour);
+            } catch (Exception ex) {
+                Logger?.Error(ex);
+            }
         }
+        public void ChangeCellColour(string side, int cellIndex, int cellColour)
+        {
+            try { 
+            if (side == "Buy")
+            {
+                if (cellColour == 1)
+                {
+                    dgvBuy[3, cellIndex].Style.ForeColor = Color.Green;
 
+                }
+                else if (cellColour == 2)
+                {
+                    dgvBuy[3, cellIndex].Style.ForeColor = Color.Red;
+
+                }
+                else if (cellColour == 0)
+                {
+                    dgvBuy[3, cellIndex].Style.ForeColor = Color.Black;
+
+                }
+            }
+                if (side == "Sell")
+                {
+                    if (cellColour == 1)
+                    {
+                        dgvSell[3, cellIndex].Style.ForeColor = Color.Green;
+
+                    }
+                    else if (cellColour == 2)
+                    {
+                        dgvSell[3, cellIndex].Style.ForeColor = Color.Red;
+
+                    }
+                    else if (cellColour == 0)
+                    {
+                        dgvSell[3, cellIndex].Style.ForeColor = Color.Black;
+
+                    }
+                }
+            } catch (Exception ex)
+            {
+                Logger?.Error($"cellIndex Received: {cellIndex}. Error: {ex}");
+            }
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
     }
 
-    public class OrderComparer : IComparer<Order>
+    public class OrderComparerBuy : IComparer<Order>
     {
         public int Compare(Order x, Order y)
         {
-            return y.price.CompareTo(x.price);
+            return y.Price.CompareTo(x.Price);
+        }
+    }
+    public class OrderComparerSell : IComparer<Order>
+    {
+        public int Compare(Order x, Order y)
+        {
+            return x.Price.CompareTo(y.Price);
         }
     }
     public class Order
     {
-        public string symbol { get; set; }
-        public string id { get; set; }
-        public string side { get; set; }
-        public int size { get; set; }
-        public double price { get; set; }
-        public DateTime timestamp { get; set; }
+        public string Symbol { get; set; }
+        public string Id { get; set; }
+        public string Side { get; set; }
+        public int Size { get; set; }
+        public int OldSize { get; set; }
+        public double Price { get; set; }
+        public DateTime Timestamp { get; set; }
 
 
 
         public Order(string symbol, string id, string side, int size, double price, DateTime timestamp)
         {
-            this.symbol = symbol;
-            this.id = id;
-            this.side = side;
-            this.size = size;
-            this.price = price;
-            this.timestamp = timestamp;
+            this.Symbol = symbol;
+            this.Id = id;
+            this.Side = side;
+            this.Size = size;
+            this.Price = price;
+            this.Timestamp = timestamp;
+            this.OldSize = -1;
         }
 
         public Order(JsonElement root)
         {
-            this.symbol = root.GetProperty("symbol").ToString();
-            this.id = root.GetProperty("id").ToString();
-            this.side = root.GetProperty("side").ToString();
-            this.size = root.GetProperty("size").GetInt32();
-            this.price = root.GetProperty("price").GetDouble();
-            this.timestamp = root.GetProperty("timestamp").GetDateTime();
+            this.Symbol = root.GetProperty("symbol").ToString();
+            this.Id = root.GetProperty("id").ToString();
+            this.Side = root.GetProperty("side").ToString();
+            this.Size = root.GetProperty("size").GetInt32();
+            this.Price = root.GetProperty("price").GetDouble();
+            this.Timestamp = root.GetProperty("timestamp").GetDateTime();
+            this.OldSize = -1;
+
         }
         public Order()
         {
 
         }
+        
+        public int GetCellColour()
+        {
+            if (this.OldSize == -1)
+            {
+                return 0;
+            } else if( this.OldSize < this.Size)
+            {
+                return 1;
+            } else
+            {
+                return 2;
+            }
+        }
 
         public override string ToString()
         {
-            return $"Order [Symbol: {symbol}, ID: {id}, Side: {side}, Size: {size}, Price: {price}, Timestamp: {timestamp}]";
+            return $"Order [Symbol: {Symbol}, ID: {Id}, Side: {Side}, Size: {Size}, Price: {Price}, Timestamp: {Timestamp}]";
         }
 
     }
@@ -305,23 +391,40 @@ namespace OrderBookUpdated
         }
         public void AddOrder(Order order, BindingList<Order> orders)
         {
-    
-            orders.Add(order);
-      
+            if (order.Side == "Buy")
+            {
+                orders.Add(order);
+
+            }
+            else
+            {
+                orders.Insert(0,order);
+            }
+
             this.length++;
         }
         public void InsertOrder(Order order, BindingList<Order> orders)
         {
-            OrderComparer orderComparer = new OrderComparer();
             // convert to normal list to use binary search
             List<Order> orderList = new List<Order>(orders);
+            int index;
+            if (order.Side == "Buy")
+            {
+                OrderComparerBuy orderComparer = new OrderComparerBuy();
+                index = orderList.BinarySearch(order, orderComparer);
 
-            int index = orderList.BinarySearch(order, orderComparer);
+            }
+            else
+            {
+                OrderComparerSell orderComparer = new OrderComparerSell();
+                index = orderList.BinarySearch(order, orderComparer);
+
+            }
             if (index < 0) 
             { 
                 index = ~index; 
             }
-
+      
             orders.Insert(index, order);
             this.length++;
         }
@@ -330,7 +433,7 @@ namespace OrderBookUpdated
             List<int> indiciesToRemove = new List<int>();
 
             for (int i = 0; i < orders.Count; i++){
-                if (orders[i].id == id)
+                if (orders[i].Id == id)
                 {
                     indiciesToRemove.Add(i);
                 }
@@ -346,14 +449,31 @@ namespace OrderBookUpdated
             
             for (int i = 0; i < orders.Count; i++){
                 {
-                    if (order.id == orders[i].id)
+                    if (order.Id == orders[i].Id)
                     {
+                        int OldSize = orders[i].Size;                        
                         orders[i] = order;
+                        orders[i].OldSize = OldSize;
                     }
                 }
             }
         }
 
+        public int GetOrderIndex(Order order, BindingList<Order> orders)
+        {
+
+            for (int i = 0; i < orders.Count; i++)
+            {
+                {
+                    if (order.Id == orders[i].Id)
+                    {
+                        return i;
+                    }
+                }
+            }
+            
+            return -1;
+        }
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -376,7 +496,7 @@ namespace OrderBookUpdated
 
             foreach (Order order in buyOrders)
             {
-                if (order.side == "Buy")
+                if (order.Side == "Buy")
                 sb.AppendLine(order.ToString());
             }
 
@@ -391,7 +511,7 @@ namespace OrderBookUpdated
 
             foreach (Order order in buyOrders)
             {
-                if (order.side == "Sell")
+                if (order.Side == "Sell")
                     sb.AppendLine(order.ToString());
             }
 
