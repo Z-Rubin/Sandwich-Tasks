@@ -4,10 +4,12 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Data;
+using System.Linq.Expressions;
 using System.Net.WebSockets;
 using System.Text;
 using System.Text.Json;
 using System.Windows.Forms;
+using static System.Windows.Forms.AxHost;
 
 
 
@@ -30,6 +32,8 @@ namespace OrderBookUpdated
             InitializeComponent();
         }
 
+
+
         private static readonly log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public static Orderbook orderbook = new Orderbook();
@@ -37,15 +41,25 @@ namespace OrderBookUpdated
         public static DataTable buyTable = new DataTable();
         public static DataTable sellTable = new DataTable();
 
-        
+        public int BuySizeColumnIndex { get; private set; }
+        public int SellSizeColumnIndex { get; private set; }
 
         private async void SubscribeButton_Click(object sender, EventArgs e)
         {
-            string Token = InputTokenRichTextBox.Text;
+            try
+            {
+                dgvBuy.AutoGenerateColumns = false;
+                dgvSell.AutoGenerateColumns = false;
 
-            string socketUrl = $"wss://ws.bitmex.com/realtime?subscribe=orderBookL2_25:{Token}";
+                string Token = InputTokenRichTextBox.Text;
 
-            await ConnectWebSocket(socketUrl);
+                string socketUrl = $"wss://ws.bitmex.com/realtime?subscribe=orderBookL2_25:{Token}";
+
+                await ConnectWebSocket(socketUrl);
+            } catch (Exception ex)
+            {
+                Logger?.Error(ex);
+            }
         }
 
         async Task ConnectWebSocket(string socketUrl)
@@ -61,7 +75,7 @@ namespace OrderBookUpdated
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex.Message);
+                    Logger.Error(ex);
                 }
             }
         }
@@ -96,12 +110,19 @@ namespace OrderBookUpdated
                         {
                             try
                             {
-                                processDataReceived(root);
+                                await Task.Run(() =>
+                                {
+                                    Invoke((MethodInvoker)delegate
+                                    {
+                                        processDataReceived(root);
+                                    });
+
+                                });
 
                             }
                             catch (Exception ex)
                             {
-                                Logger.Error(ex.Message);
+                                Logger.Error(ex);
                             }
 
                         }
@@ -112,64 +133,75 @@ namespace OrderBookUpdated
         }
 
         public void updateOutput()
-        {           
+        {
             label1.Text = orderbook.length.ToString();
         }
         public void processDataReceived(JsonElement root)
         {
-            string action = root.GetProperty("action").ToString();
             try
             {
-                if (action == "partial")
+                string action = root.GetProperty("action").ToString();
+
+                try
                 {
-                    partialAction(root);
 
-                    dgvSell.DataSource = orderbook.sellOrders;
-                    dgvBuy.DataSource = orderbook.buyOrders;
+                    if (action == "partial")
+                    {
+                        partialAction(root);
 
+                        // Assuming orderbook.sellOrders and orderbook.buyOrders are updated inside partialAction
+                        // Use BeginInvoke to update the DataGridView on the UI thread
+                        dgvSell.BeginInvoke(new Action(() => dgvSell.DataSource = orderbook.sellOrders));
+                        dgvBuy.BeginInvoke(new Action(() => dgvBuy.DataSource = orderbook.buyOrders));
+                        
+                    }
+                    else if (action == "delete")
+                    {
+                        deleteAction(root);
+                    }
+                    else if (action == "insert")
+                    {
+                        insertAction(root);
+                    }
+                    else if (action == "update")
+                    {
+                        updateAction(root);
+                    }
+                    else
+                    {
+                        Logger.Info($"{action} is not catered for yet");
+                    }
+
+
+                    updateOutput();
                 }
-                else if (action == "delete")
+
+                catch (Exception ex)
                 {
-                    deleteAction(root);
+                    Logger.Error($"Error processing action {action}, exception: {ex}");
                 }
-                else if (action == "insert")
-                {
-                    insertAction(root);
-                }
-                else if (action == "update")
-                {
-                    updateAction(root);
-                }
-                else
-                {
-                    Logger.Info($"{action} is not catered for yet");
-                }
-
-                updateOutput();
-
-
-
             }
             catch (Exception ex)
             {
-                Logger.Error($"Error processing action {action}, exception: {ex}");
+                Logger.Error(ex);
             }
-
         }
 
-        
+
+
+
 
         // Action methods:
         public void partialAction(JsonElement root)
-        {
-            // loop through orders and add to orderbook object
+        {            // loop through orders and add to orderbook object
             foreach (var dataPoint in root.GetProperty("data").EnumerateArray())
             {
                 Order order = new Order(dataPoint);
                 orderbook.AddOrder(order, orderbook.GetOrders(order.Side));
             }
-   
-            Logger.Info(orderbook.sellOrders);
+            dgvBuy.Columns["Price1"].DefaultCellStyle.ForeColor = Color.Green;
+            dgvSell.Columns["Price"].DefaultCellStyle.ForeColor = Color.Red;
+
         }
         public void deleteAction(JsonElement root)
         {
@@ -183,7 +215,7 @@ namespace OrderBookUpdated
             }
             else
             {
-                    orderbook.DeleteOrder(data.GetProperty("id").ToString(), orderbook.GetOrders(data.GetProperty("side").ToString()));
+                orderbook.DeleteOrder(data.GetProperty("id").ToString(), orderbook.GetOrders(data.GetProperty("side").ToString()));
             }
         }
         public void insertAction(JsonElement root)
@@ -211,25 +243,32 @@ namespace OrderBookUpdated
         }
         public void updateAction(JsonElement root)
         {
-            JsonElement data = root.GetProperty("data");
-            if (data.GetArrayLength() > 0)
+            try
             {
-                foreach (var dataPoint in root.GetProperty("data").EnumerateArray())
+                JsonElement data = root.GetProperty("data");
+                if (data.GetArrayLength() > 0)
                 {
-                    Order order = new Order(dataPoint);
+                    foreach (var dataPoint in root.GetProperty("data").EnumerateArray())
+                    {
+                        Order order = new Order(dataPoint);
+
+                        orderbook.UpdateOrder(order, orderbook.GetOrders(order.Side));
+
+                        UpdateCellColour(order);
+                    }
+                }
+                else
+                {
+                    Order order = new Order(data);
 
                     orderbook.UpdateOrder(order, orderbook.GetOrders(order.Side));
 
                     UpdateCellColour(order);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                Order order = new Order(data);
-
-                orderbook.UpdateOrder(order, orderbook.GetOrders(order.Side));
-
-                UpdateCellColour(order);
+                Logger?.Error(ex);
             }
         }
 
@@ -237,59 +276,73 @@ namespace OrderBookUpdated
         public void UpdateCellColour(Order order)
         {
             try
-           {
+            {
                 int CellColour = order.GetCellColour();
                 int CellIndex = orderbook.GetOrderIndex(order, orderbook.GetOrders(order.Side));
                 ChangeCellColour(order.Side, CellIndex, CellColour);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Logger?.Error(ex);
             }
         }
         public void ChangeCellColour(string side, int cellIndex, int cellColour)
         {
-            try { 
-            if (side == "Buy")
+            try
             {
-                if (cellColour == 1)
-                {
-                    dgvBuy[3, cellIndex].Style.ForeColor = Color.Green;
-
-                }
-                else if (cellColour == 2)
-                {
-                    dgvBuy[3, cellIndex].Style.ForeColor = Color.Red;
-
-                }
-                else if (cellColour == 0)
-                {
-                    dgvBuy[3, cellIndex].Style.ForeColor = Color.Black;
-
-                }
-            }
-                if (side == "Sell")
+                if (side == "Buy")
                 {
                     if (cellColour == 1)
                     {
-                        dgvSell[3, cellIndex].Style.ForeColor = Color.Green;
+                        dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Green;
 
                     }
                     else if (cellColour == 2)
                     {
-                        dgvSell[3, cellIndex].Style.ForeColor = Color.Red;
+                        dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Red;
 
                     }
                     else if (cellColour == 0)
                     {
-                        dgvSell[3, cellIndex].Style.ForeColor = Color.Black;
+                        dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Black;
 
                     }
                 }
-            } catch (Exception ex)
+                if (side == "Sell")
+                {
+                    if (cellColour == 1)
+                    {
+                        dgvSell[SellSizeColumnIndex, cellIndex].Style.ForeColor = Color.Green;
+
+                    }
+                    else if (cellColour == 2)
+                    {
+                        dgvSell[SellSizeColumnIndex, cellIndex].Style.ForeColor = Color.Red;
+
+                    }
+                    else if (cellColour == 0)
+                    {
+                        dgvSell[SellSizeColumnIndex, cellIndex].Style.ForeColor = Color.Black;
+
+                    }
+                }
+            }
+            catch (Exception ex)
             {
                 Logger?.Error($"cellIndex Received: {cellIndex}. Error: {ex}");
             }
         }
-        private void Form1_Load(object sender, EventArgs e)
+        public void Form1_Load(object sender, EventArgs e)
+        {
+            BuySizeColumnIndex = dgvBuy.Columns["Size1"].Index;
+            SellSizeColumnIndex = dgvSell.Columns["Size"].Index;
+            dgvBuy.DefaultCellStyle.Font = new Font("Tahoma", 12);
+            dgvSell.DefaultCellStyle.Font = new Font("Tahoma", 12);
+
+
+        }
+
+        private void orderBindingSource_CurrentChanged(object sender, EventArgs e)
         {
 
         }
@@ -417,13 +470,9 @@ namespace OrderBookUpdated
             else
             {
                 OrderComparerSell orderComparer = new OrderComparerSell();
+
                 index = orderList.BinarySearch(order, orderComparer);
 
-            }
-
-            if (order.Side == "Sell")
-            {
-                Console.WriteLine("");
             }
             if (index < 0) 
             { 
