@@ -10,6 +10,8 @@ using System.Text.Json;
 using System.Windows.Forms;
 using System.Threading;
 using static System.Windows.Forms.AxHost;
+using System.Text.Json.Serialization;
+using System.Runtime.Serialization;
 
 
 
@@ -115,25 +117,20 @@ namespace OrderBookUpdated
                     {
                         string completeMessage = messageBuilder.ToString();
                         ActionData ActionData;
-
                         try
                         {
                             ActionData = JsonSerializer.Deserialize<ActionData>(completeMessage, options);
+                                if (ActionData.Action != null && ActionData.Data != null)
+                                {                                    try
+                                    {
+                                        processDataReceived(ActionData);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        _logger.Error(ex);
+                                    }
 
-                            if (ActionData.Action != null && ActionData.Data != null)
-                            {
-                                MessageBox.Show(ActionData.Data.ToString());
-                                try
-                                {
-                                    processDataReceived(ActionData);
-                                }
-                                catch (Exception ex)
-                                {
-                                    _logger.Error(ex);
-                                }
-
-                            }
-
+                                }                           
                         }
                         catch (Exception ex){
                             _logger.Error(ex); 
@@ -146,7 +143,7 @@ namespace OrderBookUpdated
 
         public void updateOutput()
         {
-            label1.Text = Orderbook.length.ToString();
+            label1.Text = Orderbook.Length.ToString();
         }
 
         public void processDataReceived(ActionData ActionData)
@@ -200,16 +197,12 @@ namespace OrderBookUpdated
             }
         }
 
-
-
-
-
         // Action methods:
         public void partialAction(List<Order> Data)
         {            // loop through orders and add to orderbook object
             foreach (var order in Data)
             {
-                Orderbook.AddOrder(order, Orderbook.GetOrders(order.Side));
+                Orderbook.AddOrder(order);
             }
             dgvBuy.Columns["Price1"].DefaultCellStyle.ForeColor = Color.Green;
             dgvSell.Columns["Price"].DefaultCellStyle.ForeColor = Color.Red;
@@ -255,7 +248,7 @@ namespace OrderBookUpdated
             try
             {
                 int CellColour = order.GetCellColour();
-                int CellIndex = Orderbook.GetOrderIndex(order, Orderbook.GetOrders(order.Side));
+                int CellIndex = Orderbook.GetOrderIndex(order);
                 ChangeCellColour(order.Side, CellIndex, CellColour);
             }
             catch (Exception ex)
@@ -335,14 +328,12 @@ namespace OrderBookUpdated
         public ActionType Action { get; set; }
         public List<Order> Data { get; set; }
 
-        public ActionData(ActionType action, List<Order> data) {
-            this.Action = action;
-            this.Data = data;   
+        public ActionData(ActionType Action, List<Order> Data) {
+            this.Action = Action;
+            this.Data = Data;   
         }
-        public ActionData() { }
 
     }
-
     public class OrderComparerBuy : IComparer<Order>
     {
         public int Compare(Order x, Order y)
@@ -350,7 +341,6 @@ namespace OrderBookUpdated
             return y.Price.CompareTo(x.Price);
         }
     }
-
     public class OrderComparerSell : IComparer<Order>
     {
         public int Compare(Order x, Order y)
@@ -358,22 +348,24 @@ namespace OrderBookUpdated
             return x.Price.CompareTo(y.Price);
         }
     }
-
-
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum SideType
     {
         Buy,
         Sell
     }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ActionType
     {
+        [EnumMember(Value = "partial")]
         partial,
+        [EnumMember(Value = "insert")]
         insert,
+        [EnumMember(Value = "update")]
         update,
+        [EnumMember(Value = "delete")]
         delete
     }
-
-
     public class Order
     {
         public string Symbol { get; set; }
@@ -423,40 +415,24 @@ namespace OrderBookUpdated
         }
 
     }
-
     public class Orderbook
     {
         public BindingList<Order> sellOrders = new BindingList<Order>();
         public BindingList<Order> buyOrders = new BindingList<Order>();
-        public int length { get; set; }
-        public Orderbook()
-        {
-
-        }
-
-        public BindingList<Order> GetOrders(SideType SideType)
-        {
-            if (SideType == SideType.Buy)
-            {
-                return buyOrders;
-            } else
-            {
-                return sellOrders;
-            }
-        }
-        public void AddOrder(Order order, BindingList<Order> orders)
+        public int Length { get; set; }
+        public void AddOrder(Order order)
         {
             if (order.Side == SideType.Buy)
             {
-                orders.Add(order);
+                buyOrders.Add(order);
 
             }
             else
             {
-                orders.Insert(0,order);
+                sellOrders.Insert(0,order);
             }
 
-            this.length++;
+            this.Length++;
         }
         public void InsertOrder(Order order)
         {
@@ -466,17 +442,25 @@ namespace OrderBookUpdated
             List<Order> orderList = new List<Order>(orders);
             int index;
 
-            IComparer orderComparer = (order.Side == SideType.Buy) ? (IComparer)new OrderComparerBuy() : (IComparer)new OrderComparerSell();
-            
+
+            IComparer<Order> orderComparer = (order.Side == SideType.Buy)
+            ? (IComparer<Order>)new OrderComparerBuy()
+            : (IComparer<Order>)new OrderComparerSell();
+
             index = orderList.BinarySearch(order, (IComparer<Order>?)orderComparer);
 
             if (index < 0) 
             { 
                 index = ~index; 
             }
-      
-            orders.Insert(index, order);
-            this.length++;
+            if (order.Side == SideType.Buy)
+            {
+                this.buyOrders.Insert(index, order);
+            } else
+            {
+                this.sellOrders.Insert(index, order);
+            }
+            this.Length++;
         }
         public void DeleteOrder(Order order)
         {
@@ -492,7 +476,7 @@ namespace OrderBookUpdated
             foreach (int index  in indiciesToRemove)
             {
                 orders.RemoveAt(index);
-                this.length--;
+                this.Length--;
             }
         }
         public void UpdateOrder(Order order)
@@ -509,21 +493,20 @@ namespace OrderBookUpdated
                 }
             }
         }
-
-        public int GetOrderIndex(Order order, BindingList<Order> orders)
+        public int GetOrderIndex(Order order)
         {
-
-            for (int i = 0; i < orders.Count; i++)
+            int i;
+            if (order.Side == SideType.Buy)
             {
-                {
-                    if (order.Id == orders[i].Id)
-                    {
-                        return i;
-                    }
-                }
+               i = buyOrders.IndexOf(order);
             }
-            
-            return -1;
+            else
+            {
+                i = sellOrders.IndexOf(order);
+            }
+            return i;
+
+
         }
         public override string ToString()
         {
@@ -538,7 +521,6 @@ namespace OrderBookUpdated
 
             return sb.ToString();
         }
-
         public string ToStringBuy()
         {
             StringBuilder sb = new StringBuilder();
@@ -553,7 +535,6 @@ namespace OrderBookUpdated
 
             return sb.ToString();
         }
-
         public string ToStringSell()
         {
             StringBuilder sb = new StringBuilder();

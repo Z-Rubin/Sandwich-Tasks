@@ -10,6 +10,8 @@ using System.Text.Json;
 using System.Windows.Forms;
 using System.Threading;
 using static System.Windows.Forms.AxHost;
+using System.Text.Json.Serialization;
+using System.Runtime.Serialization;
 
 
 
@@ -24,23 +26,17 @@ namespace OrderBookUpdated
             InitializeComponent();
         }
 
-        private  readonly log4net.ILog _logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        public log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public int BuySizeColumnIndex { get; private set; }
-
         public int SellSizeColumnIndex { get; private set; }
+        public  Orderbook Orderbook = new();
+        public  DataTable BuyTable = new();
+        public  DataTable SellTable = new();
 
-        public static Orderbook Orderbook = new Orderbook();
-        public static DataTable BuyTable = new DataTable();
-        public static DataTable SellTable = new DataTable();
-
-        public JsonSerializerOptions options = new JsonSerializerOptions
+        public JsonSerializerOptions options = new()
         {
             PropertyNameCaseInsensitive = true
         };
-
-
-
         public void OnHeartbeatTimer(object? state)
         {
             try
@@ -50,10 +46,9 @@ namespace OrderBookUpdated
             catch (Exception ex)
             {
 
-                _logger?.Error(ex);
+                Logger?.Error(ex);
             }
         }
-
         private async void SubscribeButton_Click(object sender, EventArgs e)
         {
             try
@@ -74,10 +69,9 @@ namespace OrderBookUpdated
             }
             catch (Exception ex)
             {
-                _logger?.Error(ex);
+                Logger?.Error(ex);
             }
         }
-
         async Task ConnectWebSocket(string socketUrl)
         {
             using (ClientWebSocket webSocket = new ClientWebSocket())
@@ -91,11 +85,10 @@ namespace OrderBookUpdated
                 }
                 catch (Exception ex)
                 {
-                    _logger.Error(ex);
+                    Logger.Error(ex);
                 }
             }
         }
-
         async Task ReceiveMessages(ClientWebSocket webSocket)
         {
             const int bufferSize = 8192;
@@ -115,41 +108,34 @@ namespace OrderBookUpdated
                     {
                         string completeMessage = messageBuilder.ToString();
                         ActionData ActionData;
-
                         try
                         {
                             ActionData = JsonSerializer.Deserialize<ActionData>(completeMessage, options);
+                                if (ActionData.Action != null && ActionData.Data != null)
+                                {                                    try
+                                    {
+                                        ProcessDataReceived(ActionData);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Logger.Error(ex);
+                                    }
 
-                            if (ActionData.Action != null && ActionData.Data != null)
-                            {
-                                MessageBox.Show(ActionData.Data.ToString());
-                                try
-                                {
-                                    processDataReceived(ActionData);
-                                }
-                                catch (Exception ex)
-                                {
-                                    _logger.Error(ex);
-                                }
-
-                            }
-
+                                }                           
                         }
                         catch (Exception ex){
-                            _logger.Error(ex); 
+                            Logger.Error(ex); 
                         }
                     messageBuilder.Clear();
                     }
                 }
             }
         }
-
-        public void updateOutput()
+        public void UpdateOutput()
         {
-            label1.Text = Orderbook.length.ToString();
+            label1.Text = Orderbook.Length.ToString();
         }
-
-        public void processDataReceived(ActionData ActionData)
+        public void ProcessDataReceived(ActionData ActionData)
         {
             try
             {
@@ -160,58 +146,58 @@ namespace OrderBookUpdated
 
                     if (action == ActionType.partial)
                     {
-                        partialAction(ActionData.Data);
+                        PartialAction(ActionData.Data);
 
                         // Assuming orderbook.sellOrders and orderbook.buyOrders are updated inside partialAction
                         // Use BeginInvoke to update the DataGridView on the UI thread
-                        dgvSell.BeginInvoke(new Action(() => dgvSell.DataSource = Orderbook.sellOrders));
-                        dgvBuy.BeginInvoke(new Action(() => dgvBuy.DataSource = Orderbook.buyOrders));
+                        dgvSell.BeginInvoke(new Action(() => dgvSell.DataSource = Orderbook.SellOrders));
+                        dgvBuy.BeginInvoke(new Action(() => dgvBuy.DataSource = Orderbook.BuyOrders));
 
                     }
                     else if (action == ActionType.delete)
                     {
-                        deleteAction(ActionData.Data);
+                        DeleteAction(ActionData.Data);
                     }
                     else if (action == ActionType.insert)
                     {
-                        insertAction(ActionData.Data);
+                        InsertAction(ActionData.Data);
                     }
                     else if (action == ActionType.update)
                     {
-                        updateAction(ActionData.Data);
+                        UpdateAction(ActionData.Data);
                     }
                     else
                     {
-                        _logger.Info($"{action} is not catered for yet");
+                        Logger.Info($"{action} is not catered for yet");
                     }
 
 
-                    updateOutput();
+                    UpdateOutput();
                 }
 
                 catch (Exception ex)
                 {
-                    _logger.Error($"Error processing action {action}, exception: {ex}");
+                    Logger.Error($"Error processing action {action}, exception: {ex}");
                 }
             }
             catch (Exception ex)
             {
-                _logger.Error(ex);
+                Logger.Error(ex);
             }
         }
 
         // Action methods:
-        public void partialAction(List<Order> Data)
+        public void PartialAction(List<Order> Data)
         {            // loop through orders and add to orderbook object
             foreach (var order in Data)
             {
-                Orderbook.AddOrder(order, Orderbook.GetOrders(order.Side));
+                Orderbook.AddOrder(order);
             }
             dgvBuy.Columns["Price1"].DefaultCellStyle.ForeColor = Color.Green;
             dgvSell.Columns["Price"].DefaultCellStyle.ForeColor = Color.Red;
 
         }
-        public void deleteAction(List<Order> Data)
+        public void DeleteAction(List<Order> Data)
         {
             
             foreach (var order in Data)
@@ -220,7 +206,7 @@ namespace OrderBookUpdated
             }
 
         }
-        public void insertAction(List<Order> Data)
+        public void InsertAction(List<Order> Data)
         {
             foreach (var order in Data)
             {
@@ -228,7 +214,7 @@ namespace OrderBookUpdated
                 UpdateCellColour(order);
             }   
         }
-        public void updateAction(List<Order> Data)
+        public void UpdateAction(List<Order> Data)
         {
             try
             {
@@ -241,7 +227,7 @@ namespace OrderBookUpdated
             }
             catch (Exception ex)
             {
-                _logger?.Error(ex);
+                Logger?.Error(ex);
             }
         }
 
@@ -251,12 +237,12 @@ namespace OrderBookUpdated
             try
             {
                 int CellColour = order.GetCellColour();
-                int CellIndex = Orderbook.GetOrderIndex(order, Orderbook.GetOrders(order.Side));
+                int CellIndex = Orderbook.GetOrderIndex(order);
                 ChangeCellColour(order.Side, CellIndex, CellColour);
             }
             catch (Exception ex)
             {
-                _logger?.Error(ex);
+                Logger?.Error(ex);
             }
         }
         public void ChangeCellColour(SideType SideType, int cellIndex, int cellColour)
@@ -302,7 +288,7 @@ namespace OrderBookUpdated
             }
             catch (Exception ex)
             {
-                _logger?.Error($"cellIndex Received: {cellIndex}. Error: {ex}");
+                Logger?.Error($"cellIndex Received: {cellIndex}. Error: {ex}");
             }
         }
         public void Form1_Load(object sender, EventArgs e)
@@ -315,7 +301,7 @@ namespace OrderBookUpdated
 
         }
 
-        private void orderBindingSource_CurrentChanged(object sender, EventArgs e)
+        private void OrderBindingSource_CurrentChanged(object sender, EventArgs e)
         {
 
         }
@@ -331,14 +317,12 @@ namespace OrderBookUpdated
         public ActionType Action { get; set; }
         public List<Order> Data { get; set; }
 
-        public ActionData(ActionType action, List<Order> data) {
-            this.Action = action;
-            this.Data = data;   
+        public ActionData(ActionType Action, List<Order> Data) {
+            this.Action = Action;
+            this.Data = Data;   
         }
-        public ActionData() { }
 
     }
-
     public class OrderComparerBuy : IComparer<Order>
     {
         public int Compare(Order x, Order y)
@@ -346,7 +330,6 @@ namespace OrderBookUpdated
             return y.Price.CompareTo(x.Price);
         }
     }
-
     public class OrderComparerSell : IComparer<Order>
     {
         public int Compare(Order x, Order y)
@@ -354,22 +337,24 @@ namespace OrderBookUpdated
             return x.Price.CompareTo(y.Price);
         }
     }
-
-
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum SideType
     {
         Buy,
         Sell
     }
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ActionType
     {
+        [EnumMember(Value = "partial")]
         partial,
+        [EnumMember(Value = "insert")]
         insert,
+        [EnumMember(Value = "update")]
         update,
+        [EnumMember(Value = "delete")]
         delete
     }
-
-
     public class Order
     {
         public string Symbol { get; set; }
@@ -419,64 +404,56 @@ namespace OrderBookUpdated
         }
 
     }
-
     public class Orderbook
     {
-        public BindingList<Order> sellOrders = new BindingList<Order>();
-        public BindingList<Order> buyOrders = new BindingList<Order>();
-        public int length { get; set; }
-        public Orderbook()
-        {
-
-        }
-
-        public BindingList<Order> GetOrders(SideType SideType)
-        {
-            if (SideType == SideType.Buy)
-            {
-                return buyOrders;
-            } else
-            {
-                return sellOrders;
-            }
-        }
-        public void AddOrder(Order order, BindingList<Order> orders)
+        public BindingList<Order> SellOrders = new BindingList<Order>();
+        public BindingList<Order> BuyOrders = new BindingList<Order>();
+        public int Length { get; set; }
+        public void AddOrder(Order order)
         {
             if (order.Side == SideType.Buy)
             {
-                orders.Add(order);
+                BuyOrders.Add(order);
 
             }
             else
             {
-                orders.Insert(0,order);
+                SellOrders.Insert(0,order);
             }
 
-            this.length++;
+            this.Length++;
         }
         public void InsertOrder(Order order)
         {
-            BindingList<Order> orders = (order.Side == SideType.Buy) ? this.buyOrders : this.sellOrders;
+            BindingList<Order> orders = (order.Side == SideType.Buy) ? this.BuyOrders : this.SellOrders;
 
             // convert to normal list to use binary search
             List<Order> orderList = new List<Order>(orders);
             int index;
 
-            IComparer orderComparer = (order.Side == SideType.Buy) ? (IComparer)new OrderComparerBuy() : (IComparer)new OrderComparerSell();
-            
+
+            IComparer<Order> orderComparer = (order.Side == SideType.Buy)
+            ? (IComparer<Order>)new OrderComparerBuy()
+            : (IComparer<Order>)new OrderComparerSell();
+
             index = orderList.BinarySearch(order, (IComparer<Order>?)orderComparer);
 
             if (index < 0) 
             { 
                 index = ~index; 
             }
-      
-            orders.Insert(index, order);
-            this.length++;
+            if (order.Side == SideType.Buy)
+            {
+                this.BuyOrders.Insert(index, order);
+            } else
+            {
+                this.SellOrders.Insert(index, order);
+            }
+            this.Length++;
         }
         public void DeleteOrder(Order order)
         {
-            BindingList<Order> orders = (order.Side == SideType.Buy) ? this.buyOrders : this.sellOrders;
+            BindingList<Order> orders = (order.Side == SideType.Buy) ? this.BuyOrders : this.SellOrders;
             List<int> indiciesToRemove = new List<int>();
 
             for (int i = 0; i < orders.Count; i++){
@@ -488,12 +465,12 @@ namespace OrderBookUpdated
             foreach (int index  in indiciesToRemove)
             {
                 orders.RemoveAt(index);
-                this.length--;
+                this.Length--;
             }
         }
         public void UpdateOrder(Order order)
         {
-            BindingList<Order> orders = (order.Side == SideType.Buy) ? this.buyOrders : this.sellOrders;
+            BindingList<Order> orders = (order.Side == SideType.Buy) ? this.BuyOrders : this.SellOrders;
             for (int i = 0; i < orders.Count; i++){
                 {
                     if (order.Id == orders[i].Id)
@@ -505,21 +482,20 @@ namespace OrderBookUpdated
                 }
             }
         }
-
-        public int GetOrderIndex(Order order, BindingList<Order> orders)
+        public int GetOrderIndex(Order order)
         {
-
-            for (int i = 0; i < orders.Count; i++)
+            int i;
+            if (order.Side == SideType.Buy)
             {
-                {
-                    if (order.Id == orders[i].Id)
-                    {
-                        return i;
-                    }
-                }
+               i = BuyOrders.IndexOf(order);
             }
-            
-            return -1;
+            else
+            {
+                i = SellOrders.IndexOf(order);
+            }
+            return i;
+
+
         }
         public override string ToString()
         {
@@ -527,21 +503,20 @@ namespace OrderBookUpdated
 
             sb.AppendLine("Orderbook:");
 
-            foreach (Order order in buyOrders)
+            foreach (Order order in BuyOrders)
             {
                 sb.AppendLine(order.ToString());
             }
 
             return sb.ToString();
         }
-
         public string ToStringBuy()
         {
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("Orderbook:");
 
-            foreach (Order order in buyOrders)
+            foreach (Order order in BuyOrders)
             {
                 if (order.Side == SideType.Buy)
                 sb.AppendLine(order.ToString());
@@ -549,14 +524,13 @@ namespace OrderBookUpdated
 
             return sb.ToString();
         }
-
         public string ToStringSell()
         {
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("Orderbook:");
 
-            foreach (Order order in buyOrders)
+            foreach (Order order in BuyOrders)
             {
                 if (order.Side == SideType.Sell)
                     sb.AppendLine(order.ToString());

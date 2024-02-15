@@ -35,19 +35,15 @@
             orderBindingSource = new BindingSource(components);
             orderbookBindingSource = new BindingSource(components);
             dgvSell = new DataGridView();
-            Price = new DataGridViewTextBoxColumn();
-            Size = new DataGridViewTextBoxColumn();
-            Side1 = new DataGridViewTextBoxColumn();
-            Symbol = new DataGridViewTextBoxColumn();
-            ID = new DataGridViewTextBoxColumn();
             checkBox1 = new CheckBox();
             dgvBuy = new DataGridView();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            button1 = new Button();
             Side = new DataGridViewTextBoxColumn();
             Size1 = new DataGridViewTextBoxColumn();
             Price1 = new DataGridViewTextBoxColumn();
-            button1 = new Button();
+            Price = new DataGridViewTextBoxColumn();
+            Size = new DataGridViewTextBoxColumn();
+            Side1 = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)orderBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)orderbookBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvSell).BeginInit();
@@ -84,7 +80,7 @@
             // orderBindingSource
             // 
             orderBindingSource.DataSource = typeof(Order);
-            orderBindingSource.CurrentChanged += orderBindingSource_CurrentChanged;
+            orderBindingSource.CurrentChanged += OrderBindingSource_CurrentChanged;
             // 
             // orderbookBindingSource
             // 
@@ -93,48 +89,13 @@
             // dgvSell
             // 
             dgvSell.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSell.Columns.AddRange(new DataGridViewColumn[] { Price, Size, Side1, Symbol, ID });
-            dgvSell.Location = new Point(761, 12);
+            dgvSell.Columns.AddRange(new DataGridViewColumn[] { Price, Size, Side1 });
+            dgvSell.Location = new Point(563, 12);
             dgvSell.Name = "dgvSell";
             dgvSell.ReadOnly = true;
             dgvSell.RowTemplate.Height = 25;
-            dgvSell.Size = new Size(543, 725);
+            dgvSell.Size = new Size(345, 725);
             dgvSell.TabIndex = 8;
-            // 
-            // Price
-            // 
-            Price.DataPropertyName = "Price";
-            Price.HeaderText = "Price";
-            Price.Name = "Price";
-            Price.ReadOnly = true;
-            // 
-            // Size
-            // 
-            Size.DataPropertyName = "Size";
-            Size.HeaderText = "Size";
-            Size.Name = "Size";
-            Size.ReadOnly = true;
-            // 
-            // Side1
-            // 
-            Side1.DataPropertyName = "Side";
-            Side1.HeaderText = "Side";
-            Side1.Name = "Side1";
-            Side1.ReadOnly = true;
-            // 
-            // Symbol
-            // 
-            Symbol.DataPropertyName = "Symbol";
-            Symbol.HeaderText = "Symbol";
-            Symbol.Name = "Symbol";
-            Symbol.ReadOnly = true;
-            // 
-            // ID
-            // 
-            ID.DataPropertyName = "ID";
-            ID.HeaderText = "ID";
-            ID.Name = "ID";
-            ID.ReadOnly = true;
             // 
             // checkBox1
             // 
@@ -149,27 +110,23 @@
             // dgvBuy
             // 
             dgvBuy.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBuy.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, Side, Size1, Price1 });
+            dgvBuy.Columns.AddRange(new DataGridViewColumn[] { Side, Size1, Price1 });
             dgvBuy.Location = new Point(214, 12);
             dgvBuy.Name = "dgvBuy";
             dgvBuy.ReadOnly = true;
             dgvBuy.RowTemplate.Height = 25;
-            dgvBuy.Size = new Size(547, 725);
+            dgvBuy.Size = new Size(343, 725);
             dgvBuy.TabIndex = 10;
             // 
-            // dataGridViewTextBoxColumn1
+            // button1
             // 
-            dataGridViewTextBoxColumn1.DataPropertyName = "ID";
-            dataGridViewTextBoxColumn1.HeaderText = "ID";
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.DataPropertyName = "Symbol";
-            dataGridViewTextBoxColumn2.HeaderText = "Symbol";
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.ReadOnly = true;
+            button1.Location = new Point(20, 299);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 11;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // Side
             // 
@@ -192,15 +149,26 @@
             Price1.Name = "Price1";
             Price1.ReadOnly = true;
             // 
-            // button1
+            // Price
             // 
-            button1.Location = new Point(20, 299);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 11;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            Price.DataPropertyName = "Price";
+            Price.HeaderText = "Price";
+            Price.Name = "Price";
+            Price.ReadOnly = true;
+            // 
+            // Size
+            // 
+            Size.DataPropertyName = "Size";
+            Size.HeaderText = "Size";
+            Size.Name = "Size";
+            Size.ReadOnly = true;
+            // 
+            // Side1
+            // 
+            Side1.DataPropertyName = "Side";
+            Side1.HeaderText = "Side";
+            Side1.Name = "Side1";
+            Side1.ReadOnly = true;
             // 
             // Form1
             // 
@@ -240,16 +208,12 @@
         private CheckBox checkBox1;
         private DataGridView dgvBuy;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private Button button1;
         private DataGridViewTextBoxColumn Price;
         private DataGridViewTextBoxColumn Size;
         private DataGridViewTextBoxColumn Side1;
-        private DataGridViewTextBoxColumn Symbol;
-        private DataGridViewTextBoxColumn ID;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn Side;
         private DataGridViewTextBoxColumn Size1;
         private DataGridViewTextBoxColumn Price1;
-        private Button button1;
     }
 }
