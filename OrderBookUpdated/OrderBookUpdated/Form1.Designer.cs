@@ -29,49 +29,45 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            SubscribeButton = new Button();
-            InputTokenRichTextBox = new RichTextBox();
+            btnSubscribe = new Button();
             label1 = new Label();
             orderBindingSource = new BindingSource(components);
             orderbookBindingSource = new BindingSource(components);
             dgvSell = new DataGridView();
-            checkBox1 = new CheckBox();
-            dgvBuy = new DataGridView();
-            button1 = new Button();
-            Side = new DataGridViewTextBoxColumn();
-            Size1 = new DataGridViewTextBoxColumn();
-            Price1 = new DataGridViewTextBoxColumn();
             Price = new DataGridViewTextBoxColumn();
             Size = new DataGridViewTextBoxColumn();
             Side1 = new DataGridViewTextBoxColumn();
+            dgvBuy = new DataGridView();
+            Side = new DataGridViewTextBoxColumn();
+            Size1 = new DataGridViewTextBoxColumn();
+            Price1 = new DataGridViewTextBoxColumn();
+            btnConnect = new Button();
+            btnDisconnect = new Button();
+            cbSelectToken = new ComboBox();
+            btnUnsubscribeSelected = new Button();
+            lbActiveSubs = new ListBox();
+            cbSubscriptionTopics = new ComboBox();
+            btnUnsubscribeAll = new Button();
             ((System.ComponentModel.ISupportInitialize)orderBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)orderbookBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvSell).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvBuy).BeginInit();
             SuspendLayout();
             // 
-            // SubscribeButton
+            // btnSubscribe
             // 
-            SubscribeButton.Location = new Point(12, 12);
-            SubscribeButton.Name = "SubscribeButton";
-            SubscribeButton.Size = new Size(152, 36);
-            SubscribeButton.TabIndex = 0;
-            SubscribeButton.Text = "Subscribe";
-            SubscribeButton.UseVisualStyleBackColor = true;
-            SubscribeButton.Click += SubscribeButton_Click;
-            // 
-            // InputTokenRichTextBox
-            // 
-            InputTokenRichTextBox.Location = new Point(12, 54);
-            InputTokenRichTextBox.Name = "InputTokenRichTextBox";
-            InputTokenRichTextBox.Size = new Size(152, 33);
-            InputTokenRichTextBox.TabIndex = 1;
-            InputTokenRichTextBox.Text = "XBTUSD";
+            btnSubscribe.Location = new Point(12, 96);
+            btnSubscribe.Name = "btnSubscribe";
+            btnSubscribe.Size = new Size(152, 36);
+            btnSubscribe.TabIndex = 0;
+            btnSubscribe.Text = "Subscribe";
+            btnSubscribe.UseVisualStyleBackColor = true;
+            btnSubscribe.Click += btnSubscribe_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 205);
+            label1.Location = new Point(34, 466);
             label1.Name = "label1";
             label1.Size = new Size(38, 15);
             label1.TabIndex = 5;
@@ -97,15 +93,26 @@
             dgvSell.Size = new Size(345, 725);
             dgvSell.TabIndex = 8;
             // 
-            // checkBox1
+            // Price
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(12, 237);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(83, 19);
-            checkBox1.TabIndex = 9;
-            checkBox1.Text = "checkBox1";
-            checkBox1.UseVisualStyleBackColor = true;
+            Price.DataPropertyName = "Price";
+            Price.HeaderText = "Price";
+            Price.Name = "Price";
+            Price.ReadOnly = true;
+            // 
+            // Size
+            // 
+            Size.DataPropertyName = "Size";
+            Size.HeaderText = "Size";
+            Size.Name = "Size";
+            Size.ReadOnly = true;
+            // 
+            // Side1
+            // 
+            Side1.DataPropertyName = "Side";
+            Side1.HeaderText = "Side";
+            Side1.Name = "Side1";
+            Side1.ReadOnly = true;
             // 
             // dgvBuy
             // 
@@ -117,16 +124,6 @@
             dgvBuy.RowTemplate.Height = 25;
             dgvBuy.Size = new Size(343, 725);
             dgvBuy.TabIndex = 10;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(20, 299);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 11;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // Side
             // 
@@ -149,41 +146,90 @@
             Price1.Name = "Price1";
             Price1.ReadOnly = true;
             // 
-            // Price
+            // btnConnect
             // 
-            Price.DataPropertyName = "Price";
-            Price.HeaderText = "Price";
-            Price.Name = "Price";
-            Price.ReadOnly = true;
+            btnConnect.Location = new Point(12, 12);
+            btnConnect.Name = "btnConnect";
+            btnConnect.Size = new Size(152, 36);
+            btnConnect.TabIndex = 12;
+            btnConnect.Text = "Connect to Socket";
+            btnConnect.UseVisualStyleBackColor = true;
+            btnConnect.Click += btnConnect_Click;
             // 
-            // Size
+            // btnDisconnect
             // 
-            Size.DataPropertyName = "Size";
-            Size.HeaderText = "Size";
-            Size.Name = "Size";
-            Size.ReadOnly = true;
+            btnDisconnect.Location = new Point(12, 54);
+            btnDisconnect.Name = "btnDisconnect";
+            btnDisconnect.Size = new Size(152, 36);
+            btnDisconnect.TabIndex = 13;
+            btnDisconnect.Text = "Disconnect from Socket";
+            btnDisconnect.UseVisualStyleBackColor = true;
+            btnDisconnect.Click += btnDisconnect_Click;
             // 
-            // Side1
+            // cbSelectToken
             // 
-            Side1.DataPropertyName = "Side";
-            Side1.HeaderText = "Side";
-            Side1.Name = "Side1";
-            Side1.ReadOnly = true;
+            cbSelectToken.FormattingEnabled = true;
+            cbSelectToken.Location = new Point(12, 246);
+            cbSelectToken.Name = "cbSelectToken";
+            cbSelectToken.Size = new Size(152, 23);
+            cbSelectToken.TabIndex = 14;
+            // 
+            // btnUnsubscribeSelected
+            // 
+            btnUnsubscribeSelected.Location = new Point(12, 138);
+            btnUnsubscribeSelected.Name = "btnUnsubscribeSelected";
+            btnUnsubscribeSelected.Size = new Size(152, 36);
+            btnUnsubscribeSelected.TabIndex = 16;
+            btnUnsubscribeSelected.Text = "Unsubscribe Selected";
+            btnUnsubscribeSelected.UseVisualStyleBackColor = true;
+            btnUnsubscribeSelected.Click += btnUnsubscribe_Click;
+            // 
+            // lbActiveSubs
+            // 
+            lbActiveSubs.FormattingEnabled = true;
+            lbActiveSubs.ItemHeight = 15;
+            lbActiveSubs.Location = new Point(12, 369);
+            lbActiveSubs.Name = "lbActiveSubs";
+            lbActiveSubs.Size = new Size(120, 94);
+            lbActiveSubs.TabIndex = 17;
+            // 
+            // cbSubscriptionTopics
+            // 
+            cbSubscriptionTopics.FormattingEnabled = true;
+            cbSubscriptionTopics.Location = new Point(12, 275);
+            cbSubscriptionTopics.Name = "cbSubscriptionTopics";
+            cbSubscriptionTopics.Size = new Size(152, 23);
+            cbSubscriptionTopics.TabIndex = 18;
+            // 
+            // btnUnsubscribeAll
+            // 
+            btnUnsubscribeAll.Location = new Point(12, 180);
+            btnUnsubscribeAll.Name = "btnUnsubscribeAll";
+            btnUnsubscribeAll.Size = new Size(152, 36);
+            btnUnsubscribeAll.TabIndex = 19;
+            btnUnsubscribeAll.Text = "Unsubscribe All";
+            btnUnsubscribeAll.UseVisualStyleBackColor = true;
+            btnUnsubscribeAll.Click += btnUnsubscribeAll_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1506, 749);
-            Controls.Add(button1);
+            Controls.Add(btnUnsubscribeAll);
+            Controls.Add(cbSubscriptionTopics);
+            Controls.Add(lbActiveSubs);
+            Controls.Add(btnUnsubscribeSelected);
+            Controls.Add(cbSelectToken);
+            Controls.Add(btnDisconnect);
+            Controls.Add(btnConnect);
             Controls.Add(dgvBuy);
-            Controls.Add(checkBox1);
             Controls.Add(dgvSell);
             Controls.Add(label1);
-            Controls.Add(InputTokenRichTextBox);
-            Controls.Add(SubscribeButton);
+            Controls.Add(btnSubscribe);
             Name = "Form1";
             Text = "Form1";
+            FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)orderBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)orderbookBindingSource).EndInit();
@@ -195,8 +241,7 @@
 
         #endregion
 
-        private Button SubscribeButton;
-        private RichTextBox InputTokenRichTextBox;
+        private Button btnSubscribe;
         private Label label1;
         private DataGridView dataGridViewBuy;
         private BindingSource orderBindingSource;
@@ -205,15 +250,20 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private DataGridView dgvSell;
-        private CheckBox checkBox1;
         private DataGridView dgvBuy;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private Button button1;
         private DataGridViewTextBoxColumn Price;
         private DataGridViewTextBoxColumn Size;
         private DataGridViewTextBoxColumn Side1;
         private DataGridViewTextBoxColumn Side;
         private DataGridViewTextBoxColumn Size1;
         private DataGridViewTextBoxColumn Price1;
+        private Button btnConnect;
+        private Button btnDisconnect;
+        private ComboBox cbSelectToken;
+        private Button btnUnsubscribeSelected;
+        private ListBox lbActiveSubs;
+        private ComboBox cbSubscriptionTopics;
+        private Button btnUnsubscribeAll;
     }
 }

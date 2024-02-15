@@ -25,23 +25,26 @@ namespace OrderBookUpdated
         {
             InitializeComponent();
         }
-
         public log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public int BuySizeColumnIndex { get; private set; }
         public int SellSizeColumnIndex { get; private set; }
-        public  Orderbook Orderbook = new();
-        public  DataTable BuyTable = new();
-        public  DataTable SellTable = new();
-
+        public Boolean Connected { get; private set; }
+        public ClientWebSocket WebSocket { get; private set; }
+        public Orderbook Orderbook = new();
+        public List<DataTable> ActiveBuyTables = new();
+        public List<DataTable> ActiveSellTables = new();
+        public DataTable BuyTable = new();
+        public DataTable SellTable = new();
         public JsonSerializerOptions options = new()
         {
             PropertyNameCaseInsensitive = true
         };
+        public List<Subscription> ActiveSubscriptions = new();
         public void OnHeartbeatTimer(object? state)
         {
             try
             {
-                throw new NotImplementedException();
+                //throw new NotImplementedException();
             }
             catch (Exception ex)
             {
@@ -49,70 +52,189 @@ namespace OrderBookUpdated
                 Logger?.Error(ex);
             }
         }
-        private async void SubscribeButton_Click(object sender, EventArgs e)
+        private async void btnSubscribe_Click(object sender, EventArgs e)
         {
             try
             {
-                var autoEvent = new AutoResetEvent(false);
+                string Token = cbSelectToken.Text;
+                if (!Connected)
+                {
+                    await ConnectWebSocket();
+                }
+                TopicType Topic = (TopicType)Enum.Parse(typeof(TopicType), cbSubscriptionTopics.Text, true);
+                TopicTokenPair TTP = new(Topic, cbSelectToken.Text); // change these two lines to allow choice of topic type
+                string argsString = TTP.ToArgsString();
 
-                System.Threading.Timer HeartbeatTimer = new System.Threading.Timer(OnHeartbeatTimer, autoEvent, 5000, 5000);
-
-                dgvBuy.AutoGenerateColumns = false;
-                dgvSell.AutoGenerateColumns = false;
-
-                string Token = InputTokenRichTextBox.Text;
-
-                string socketUrl = $"wss://ws.bitmex.com/realtime?subscribe=orderBookL2_25:{Token}";
-
-                await ConnectWebSocket(socketUrl);
-
+                await Subscribe(argsString);
             }
             catch (Exception ex)
             {
                 Logger?.Error(ex);
             }
         }
-        async Task ConnectWebSocket(string socketUrl)
+        private async void btnUnsubscribe_Click(object sender, EventArgs e)
         {
-            using (ClientWebSocket webSocket = new ClientWebSocket())
+            try
             {
-                try
+                if (lbActiveSubs.SelectedItems.Count == 1)
                 {
-                    await webSocket.ConnectAsync(new Uri(socketUrl), CancellationToken.None);
-                    Console.WriteLine("WebSocket connected.");
-
-                    await ReceiveMessages(webSocket);
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex);
+                    int index = ActiveSubscriptions.FindIndex(Subscription => Subscription.args == lbActiveSubs.SelectedItem.ToString());
+                    if (index > -1)
+                    {
+                        await Unsubscribe(ActiveSubscriptions[index]);
+                        lbActiveSubs.Items.RemoveAt(index);
+                    }
                 }
             }
-        }
-        async Task ReceiveMessages(ClientWebSocket webSocket)
-        {
-            const int bufferSize = 8192;
-            byte[] buffer = new byte[bufferSize];
-            StringBuilder messageBuilder = new StringBuilder();
-
-            while (webSocket.State == WebSocketState.Open)
+            catch (Exception ex)
             {
-                WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-
-                if (result.MessageType == WebSocketMessageType.Text)
+                Logger?.Error(ex);
+            }
+        }
+        private async void btnUnsubscribeAll_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await UnsubscribeAll();
+            } catch (Exception ex)
+            {
+                Logger?.Error(ex);
+            }
+        }
+        public async Task Subscribe(string args)
+        {
+            try
+            {
+                Subscription NewSubscription = new(args);
+                byte[] buffer = Encoding.UTF8.GetBytes(NewSubscription.SubscribeToJsonMessage());
+                await WebSocket.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text, true, CancellationToken.None);
+                lbActiveSubs.Items.Add(args);
+                Logger?.Info($"Successfully subscribed with: {NewSubscription.SubscribeToJsonMessage()}");
+                ActiveSubscriptions.Add(NewSubscription);
+                await ReceiveMessages(WebSocket);
+            }
+            catch (Exception ex)
+            {
+                Logger?.Error(ex);
+            }
+        }
+        public async Task Unsubscribe(Subscription Subscription)
+        {
+            try
+            {
+                byte[] buffer = Encoding.UTF8.GetBytes(Subscription.UnsubscribeToJsonMessage());
+                await WebSocket.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text, true, CancellationToken.None);
+                Logger?.Info($"Successfully unsubscribed with {Subscription.UnsubscribeToJsonMessage()}");
+                ActiveSubscriptions.Remove(Subscription);
+            }
+            catch (Exception ex)
+            {
+                Logger?.Error(ex);
+            }
+        }
+        public async Task UnsubscribeAll()
+        {
+            try
+            {
+                while (ActiveSubscriptions.Count > 0)
                 {
-                    string stringFragment = Encoding.UTF8.GetString(buffer, 0, result.Count);
-                    messageBuilder.Append(stringFragment);
+                    await Unsubscribe(ActiveSubscriptions[0]);
+                    lbActiveSubs.Items.RemoveAt(0);
+                }
+            } catch (Exception ex)
+            {
+                Logger?.Error(ex);
+            }
 
-                    if (result.EndOfMessage)
+        }
+        private async void btnConnect_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!Connected)
+                {
+                    await ConnectWebSocket();
+
+                    var autoEvent = new AutoResetEvent(false);
+
+                    System.Threading.Timer HeartbeatTimer = new System.Threading.Timer(OnHeartbeatTimer, autoEvent, 5000, 5000);
+                }
+            } catch (Exception ex)
+            {
+                Logger?.Error(ex);
+            }
+        }
+        private async void btnDisconnect_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await DisconnectSocket();
+            } catch (Exception ex)
+            {
+                Logger?.Error(ex);
+            }
+        }
+        public async Task ConnectWebSocket()
+        {
+            try
+            {
+                string socketUrl = $"wss://ws.bitmex.com/realtime";
+                WebSocket = new ClientWebSocket();
+
+                await WebSocket.ConnectAsync(new Uri(socketUrl), CancellationToken.None);
+                Connected = true;
+                Logger.Info($"Connection Established: {socketUrl}");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex);
+            }
+        }
+        public async Task DisconnectSocket()
+        {
+            try
+            {
+                if (Connected)
+                {
+                    await UnsubscribeAll();
+                    await WebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing WebSocket", CancellationToken.None);
+                    Connected = false;
+                    Logger.Info("Connection successfully closed");
+                    Connected = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger?.Error(ex);
+            }
+        }
+        public async Task ReceiveMessages(ClientWebSocket webSocket)
+        {
+            try
+            {
+                const int bufferSize = 8192;
+                byte[] buffer = new byte[bufferSize];
+                StringBuilder messageBuilder = new StringBuilder();
+
+                while (webSocket.State == WebSocketState.Open)
+                {
+                    WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+
+                    if (result.MessageType == WebSocketMessageType.Text)
                     {
-                        string completeMessage = messageBuilder.ToString();
-                        ActionData ActionData;
-                        try
+                        string stringFragment = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                        messageBuilder.Append(stringFragment);
+
+                        if (result.EndOfMessage)
                         {
-                            ActionData = JsonSerializer.Deserialize<ActionData>(completeMessage, options);
+                            string completeMessage = messageBuilder.ToString();
+                            ActionData ActionData;
+                            try
+                            {
+                                ActionData = JsonSerializer.Deserialize<ActionData>(completeMessage, options);
                                 if (ActionData.Action != null && ActionData.Data != null)
-                                {                                    try
+                                {
+                                    try
                                     {
                                         ProcessDataReceived(ActionData);
                                     }
@@ -121,14 +243,19 @@ namespace OrderBookUpdated
                                         Logger.Error(ex);
                                     }
 
-                                }                           
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.Error(ex);
+                            }
+                            messageBuilder.Clear();
                         }
-                        catch (Exception ex){
-                            Logger.Error(ex); 
-                        }
-                    messageBuilder.Clear();
                     }
                 }
+            } catch (Exception ex)
+            {
+                Logger?.Error(ex); 
             }
         }
         public void UpdateOutput()
@@ -199,7 +326,7 @@ namespace OrderBookUpdated
         }
         public void DeleteAction(List<Order> Data)
         {
-            
+
             foreach (var order in Data)
             {
                 Orderbook.DeleteOrder(order);
@@ -212,7 +339,7 @@ namespace OrderBookUpdated
             {
                 Orderbook.InsertOrder(order);
                 UpdateCellColour(order);
-            }   
+            }
         }
         public void UpdateAction(List<Order> Data)
         {
@@ -223,7 +350,7 @@ namespace OrderBookUpdated
                     Orderbook.UpdateOrder(order);
 
                     UpdateCellColour(order);
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -251,38 +378,44 @@ namespace OrderBookUpdated
             {
                 if (SideType == SideType.Buy)
                 {
-                    if (cellColour == 1)
+                    if (dgvBuy.RowCount > cellIndex)
                     {
-                        dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Green;
+                        if (cellColour == 1)
+                        {
+                            dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Green;
 
-                    }
-                    else if (cellColour == 2)
-                    {
-                        dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Red;
+                        }
+                        else if (cellColour == 2)
+                        {
+                            dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Red;
 
-                    }
-                    else if (cellColour == 0)
-                    {
-                        dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Black;
+                        }
+                        else if (cellColour == 0)
+                        {
+                            dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Black;
 
+                        }
                     }
                 }
                 if (SideType == SideType.Sell)
                 {
-                    if (cellColour == 1)
+                    if (dgvSell.RowCount > cellIndex)
                     {
-                        dgvSell[SellSizeColumnIndex, cellIndex].Style.ForeColor = Color.Green;
+                        if (cellColour == 1)
+                        {
+                            dgvSell[SellSizeColumnIndex, cellIndex].Style.ForeColor = Color.Green;
 
-                    }
-                    else if (cellColour == 2)
-                    {
-                        dgvSell[SellSizeColumnIndex, cellIndex].Style.ForeColor = Color.Red;
+                        }
+                        else if (cellColour == 2)
+                        {
+                            dgvSell[SellSizeColumnIndex, cellIndex].Style.ForeColor = Color.Red;
 
-                    }
-                    else if (cellColour == 0)
-                    {
-                        dgvSell[SellSizeColumnIndex, cellIndex].Style.ForeColor = Color.Black;
+                        }
+                        else if (cellColour == 0)
+                        {
+                            dgvSell[SellSizeColumnIndex, cellIndex].Style.ForeColor = Color.Black;
 
+                        }
                     }
                 }
             }
@@ -298,28 +431,36 @@ namespace OrderBookUpdated
             dgvBuy.DefaultCellStyle.Font = new Font("Tahoma", 12);
             dgvSell.DefaultCellStyle.Font = new Font("Tahoma", 12);
 
+            dgvBuy.AutoGenerateColumns = false;
+            dgvSell.AutoGenerateColumns = false;
 
+            cbSubscriptionTopics.DataSource = Enum.GetNames(typeof(TopicType));
+            cbSelectToken.DataSource = Enum.GetNames(typeof(Symbols));
+            cbSubscriptionTopics.SelectedIndex = 4;
         }
-
         private void OrderBindingSource_CurrentChanged(object sender, EventArgs e)
         {
 
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
 
         }
-    }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UnsubscribeAll()
+        }
+    }
     public class ActionData
     {
         public ActionType Action { get; set; }
         public List<Order> Data { get; set; }
 
-        public ActionData(ActionType Action, List<Order> Data) {
+        public ActionData(ActionType Action, List<Order> Data)
+        {
             this.Action = Action;
-            this.Data = Data;   
+            this.Data = Data;
         }
 
     }
@@ -383,16 +524,18 @@ namespace OrderBookUpdated
         {
 
         }
-        
+
         public int GetCellColour()
         {
             if (this.OldSize == -1)
             {
                 return 0;
-            } else if( this.OldSize < this.Size)
+            }
+            else if (this.OldSize < this.Size)
             {
                 return 1;
-            } else
+            }
+            else
             {
                 return 2;
             }
@@ -418,7 +561,7 @@ namespace OrderBookUpdated
             }
             else
             {
-                SellOrders.Insert(0,order);
+                SellOrders.Insert(0, order);
             }
 
             this.Length++;
@@ -438,14 +581,15 @@ namespace OrderBookUpdated
 
             index = orderList.BinarySearch(order, (IComparer<Order>?)orderComparer);
 
-            if (index < 0) 
-            { 
-                index = ~index; 
+            if (index < 0)
+            {
+                index = ~index;
             }
             if (order.Side == SideType.Buy)
             {
                 this.BuyOrders.Insert(index, order);
-            } else
+            }
+            else
             {
                 this.SellOrders.Insert(index, order);
             }
@@ -456,13 +600,14 @@ namespace OrderBookUpdated
             BindingList<Order> orders = (order.Side == SideType.Buy) ? this.BuyOrders : this.SellOrders;
             List<int> indiciesToRemove = new List<int>();
 
-            for (int i = 0; i < orders.Count; i++){
+            for (int i = 0; i < orders.Count; i++)
+            {
                 if (orders[i].Id == order.Id)
                 {
                     indiciesToRemove.Add(i);
                 }
             }
-            foreach (int index  in indiciesToRemove)
+            foreach (int index in indiciesToRemove)
             {
                 orders.RemoveAt(index);
                 this.Length--;
@@ -471,11 +616,12 @@ namespace OrderBookUpdated
         public void UpdateOrder(Order order)
         {
             BindingList<Order> orders = (order.Side == SideType.Buy) ? this.BuyOrders : this.SellOrders;
-            for (int i = 0; i < orders.Count; i++){
+            for (int i = 0; i < orders.Count; i++)
+            {
                 {
                     if (order.Id == orders[i].Id)
                     {
-                        int OldSize = orders[i].Size;                        
+                        int OldSize = orders[i].Size;
                         orders[i] = order;
                         orders[i].OldSize = OldSize;
                     }
@@ -487,7 +633,7 @@ namespace OrderBookUpdated
             int i;
             if (order.Side == SideType.Buy)
             {
-               i = BuyOrders.IndexOf(order);
+                i = BuyOrders.IndexOf(order);
             }
             else
             {
@@ -519,7 +665,7 @@ namespace OrderBookUpdated
             foreach (Order order in BuyOrders)
             {
                 if (order.Side == SideType.Buy)
-                sb.AppendLine(order.ToString());
+                    sb.AppendLine(order.ToString());
             }
 
             return sb.ToString();
@@ -539,4 +685,83 @@ namespace OrderBookUpdated
             return sb.ToString();
         }
     }
+    public enum Symbols
+    {
+        XBTUSD
+    }
+    public enum TopicType
+    {
+        [Description("funding")] funding,
+        [Description("instrument")] instrument,
+        [Description("insurance")] insurance,
+        [Description("liquidation")] liquidation,
+        orderBookL2_25,
+        [Description("orderBookL2")] orderBookL2,
+        [Description("orderBook10")] orderBook10,
+        [Description("quote")] quote,
+        [Description("quoteBin1m")] quoteBin1m,
+        [Description("quoteBin5m")] quoteBin5m,
+        [Description("quoteBin1h")] quoteBin1h,
+        [Description("quoteBin1d")] quoteBin1d,
+        [Description("settlement")] settlement,
+        [Description("trade")] trade,
+        [Description("tradeBin1m")] tradeBin1m,
+        [Description("tradeBin1d")] tradeBin1d,
+        [Description("tradeBin1h")] tradeBin1h,
+        [Description("tradeBin5m")] tradeBin5m,
+    }
+    public class Subscription
+    {
+        public string op { get; set; } = "";
+        public string args { get; set; }
+        public Subscription(string arg, string op) : this(arg)
+        {
+            this.op = op;
+        }
+        public Subscription(string arg)
+        {
+            this.args = arg;
+        }
+        public int IsInActiveSubscriptions(List<Subscription> activeSubscriptions)
+        {
+            for (int i = 0; i < activeSubscriptions.Count; i++)
+            {
+                if (activeSubscriptions[i].args == this.args)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        public string ToJsonMessage()
+        {
+            return JsonSerializer.Serialize(this);
+        }
+        public string UnsubscribeToJsonMessage()
+        {
+            this.op = "unsubscribe";
+            return JsonSerializer.Serialize(this);
+        }
+        public string SubscribeToJsonMessage()
+        {
+            this.op = "subscribe";
+            return JsonSerializer.Serialize(this);
+        }
+    }
+    public class TopicTokenPair
+    {
+        public TopicType Topic { get; set; }
+        public string Token { get; set; }
+        public TopicTokenPair(TopicType topic, string token)
+        {
+            Topic = topic;
+            Token = token;
+        }
+        public string ToArgsString()
+        {
+            return $"{this.Topic}:{this.Token}";
+        }
+    }
+
+
 }
