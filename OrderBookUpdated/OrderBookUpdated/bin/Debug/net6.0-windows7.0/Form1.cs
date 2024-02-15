@@ -29,15 +29,17 @@ namespace OrderBookUpdated
         public int BuySizeColumnIndex { get; private set; }
         public int SellSizeColumnIndex { get; private set; }
         public Boolean Connected { get; private set; }
+        public List<OrderbookForm> SubscriptionForms { get; private set; } = new List<OrderbookForm>();
         public ClientWebSocket WebSocket { get; private set; }
         public Orderbook Orderbook = new();
-        public DataTable BuyTable = new();
-        public DataTable SellTable = new();
+        public List<Orderbook> AllOrderBooks = new();
         public JsonSerializerOptions options = new()
         {
             PropertyNameCaseInsensitive = true
         };
-        public List<Subscription> ActiveSubscriptions = new List<Subscription>();
+        public List<Subscription> ActiveSubscriptions = new();
+
+
         public void OnHeartbeatTimer(object? state)
         {
             try
@@ -62,13 +64,22 @@ namespace OrderBookUpdated
                 TopicType Topic = (TopicType)Enum.Parse(typeof(TopicType), cbSubscriptionTopics.Text, true);
                 TopicTokenPair TTP = new(Topic, cbSelectToken.Text); // change these two lines to allow choice of topic type
                 string argsString = TTP.ToArgsString();
+                OrderbookForm SubForm = CreateSubscriptionForm(argsString);
+                SubForm.Show();
+                SubscriptionForms.Add(SubForm);
 
                 await Subscribe(argsString);
+
+                
             }
             catch (Exception ex)
             {
                 Logger?.Error(ex);
             }
+        }
+        public OrderbookForm CreateSubscriptionForm(string argsString)
+        {
+            return new OrderbookForm();
         }
         private async void btnUnsubscribe_Click(object sender, EventArgs e)
         {
@@ -91,13 +102,13 @@ namespace OrderBookUpdated
         }
         private async void btnUnsubscribeAll_Click(object sender, EventArgs e)
         {
-            while (ActiveSubscriptions.Count > 0)
+            try
             {
-                await Unsubscribe(ActiveSubscriptions[0]);
-                lbActiveSubs.Items.RemoveAt(0);
+                await UnsubscribeAll();
+            } catch (Exception ex)
+            {
+                Logger?.Error(ex);
             }
-            
-
         }
         public async Task Subscribe(string args)
         {
@@ -130,34 +141,47 @@ namespace OrderBookUpdated
                 Logger?.Error(ex);
             }
         }
+        public async Task UnsubscribeAll()
+        {
+            try
+            {
+                while (ActiveSubscriptions.Count > 0)
+                {
+                    await Unsubscribe(ActiveSubscriptions[0]);
+                    lbActiveSubs.Items.RemoveAt(0);
+                }
+            } catch (Exception ex)
+            {
+                Logger?.Error(ex);
+            }
+
+        }
         private async void btnConnect_Click(object sender, EventArgs e)
         {
-            if (!Connected)
+            try
             {
-                await ConnectWebSocket();
+                if (!Connected)
+                {
+                    await ConnectWebSocket();
 
-                var autoEvent = new AutoResetEvent(false);
+                    var autoEvent = new AutoResetEvent(false);
 
-                System.Threading.Timer HeartbeatTimer = new System.Threading.Timer(OnHeartbeatTimer, autoEvent, 5000, 5000);
+                    System.Threading.Timer HeartbeatTimer = new System.Threading.Timer(OnHeartbeatTimer, autoEvent, 5000, 5000);
+                }
+            } catch (Exception ex)
+            {
+                Logger?.Error(ex);
             }
         }
         private async void btnDisconnect_Click(object sender, EventArgs e)
         {
             try
             {
-                if (Connected)
-                {
-                    await WebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing WebSocket", CancellationToken.None);
-                    Connected = false;
-                    Logger.Info("Connection successfully closed");
-                    Connected = false;
-                }
-            }
-            catch (Exception ex)
+                await DisconnectSocket();
+            } catch (Exception ex)
             {
                 Logger?.Error(ex);
             }
-
         }
         public async Task ConnectWebSocket()
         {
@@ -175,48 +199,72 @@ namespace OrderBookUpdated
                 Logger.Error(ex);
             }
         }
+        public async Task DisconnectSocket()
+        {
+            try
+            {
+                if (Connected)
+                {
+                    await UnsubscribeAll();
+                    await WebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing WebSocket", CancellationToken.None);
+                    Connected = false;
+                    Logger.Info("Connection successfully closed");
+                    Connected = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger?.Error(ex);
+            }
+        }
         public async Task ReceiveMessages(ClientWebSocket webSocket)
         {
-            const int bufferSize = 8192;
-            byte[] buffer = new byte[bufferSize];
-            StringBuilder messageBuilder = new StringBuilder();
-
-            while (webSocket.State == WebSocketState.Open)
+            try
             {
-                WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+                const int bufferSize = 8192;
+                byte[] buffer = new byte[bufferSize];
+                StringBuilder messageBuilder = new StringBuilder();
 
-                if (result.MessageType == WebSocketMessageType.Text)
+                while (webSocket.State == WebSocketState.Open)
                 {
-                    string stringFragment = Encoding.UTF8.GetString(buffer, 0, result.Count);
-                    messageBuilder.Append(stringFragment);
+                    WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 
-                    if (result.EndOfMessage)
+                    if (result.MessageType == WebSocketMessageType.Text)
                     {
-                        string completeMessage = messageBuilder.ToString();
-                        ActionData ActionData;
-                        try
-                        {
-                            ActionData = JsonSerializer.Deserialize<ActionData>(completeMessage, options);
-                            if (ActionData.Action != null && ActionData.Data != null)
-                            {
-                                try
-                                {
-                                    ProcessDataReceived(ActionData);
-                                }
-                                catch (Exception ex)
-                                {
-                                    Logger.Error(ex);
-                                }
+                        string stringFragment = Encoding.UTF8.GetString(buffer, 0, result.Count);
+                        messageBuilder.Append(stringFragment);
 
-                            }
-                        }
-                        catch (Exception ex)
+                        if (result.EndOfMessage)
                         {
-                            Logger.Error(ex);
+                            string completeMessage = messageBuilder.ToString();
+                            ActionData ActionData;
+                            try
+                            {
+                                ActionData = JsonSerializer.Deserialize<ActionData>(completeMessage, options);
+                                if (ActionData.Action != null && ActionData.Data != null)
+                                {
+                                    try
+                                    {
+                                        ProcessDataReceived(ActionData);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Logger.Error(ex);
+                                    }
+
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Logger.Error(ex);
+                            }
+                            messageBuilder.Clear();
                         }
-                        messageBuilder.Clear();
                     }
                 }
+            } catch (Exception ex)
+            {
+                Logger?.Error(ex); 
             }
         }
         public void UpdateOutput()
@@ -240,7 +288,10 @@ namespace OrderBookUpdated
                         // Use BeginInvoke to update the DataGridView on the UI thread
                         dgvSell.BeginInvoke(new Action(() => dgvSell.DataSource = Orderbook.SellOrders));
                         dgvBuy.BeginInvoke(new Action(() => dgvBuy.DataSource = Orderbook.BuyOrders));
+                        //ActiveBuyTables.Add(DataTable(Orderbook.BuyOrders));
 
+
+                        //SubscriptionForms[0].SetOrdersDataSource(ActiveBuyTables[0], ActiveSellTables[0]);
                     }
                     else if (action == ActionType.delete)
                     {
@@ -408,7 +459,17 @@ namespace OrderBookUpdated
 
         }
 
- 
+        private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                await DisconnectSocket(); // also unsubscribes
+            }
+            catch (Exception ex)
+            {
+                Logger?.Error(ex);
+            }
+        }
     }
     public class ActionData
     {

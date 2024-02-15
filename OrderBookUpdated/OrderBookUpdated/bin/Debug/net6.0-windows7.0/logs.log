@@ -3738,3 +3738,33 @@
 2024-02-15 14:15:07,709 INFO - Connection successfully closed
 2024-02-15 14:15:41,732 INFO - Connection Established: wss://ws.bitmex.com/realtime
 2024-02-15 14:15:46,525 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:XBTUSD"}
+2024-02-15 14:28:10,222 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 14:28:10,275 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:XBTUSD"}
+2024-02-15 14:28:18,394 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:XBTUSD"}
+2024-02-15 14:37:08,275 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 14:37:08,325 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:XBTUSD"}
+2024-02-15 14:37:27,622 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 14:37:27,665 ERROR - System.NullReferenceException: Object reference not set to an instance of an object.
+   at OrderBookUpdated.Form1.btnSubscribe_Click(Object sender, EventArgs e) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 71
+2024-02-15 14:38:14,628 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 14:38:14,667 ERROR - System.NullReferenceException: Object reference not set to an instance of an object.
+   at OrderBookUpdated.Form1.btnSubscribe_Click(Object sender, EventArgs e) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 71
+2024-02-15 14:38:36,724 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 14:38:36,795 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:XBTUSD"}
+2024-02-15 14:38:40,297 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:XBTUSD"}
+2024-02-15 14:38:50,611 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 14:38:50,703 ERROR - System.NullReferenceException: Object reference not set to an instance of an object.
+   at OrderBookUpdated.Form1.btnSubscribe_Click(Object sender, EventArgs e) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 73
+2024-02-15 14:41:05,659 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 14:41:41,751 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 14:48:38,979 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 14:48:39,039 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:XBTUSD"}
+2024-02-15 14:50:17,151 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 14:50:17,209 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:XBTUSD"}
+2024-02-15 14:51:29,534 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 14:51:29,593 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:XBTUSD"}
+2024-02-15 14:54:44,258 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 14:54:44,319 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:XBTUSD"}
+2024-02-15 15:00:21,082 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 15:00:21,143 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:XBTUSD"}
+2024-02-15 15:00:28,367 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:XBTUSD"}
