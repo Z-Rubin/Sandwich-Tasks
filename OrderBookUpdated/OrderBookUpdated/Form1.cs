@@ -141,7 +141,8 @@ namespace OrderBookUpdated
             {
                 byte[] buffer = Encoding.UTF8.GetBytes(Subscription.UnsubscribeToJsonMessage());
                 await WebSocket.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text, true, CancellationToken.None);
-                tabControlSubscriptions.TabPages.RemoveAt(ActiveSubscriptions.IndexOf(Subscription));
+                int index = ActiveSubscriptions.IndexOf(Subscription);
+                tabControlSubscriptions.TabPages.RemoveAt(index);
                 ActiveSubscriptions.Remove(Subscription);
                 Logger?.Info($"Successfully unsubscribed with {Subscription.UnsubscribeToJsonMessage()}");
 

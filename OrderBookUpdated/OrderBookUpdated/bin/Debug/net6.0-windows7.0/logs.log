@@ -2064,3 +2064,786 @@
 2024-02-15 16:56:18,834 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:XRPUSD"}
 2024-02-15 16:56:23,011 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:BNBUSD"}
 2024-02-15 16:56:50,569 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:XRPUSD"}
+2024-02-15 17:03:22,956 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 17:03:23,022 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:ETHUSD"}
+2024-02-15 17:03:24,588 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:XRPUSD"}
+2024-02-15 17:03:33,702 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:ETHUSD"}
+2024-02-15 17:03:55,638 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:XRPUSD"}
+2024-02-15 17:04:44,045 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 17:04:44,074 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:XBTUSD"}
+2024-02-15 17:04:46,091 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:ETHUSD"}
+2024-02-15 17:05:13,055 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.Unsubscribe(Subscription Subscription) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 149
+2024-02-15 17:05:13,083 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.Unsubscribe(Subscription Subscription) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 149
+2024-02-15 17:05:13,084 ERROR - System.ArgumentOutOfRangeException: Index 0 is out of range. (Parameter 'index')
+   at System.Windows.Forms.Control.ControlCollection.get_Item(Int32 index)
+   at System.Windows.Forms.TabControl.TabPageCollection.RemoveAt(Int32 index)
+   at OrderBookUpdated.Form1.Unsubscribe(Subscription Subscription) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 145
+2024-02-15 17:05:13,084 ERROR - System.ArgumentOutOfRangeException: InvalidArgument=Value of '0' is not valid for 'index'. (Parameter 'index')
+Actual value was 0.
+   at System.Windows.Forms.ListBox.ObjectCollection.RemoveAt(Int32 index)
+   at OrderBookUpdated.Form1.UnsubscribeAll() in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 167
+2024-02-15 17:05:13,085 ERROR - Error processing action delete, index is 0, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,085 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,085 ERROR - Error processing action insert, index is 0, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,096 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,096 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,096 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,112 ERROR - Error processing action delete, index is 0, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,112 ERROR - Error processing action insert, index is 0, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,145 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,145 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,145 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,198 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,246 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,246 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,246 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,299 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,300 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,351 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,351 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,352 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,401 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,401 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,401 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,446 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,446 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,446 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,497 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,497 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,498 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,544 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,544 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,544 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,594 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,594 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,594 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,648 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,648 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,648 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,691 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,691 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,691 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,740 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,740 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,740 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,789 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,789 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,789 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,838 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,838 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,843 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,891 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,891 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,891 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,937 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,937 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,937 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:13,985 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:13,986 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:13,986 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,035 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,035 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,035 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,084 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,084 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,084 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,140 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,140 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,140 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,184 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,184 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,184 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,235 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,235 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,235 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,280 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,280 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,281 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,332 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,333 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,333 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,378 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,378 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,378 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,428 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,483 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,535 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,535 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,584 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,584 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,584 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,635 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,635 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,635 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,683 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,683 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,683 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,730 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,731 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,731 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,785 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,785 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,785 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,829 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,829 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,829 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,886 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,927 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,927 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,927 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:14,982 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:14,983 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:14,983 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,031 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,031 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,031 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,080 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,080 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,080 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,129 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,129 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,129 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,182 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,182 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,182 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,230 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,230 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,230 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,278 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,278 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,278 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,327 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,327 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,328 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,376 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,376 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,376 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,426 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,426 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,426 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,479 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,480 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,480 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,524 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,524 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,524 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,574 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,574 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,574 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,622 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,622 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,623 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,676 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,676 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,676 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,726 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,768 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,768 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,769 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,818 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,818 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,819 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,880 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,880 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,880 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:15,915 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:15,915 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:15,915 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:16,058 ERROR - System.ArgumentOutOfRangeException: Index 0 is out of range. (Parameter 'index')
+   at System.Windows.Forms.Control.ControlCollection.get_Item(Int32 index)
+   at System.Windows.Forms.TabControl.TabPageCollection.RemoveAt(Int32 index)
+   at OrderBookUpdated.Form1.Unsubscribe(Subscription Subscription) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 145
+2024-02-15 17:05:16,059 ERROR - System.ArgumentOutOfRangeException: InvalidArgument=Value of '0' is not valid for 'index'. (Parameter 'index')
+Actual value was 0.
+   at System.Windows.Forms.ListBox.ObjectCollection.RemoveAt(Int32 index)
+   at OrderBookUpdated.Form1.UnsubscribeAll() in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 167
+2024-02-15 17:05:16,108 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:29,584 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-15 17:05:29,642 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:XRPUSD"}
+2024-02-15 17:05:31,650 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:BNBUSD"}
+2024-02-15 17:05:45,060 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.Unsubscribe(Subscription Subscription) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 149
+2024-02-15 17:05:45,230 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:45,244 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:45,262 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:45,272 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:46,430 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:46,441 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:46,452 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:46,633 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:46,661 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:46,686 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:46,701 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:46,717 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:46,732 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:46,894 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:46,909 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:46,942 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:46,952 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:46,961 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:47,380 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:47,391 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:47,534 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:47,547 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:47,584 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:47,593 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:47,725 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:47,739 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:47,773 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:47,785 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:47,833 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:47,985 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:47,997 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-15 17:05:48,035 ERROR - Error processing action delete, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.DeleteAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 350
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 309
+2024-02-15 17:05:48,044 ERROR - System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.UpdateAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 368
+2024-02-15 17:05:48,053 ERROR - Error processing action insert, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at OrderBookUpdated.Form1.InsertAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 358
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
