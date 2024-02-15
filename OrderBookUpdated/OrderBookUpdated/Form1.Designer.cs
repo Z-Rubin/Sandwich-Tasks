@@ -33,14 +33,6 @@
             label1 = new Label();
             orderBindingSource = new BindingSource(components);
             orderbookBindingSource = new BindingSource(components);
-            dgvSell = new DataGridView();
-            Price = new DataGridViewTextBoxColumn();
-            Size = new DataGridViewTextBoxColumn();
-            Side1 = new DataGridViewTextBoxColumn();
-            dgvBuy = new DataGridView();
-            Side = new DataGridViewTextBoxColumn();
-            Size1 = new DataGridViewTextBoxColumn();
-            Price1 = new DataGridViewTextBoxColumn();
             btnConnect = new Button();
             btnDisconnect = new Button();
             cbSelectToken = new ComboBox();
@@ -48,10 +40,9 @@
             lbActiveSubs = new ListBox();
             cbSubscriptionTopics = new ComboBox();
             btnUnsubscribeAll = new Button();
+            tabControlSubscriptions = new TabControl();
             ((System.ComponentModel.ISupportInitialize)orderBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)orderbookBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgvSell).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgvBuy).BeginInit();
             SuspendLayout();
             // 
             // btnSubscribe
@@ -81,70 +72,6 @@
             // orderbookBindingSource
             // 
             orderbookBindingSource.DataSource = typeof(Orderbook);
-            // 
-            // dgvSell
-            // 
-            dgvSell.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSell.Columns.AddRange(new DataGridViewColumn[] { Price, Size, Side1 });
-            dgvSell.Location = new Point(563, 12);
-            dgvSell.Name = "dgvSell";
-            dgvSell.ReadOnly = true;
-            dgvSell.RowTemplate.Height = 25;
-            dgvSell.Size = new Size(345, 725);
-            dgvSell.TabIndex = 8;
-            // 
-            // Price
-            // 
-            Price.DataPropertyName = "Price";
-            Price.HeaderText = "Price";
-            Price.Name = "Price";
-            Price.ReadOnly = true;
-            // 
-            // Size
-            // 
-            Size.DataPropertyName = "Size";
-            Size.HeaderText = "Size";
-            Size.Name = "Size";
-            Size.ReadOnly = true;
-            // 
-            // Side1
-            // 
-            Side1.DataPropertyName = "Side";
-            Side1.HeaderText = "Side";
-            Side1.Name = "Side1";
-            Side1.ReadOnly = true;
-            // 
-            // dgvBuy
-            // 
-            dgvBuy.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBuy.Columns.AddRange(new DataGridViewColumn[] { Side, Size1, Price1 });
-            dgvBuy.Location = new Point(214, 12);
-            dgvBuy.Name = "dgvBuy";
-            dgvBuy.ReadOnly = true;
-            dgvBuy.RowTemplate.Height = 25;
-            dgvBuy.Size = new Size(343, 725);
-            dgvBuy.TabIndex = 10;
-            // 
-            // Side
-            // 
-            Side.DataPropertyName = "Side";
-            Side.HeaderText = "Side";
-            Side.Name = "Side";
-            Side.ReadOnly = true;
-            // 
-            // Size1
-            // 
-            Size1.DataPropertyName = "Size";
-            Size1.HeaderText = "Size";
-            Size1.Name = "Size1";
-            Size1.ReadOnly = true;
-            // 
-            // Price1
-            // 
-            Price1.DataPropertyName = "Price";
-            Price1.HeaderText = "Price";
-            Price1.Name = "Price1";
-            Price1.ReadOnly = true;
             // 
             // btnConnect
             // 
@@ -211,11 +138,20 @@
             btnUnsubscribeAll.UseVisualStyleBackColor = true;
             btnUnsubscribeAll.Click += btnUnsubscribeAll_Click;
             // 
+            // tabControlSubscriptions
+            // 
+            tabControlSubscriptions.Location = new Point(170, 12);
+            tabControlSubscriptions.Name = "tabControlSubscriptions";
+            tabControlSubscriptions.SelectedIndex = 0;
+            tabControlSubscriptions.Size = new Size(1187, 725);
+            tabControlSubscriptions.TabIndex = 20;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1506, 749);
+            Controls.Add(tabControlSubscriptions);
             Controls.Add(btnUnsubscribeAll);
             Controls.Add(cbSubscriptionTopics);
             Controls.Add(lbActiveSubs);
@@ -223,8 +159,6 @@
             Controls.Add(cbSelectToken);
             Controls.Add(btnDisconnect);
             Controls.Add(btnConnect);
-            Controls.Add(dgvBuy);
-            Controls.Add(dgvSell);
             Controls.Add(label1);
             Controls.Add(btnSubscribe);
             Name = "Form1";
@@ -233,8 +167,6 @@
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)orderBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)orderbookBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgvSell).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgvBuy).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -249,15 +181,7 @@
         private DataGridView dataGridViewSell;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private DataGridView dgvSell;
-        private DataGridView dgvBuy;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn Price;
-        private DataGridViewTextBoxColumn Size;
-        private DataGridViewTextBoxColumn Side1;
-        private DataGridViewTextBoxColumn Side;
-        private DataGridViewTextBoxColumn Size1;
-        private DataGridViewTextBoxColumn Price1;
         private Button btnConnect;
         private Button btnDisconnect;
         private ComboBox cbSelectToken;
@@ -265,5 +189,6 @@
         private ListBox lbActiveSubs;
         private ComboBox cbSubscriptionTopics;
         private Button btnUnsubscribeAll;
+        private TabControl tabControlSubscriptions;
     }
 }

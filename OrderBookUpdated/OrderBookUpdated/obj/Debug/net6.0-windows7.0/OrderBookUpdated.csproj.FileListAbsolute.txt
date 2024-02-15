@@ -21,4 +21,4 @@ C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\obj\D
 C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\obj\Debug\net6.0-windows7.0\OrderBookUpdated.pdb
 C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\obj\Debug\net6.0-windows7.0\OrderBookUpdated.genruntimeconfig.cache
 C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\obj\Debug\net6.0-windows7.0\ref\OrderBookUpdated.dll
-C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\obj\Debug\net6.0-windows7.0\OrderBookUpdated.OrderbookForm.resources
+C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\obj\Debug\net6.0-windows7.0\OrderBookUpdated.pnlOrderbook.resources

@@ -26,13 +26,10 @@ namespace OrderBookUpdated
             InitializeComponent();
         }
         public log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public int BuySizeColumnIndex { get; private set; }
-        public int SellSizeColumnIndex { get; private set; }
         public Boolean Connected { get; private set; }
-        public List<OrderbookForm> SubscriptionForms { get; private set; } = new List<OrderbookForm>();
+        public List<pnlOrderbook> Panels { get; private set; } = new();
         public ClientWebSocket WebSocket { get; private set; }
-        public Orderbook Orderbook = new();
-        public List<Orderbook> AllOrderBooks = new();
+        public List<Orderbook> Orderbooks = new();
         public JsonSerializerOptions options = new()
         {
             PropertyNameCaseInsensitive = true
@@ -57,29 +54,37 @@ namespace OrderBookUpdated
             try
             {
                 string Token = cbSelectToken.Text;
+                TopicType Topic = (TopicType)Enum.Parse(typeof(TopicType), cbSubscriptionTopics.Text, true);
+                TopicTokenPair TTP = new(Topic, cbSelectToken.Text); // change these two lines to allow choice of topic type
+                string argsString = TTP.ToArgsString();
                 if (!Connected)
                 {
                     await ConnectWebSocket();
                 }
-                TopicType Topic = (TopicType)Enum.Parse(typeof(TopicType), cbSubscriptionTopics.Text, true);
-                TopicTokenPair TTP = new(Topic, cbSelectToken.Text); // change these two lines to allow choice of topic type
-                string argsString = TTP.ToArgsString();
-                OrderbookForm SubForm = CreateSubscriptionForm(argsString);
-                SubForm.Show();
-                SubscriptionForms.Add(SubForm);
 
-                await Subscribe(argsString);
+                Subscription NewSubscription = new(argsString);
+                int index = ActiveSubscriptions.FindIndex(Subscription => Subscription.args == NewSubscription.args);
 
-                
+                if (index < 0) 
+                {
+                    TabPage newTabPage = new TabPage(Topic.ToString());
+                    pnlOrderbook pnlOrderbook = new pnlOrderbook();
+                    pnlOrderbook.Dock = DockStyle.Fill;                     
+                    newTabPage.Controls.Add(pnlOrderbook);
+                    pnlOrderbook.SetSymbolLabel(Token);
+                    Panels.Add(pnlOrderbook);
+                    tabControlSubscriptions.TabPages.Add(newTabPage);
+                    
+                    await Subscribe(NewSubscription, argsString);
+                } else
+                {
+                    Logger.Warn("Symbol Topic combo is already subscribed to");
+                }                
             }
             catch (Exception ex)
             {
                 Logger?.Error(ex);
             }
-        }
-        public OrderbookForm CreateSubscriptionForm(string argsString)
-        {
-            return new OrderbookForm();
         }
         private async void btnUnsubscribe_Click(object sender, EventArgs e)
         {
@@ -110,17 +115,20 @@ namespace OrderBookUpdated
                 Logger?.Error(ex);
             }
         }
-        public async Task Subscribe(string args)
+        public async Task Subscribe(Subscription NewSubscription, string args)
         {
             try
             {
-                Subscription NewSubscription = new(args);
                 byte[] buffer = Encoding.UTF8.GetBytes(NewSubscription.SubscribeToJsonMessage());
                 await WebSocket.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text, true, CancellationToken.None);
                 lbActiveSubs.Items.Add(args);
-                Logger?.Info($"Successfully subscribed with: {NewSubscription.SubscribeToJsonMessage()}");
                 ActiveSubscriptions.Add(NewSubscription);
-                await ReceiveMessages(WebSocket);
+                Orderbooks.Add(new Orderbook());
+                Logger?.Info($"Successfully subscribed with: {NewSubscription.SubscribeToJsonMessage()}");
+                if (ActiveSubscriptions.Count < 2)
+                {
+                    await ReceiveMessages(WebSocket, Orderbooks.Count - 1);// ActiveSubscriptions.IndexOf(NewSubscription));
+                }
             }
             catch (Exception ex)
             {
@@ -133,8 +141,10 @@ namespace OrderBookUpdated
             {
                 byte[] buffer = Encoding.UTF8.GetBytes(Subscription.UnsubscribeToJsonMessage());
                 await WebSocket.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text, true, CancellationToken.None);
-                Logger?.Info($"Successfully unsubscribed with {Subscription.UnsubscribeToJsonMessage()}");
+                tabControlSubscriptions.TabPages.RemoveAt(ActiveSubscriptions.IndexOf(Subscription));
                 ActiveSubscriptions.Remove(Subscription);
+                Logger?.Info($"Successfully unsubscribed with {Subscription.UnsubscribeToJsonMessage()}");
+
             }
             catch (Exception ex)
             {
@@ -217,13 +227,13 @@ namespace OrderBookUpdated
                 Logger?.Error(ex);
             }
         }
-        public async Task ReceiveMessages(ClientWebSocket webSocket)
+        public async Task ReceiveMessages(ClientWebSocket webSocket, int OrderbookI)
         {
             try
             {
                 const int bufferSize = 8192;
                 byte[] buffer = new byte[bufferSize];
-                StringBuilder messageBuilder = new StringBuilder();
+                StringBuilder messageBuilder = new();
 
                 while (webSocket.State == WebSocketState.Open)
                 {
@@ -269,54 +279,47 @@ namespace OrderBookUpdated
         }
         public void UpdateOutput()
         {
-            label1.Text = Orderbook.Length.ToString();
+            //label1.Text = Orderbook.Length.ToString();
         }
         public void ProcessDataReceived(ActionData ActionData)
         {
+            int OrderbookI = -1;
+
             try
             {
                 ActionType action = ActionData.Action;
-
                 try
                 {
-
-                    if (action == ActionType.partial)
+                    OrderbookI = ActiveSubscriptions.FindIndex(Subscription => Subscription.args.Contains(ActionData.Data[0].Symbol));
+                    if (OrderbookI != -1)
                     {
-                        PartialAction(ActionData.Data);
-
-                        // Assuming orderbook.sellOrders and orderbook.buyOrders are updated inside partialAction
-                        // Use BeginInvoke to update the DataGridView on the UI thread
-                        dgvSell.BeginInvoke(new Action(() => dgvSell.DataSource = Orderbook.SellOrders));
-                        dgvBuy.BeginInvoke(new Action(() => dgvBuy.DataSource = Orderbook.BuyOrders));
-                        //ActiveBuyTables.Add(DataTable(Orderbook.BuyOrders));
-
-
-                        //SubscriptionForms[0].SetOrdersDataSource(ActiveBuyTables[0], ActiveSellTables[0]);
+                        if (action == ActionType.partial)
+                        {
+                            PartialAction(ActionData.Data, OrderbookI);
+                            Panels[OrderbookI].SetOrdersDataSource(Orderbooks[OrderbookI].BuyOrders, Orderbooks[OrderbookI].SellOrders);
+                        }
+                        else if (action == ActionType.delete)
+                        {
+                            DeleteAction(ActionData.Data, OrderbookI);
+                        }
+                        else if (action == ActionType.insert)
+                        {
+                            InsertAction(ActionData.Data, OrderbookI);
+                        }
+                        else if (action == ActionType.update)
+                        {
+                            UpdateAction(ActionData.Data, OrderbookI);
+                        }
+                        else
+                        {
+                            Logger.Info($"{action} is not catered for yet");
+                        }
+                        UpdateOutput();
                     }
-                    else if (action == ActionType.delete)
-                    {
-                        DeleteAction(ActionData.Data);
-                    }
-                    else if (action == ActionType.insert)
-                    {
-                        InsertAction(ActionData.Data);
-                    }
-                    else if (action == ActionType.update)
-                    {
-                        UpdateAction(ActionData.Data);
-                    }
-                    else
-                    {
-                        Logger.Info($"{action} is not catered for yet");
-                    }
-
-
-                    UpdateOutput();
                 }
-
                 catch (Exception ex)
                 {
-                    Logger.Error($"Error processing action {action}, exception: {ex}");
+                    Logger.Error($"Error processing action {action}, index is {OrderbookI}, exception: {ex}");
                 }
             }
             catch (Exception ex)
@@ -326,42 +329,39 @@ namespace OrderBookUpdated
         }
 
         // Action methods:
-        public void PartialAction(List<Order> Data)
+        public void PartialAction(List<Order> Data, int OrderbookI)
         {            // loop through orders and add to orderbook object
             foreach (var order in Data)
             {
-                Orderbook.AddOrder(order);
+                Orderbooks[OrderbookI].AddOrder(order);
             }
-            dgvBuy.Columns["Price1"].DefaultCellStyle.ForeColor = Color.Green;
-            dgvSell.Columns["Price"].DefaultCellStyle.ForeColor = Color.Red;
-
         }
-        public void DeleteAction(List<Order> Data)
+        public void DeleteAction(List<Order> Data, int OrderbookI)
         {
 
             foreach (var order in Data)
             {
-                Orderbook.DeleteOrder(order);
+                Orderbooks[OrderbookI].DeleteOrder(order);
             }
 
         }
-        public void InsertAction(List<Order> Data)
+        public void InsertAction(List<Order> Data, int OrderbookI)
         {
             foreach (var order in Data)
             {
-                Orderbook.InsertOrder(order);
-                UpdateCellColour(order);
+                Orderbooks[OrderbookI].InsertOrder(order);
+                UpdateCellColour(order, OrderbookI);
             }
         }
-        public void UpdateAction(List<Order> Data)
+        public void UpdateAction(List<Order> Data, int OrderbookI)
         {
             try
             {
                 foreach (var order in Data)
                 {
-                    Orderbook.UpdateOrder(order);
+                    Orderbooks[OrderbookI].UpdateOrder(order);
 
-                    UpdateCellColour(order);
+                    UpdateCellColour(order, OrderbookI);
                 }
             }
             catch (Exception ex)
@@ -371,81 +371,34 @@ namespace OrderBookUpdated
         }
 
         // Change Cell Colour on updates and inserts
-        public void UpdateCellColour(Order order)
+        public void UpdateCellColour(Order order, int OrderbookI)
         {
             try
             {
                 int CellColour = order.GetCellColour();
-                int CellIndex = Orderbook.GetOrderIndex(order);
-                ChangeCellColour(order.Side, CellIndex, CellColour);
+                int CellIndex = Orderbooks[OrderbookI].GetOrderIndex(order);
+                if ( CellIndex > -1)
+                {
+                    ChangeCellColour(order.Side, CellIndex, CellColour, OrderbookI);
+                }
             }
             catch (Exception ex)
             {
                 Logger?.Error(ex);
             }
         }
-        public void ChangeCellColour(SideType SideType, int cellIndex, int cellColour)
+        public void ChangeCellColour(SideType SideType, int cellIndex, int cellColour, int OrderbookI)
         {
             try
             {
-                if (SideType == SideType.Buy)
-                {
-                    if (dgvBuy.RowCount > cellIndex)
-                    {
-                        if (cellColour == 1)
-                        {
-                            dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Green;
-
-                        }
-                        else if (cellColour == 2)
-                        {
-                            dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Red;
-
-                        }
-                        else if (cellColour == 0)
-                        {
-                            dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Black;
-
-                        }
-                    }
-                }
-                if (SideType == SideType.Sell)
-                {
-                    if (dgvSell.RowCount > cellIndex)
-                    {
-                        if (cellColour == 1)
-                        {
-                            dgvSell[SellSizeColumnIndex, cellIndex].Style.ForeColor = Color.Green;
-
-                        }
-                        else if (cellColour == 2)
-                        {
-                            dgvSell[SellSizeColumnIndex, cellIndex].Style.ForeColor = Color.Red;
-
-                        }
-                        else if (cellColour == 0)
-                        {
-                            dgvSell[SellSizeColumnIndex, cellIndex].Style.ForeColor = Color.Black;
-
-                        }
-                    }
-                }
+                Panels[OrderbookI].SetCellForeColor(SideType, cellIndex, cellColour);
             }
             catch (Exception ex)
             {
                 Logger?.Error($"cellIndex Received: {cellIndex}. Error: {ex}");
             }
         }
-        public void Form1_Load(object sender, EventArgs e)
-        {
-            BuySizeColumnIndex = dgvBuy.Columns["Size1"].Index;
-            SellSizeColumnIndex = dgvSell.Columns["Size"].Index;
-            dgvBuy.DefaultCellStyle.Font = new Font("Tahoma", 12);
-            dgvSell.DefaultCellStyle.Font = new Font("Tahoma", 12);
-
-            dgvBuy.AutoGenerateColumns = false;
-            dgvSell.AutoGenerateColumns = false;
-
+        public void Form1_Load(object sender, EventArgs e) { 
             cbSubscriptionTopics.DataSource = Enum.GetNames(typeof(TopicType));
             cbSelectToken.DataSource = Enum.GetNames(typeof(Symbols));
             cbSubscriptionTopics.SelectedIndex = 4;
@@ -474,12 +427,14 @@ namespace OrderBookUpdated
     public class ActionData
     {
         public ActionType Action { get; set; }
+        public string Table {  get; set; }
         public List<Order> Data { get; set; }
 
-        public ActionData(ActionType Action, List<Order> Data)
+        public ActionData(ActionType Action, List<Order> Data, string Table)
         {
             this.Action = Action;
             this.Data = Data;
+            this.Table = Table;
         }
 
     }
@@ -617,19 +572,12 @@ namespace OrderBookUpdated
         public void DeleteOrder(Order order)
         {
             BindingList<Order> orders = (order.Side == SideType.Buy) ? this.BuyOrders : this.SellOrders;
-            List<int> indiciesToRemove = new List<int>();
-
-            for (int i = 0; i < orders.Count; i++)
+            for (int i = orders.Count -1; i >= 0; i--)
             {
                 if (orders[i].Id == order.Id)
                 {
-                    indiciesToRemove.Add(i);
+                    orders.RemoveAt(i);
                 }
-            }
-            foreach (int index in indiciesToRemove)
-            {
-                orders.RemoveAt(index);
-                this.Length--;
             }
         }
         public void UpdateOrder(Order order)
@@ -706,7 +654,11 @@ namespace OrderBookUpdated
     }
     public enum Symbols
     {
-        XBTUSD
+        XBTUSD,
+        SOLUSD,
+        ETHUSD,
+        XRPUSD,
+        BNBUSD
     }
     public enum TopicType
     {
@@ -770,15 +722,15 @@ namespace OrderBookUpdated
     public class TopicTokenPair
     {
         public TopicType Topic { get; set; }
-        public string Token { get; set; }
-        public TopicTokenPair(TopicType topic, string token)
+        public string Symbol { get; set; }
+        public TopicTokenPair(TopicType topic, string symbol)
         {
             Topic = topic;
-            Token = token;
+            Symbol = symbol;
         }
         public string ToArgsString()
         {
-            return $"{this.Topic}:{this.Token}";
+            return $"{this.Topic}:{this.Symbol}";
         }
     }
 

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OrderBookUpdated")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+32cf7a3ab246139dc92882b78cc7b01c67083447")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72207653916477ebbd0744845aa92c7662863060")]
 [assembly: System.Reflection.AssemblyProductAttribute("OrderBookUpdated")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrderBookUpdated")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
