@@ -33,9 +33,9 @@
             dgvSell = new DataGridView();
             Price = new DataGridViewTextBoxColumn();
             Size = new DataGridViewTextBoxColumn();
-            Side1 = new DataGridViewTextBoxColumn();
+            TotalUSD1 = new DataGridViewProgressColumn();
             dgvBuy = new DataGridView();
-            Side = new DataGridViewTextBoxColumn();
+            TotalUSD = new DataGridViewProgressColumn();
             Size1 = new DataGridViewTextBoxColumn();
             Price1 = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
@@ -48,7 +48,7 @@
             panel1.Controls.Add(lblSymbol);
             panel1.Controls.Add(dgvSell);
             panel1.Controls.Add(dgvBuy);
-            panel1.Location = new Point(3, 3);
+            panel1.Location = new Point(12, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(704, 783);
             panel1.TabIndex = 0;
@@ -67,7 +67,7 @@
             // dgvSell
             // 
             dgvSell.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSell.Columns.AddRange(new DataGridViewColumn[] { Price, Size, Side1 });
+            dgvSell.Columns.AddRange(new DataGridViewColumn[] { Price, Size, TotalUSD1 });
             dgvSell.Location = new Point(352, 43);
             dgvSell.Name = "dgvSell";
             dgvSell.ReadOnly = true;
@@ -89,17 +89,19 @@
             Size.Name = "Size";
             Size.ReadOnly = true;
             // 
-            // Side1
+            // TotalUSD1
             // 
-            Side1.DataPropertyName = "Side";
-            Side1.HeaderText = "Side";
-            Side1.Name = "Side1";
-            Side1.ReadOnly = true;
+            TotalUSD1.DataPropertyName = "TotalUSD";
+            TotalUSD1.HeaderText = "Total (USD)";
+            TotalUSD1.Name = "TotalUSD1";
+            TotalUSD1.ReadOnly = true;
+            TotalUSD1.Resizable = DataGridViewTriState.True;
+            TotalUSD1.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // dgvBuy
             // 
             dgvBuy.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvBuy.Columns.AddRange(new DataGridViewColumn[] { Side, Size1, Price1 });
+            dgvBuy.Columns.AddRange(new DataGridViewColumn[] { TotalUSD, Size1, Price1 });
             dgvBuy.Location = new Point(3, 43);
             dgvBuy.Name = "dgvBuy";
             dgvBuy.ReadOnly = true;
@@ -107,12 +109,14 @@
             dgvBuy.Size = new Size(343, 688);
             dgvBuy.TabIndex = 13;
             // 
-            // Side
+            // TotalUSD
             // 
-            Side.DataPropertyName = "Side";
-            Side.HeaderText = "Side";
-            Side.Name = "Side";
-            Side.ReadOnly = true;
+            TotalUSD.DataPropertyName = "TotalUSD";
+            TotalUSD.HeaderText = "Total (USD)";
+            TotalUSD.Name = "TotalUSD";
+            TotalUSD.ReadOnly = true;
+            TotalUSD.Resizable = DataGridViewTriState.True;
+            TotalUSD.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // Size1
             // 
@@ -134,6 +138,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel1);
             Name = "pnlOrderbook";
+            Load += pnlOrderbook_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvSell).EndInit();
@@ -145,13 +150,13 @@
 
         private Panel panel1;
         private DataGridView dgvSell;
-        private DataGridViewTextBoxColumn Price;
-        private DataGridViewTextBoxColumn Size;
-        private DataGridViewTextBoxColumn Side1;
         private DataGridView dgvBuy;
-        private DataGridViewTextBoxColumn Side;
+        private Label lblSymbol;
+        private DataGridViewProgressColumn TotalUSD;
         private DataGridViewTextBoxColumn Size1;
         private DataGridViewTextBoxColumn Price1;
-        private Label lblSymbol;
+        private DataGridViewTextBoxColumn Price;
+        private DataGridViewTextBoxColumn Size;
+        private DataGridViewProgressColumn TotalUSD1;
     }
 }

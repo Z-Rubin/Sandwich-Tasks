@@ -30,7 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             btnSubscribe = new Button();
-            label1 = new Label();
             orderBindingSource = new BindingSource(components);
             orderbookBindingSource = new BindingSource(components);
             btnConnect = new Button();
@@ -41,6 +40,7 @@
             cbSubscriptionTopics = new ComboBox();
             btnUnsubscribeAll = new Button();
             tabControlSubscriptions = new TabControl();
+            TestBut = new Button();
             ((System.ComponentModel.ISupportInitialize)orderBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)orderbookBindingSource).BeginInit();
             SuspendLayout();
@@ -54,15 +54,6 @@
             btnSubscribe.Text = "Subscribe";
             btnSubscribe.UseVisualStyleBackColor = true;
             btnSubscribe.Click += btnSubscribe_Click;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(34, 466);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 5;
-            label1.Text = "label1";
             // 
             // orderBindingSource
             // 
@@ -145,12 +136,24 @@
             tabControlSubscriptions.SelectedIndex = 0;
             tabControlSubscriptions.Size = new Size(1187, 725);
             tabControlSubscriptions.TabIndex = 20;
+            tabControlSubscriptions.Selected += tabControlSubscriptions_Selected;
+            // 
+            // TestBut
+            // 
+            TestBut.Location = new Point(12, 502);
+            TestBut.Name = "TestBut";
+            TestBut.Size = new Size(152, 36);
+            TestBut.TabIndex = 21;
+            TestBut.Text = "ChangeProgressBar";
+            TestBut.UseVisualStyleBackColor = true;
+            TestBut.Click += TestBut_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1506, 749);
+            Controls.Add(TestBut);
             Controls.Add(tabControlSubscriptions);
             Controls.Add(btnUnsubscribeAll);
             Controls.Add(cbSubscriptionTopics);
@@ -159,7 +162,6 @@
             Controls.Add(cbSelectToken);
             Controls.Add(btnDisconnect);
             Controls.Add(btnConnect);
-            Controls.Add(label1);
             Controls.Add(btnSubscribe);
             Name = "Form1";
             Text = "Form1";
@@ -168,13 +170,11 @@
             ((System.ComponentModel.ISupportInitialize)orderBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)orderbookBindingSource).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private Button btnSubscribe;
-        private Label label1;
         private DataGridView dataGridViewBuy;
         private BindingSource orderBindingSource;
         private BindingSource orderbookBindingSource;
@@ -190,5 +190,6 @@
         private ComboBox cbSubscriptionTopics;
         private Button btnUnsubscribeAll;
         private TabControl tabControlSubscriptions;
+        private Button TestBut;
     }
 }

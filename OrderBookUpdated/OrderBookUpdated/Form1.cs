@@ -36,7 +36,6 @@ namespace OrderBookUpdated
         };
         public List<Subscription> ActiveSubscriptions = new();
 
-
         public void OnHeartbeatTimer(object? state)
         {
             try
@@ -55,8 +54,9 @@ namespace OrderBookUpdated
             {
                 string Token = cbSelectToken.Text;
                 TopicType Topic = (TopicType)Enum.Parse(typeof(TopicType), cbSubscriptionTopics.Text, true);
-                TopicTokenPair TTP = new(Topic, cbSelectToken.Text); // change these two lines to allow choice of topic type
+                TopicTokenPair TTP = new(Topic, cbSelectToken.Text);
                 string argsString = TTP.ToArgsString();
+
                 if (!Connected)
                 {
                     await ConnectWebSocket();
@@ -65,21 +65,14 @@ namespace OrderBookUpdated
                 Subscription NewSubscription = new(argsString);
                 int index = ActiveSubscriptions.FindIndex(Subscription => Subscription.args == NewSubscription.args);
 
-                if (index < 0) 
+                if (index < 0)
                 {
-                    TabPage newTabPage = new TabPage(Topic.ToString());
-                    pnlOrderbook pnlOrderbook = new pnlOrderbook();
-                    pnlOrderbook.Dock = DockStyle.Fill;                     
-                    newTabPage.Controls.Add(pnlOrderbook);
-                    pnlOrderbook.SetSymbolLabel(Token);
-                    Panels.Add(pnlOrderbook);
-                    tabControlSubscriptions.TabPages.Add(newTabPage);
-                    
-                    await Subscribe(NewSubscription, argsString);
-                } else
+                    await Subscribe(NewSubscription, argsString, Topic, Token);
+                }
+                else
                 {
                     Logger.Warn("Symbol Topic combo is already subscribed to");
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -110,20 +103,19 @@ namespace OrderBookUpdated
             try
             {
                 await UnsubscribeAll();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Logger?.Error(ex);
             }
         }
-        public async Task Subscribe(Subscription NewSubscription, string args)
+        public async Task Subscribe(Subscription NewSubscription, string args, TopicType Topic, string Token)
         {
             try
             {
                 byte[] buffer = Encoding.UTF8.GetBytes(NewSubscription.SubscribeToJsonMessage());
                 await WebSocket.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text, true, CancellationToken.None);
-                lbActiveSubs.Items.Add(args);
-                ActiveSubscriptions.Add(NewSubscription);
-                Orderbooks.Add(new Orderbook());
+                AddsForSubscribe(args, NewSubscription, Topic, Token); // adds panels, tabs, orderbook to list etc...
                 Logger?.Info($"Successfully subscribed with: {NewSubscription.SubscribeToJsonMessage()}");
                 if (ActiveSubscriptions.Count < 2)
                 {
@@ -135,6 +127,20 @@ namespace OrderBookUpdated
                 Logger?.Error(ex);
             }
         }
+        public void AddsForSubscribe(string args, Subscription NewSubscription, TopicType Topic, string Token)
+        {
+            lbActiveSubs.Items.Add(args);
+            TabPage newTabPage = new TabPage(Topic.ToString());
+            pnlOrderbook pnlOrderbook = new pnlOrderbook();
+            pnlOrderbook.Dock = DockStyle.Fill;
+            newTabPage.Controls.Add(pnlOrderbook);
+            pnlOrderbook.SetSymbolLabel(Token);
+            Panels.Add(pnlOrderbook);
+            tabControlSubscriptions.TabPages.Add(newTabPage);
+            tabControlSubscriptions.SelectTab(newTabPage);
+            ActiveSubscriptions.Add(NewSubscription);
+            Orderbooks.Add(new Orderbook());
+        }
         public async Task Unsubscribe(Subscription Subscription)
         {
             try
@@ -142,8 +148,7 @@ namespace OrderBookUpdated
                 byte[] buffer = Encoding.UTF8.GetBytes(Subscription.UnsubscribeToJsonMessage());
                 await WebSocket.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text, true, CancellationToken.None);
                 int index = ActiveSubscriptions.IndexOf(Subscription);
-                tabControlSubscriptions.TabPages.RemoveAt(index);
-                ActiveSubscriptions.Remove(Subscription);
+                RemovesForUnsubscribe(index); // removes panels, list entries etc...
                 Logger?.Info($"Successfully unsubscribed with {Subscription.UnsubscribeToJsonMessage()}");
 
             }
@@ -151,6 +156,13 @@ namespace OrderBookUpdated
             {
                 Logger?.Error(ex);
             }
+        }
+        public void RemovesForUnsubscribe(int index)
+        {
+            tabControlSubscriptions.TabPages.RemoveAt(index);
+            Panels.RemoveAt(index);
+            ActiveSubscriptions.RemoveAt(index);
+            Orderbooks.RemoveAt(index);
         }
         public async Task UnsubscribeAll()
         {
@@ -161,7 +173,8 @@ namespace OrderBookUpdated
                     await Unsubscribe(ActiveSubscriptions[0]);
                     lbActiveSubs.Items.RemoveAt(0);
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Logger?.Error(ex);
             }
@@ -179,7 +192,8 @@ namespace OrderBookUpdated
 
                     System.Threading.Timer HeartbeatTimer = new System.Threading.Timer(OnHeartbeatTimer, autoEvent, 5000, 5000);
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Logger?.Error(ex);
             }
@@ -189,7 +203,8 @@ namespace OrderBookUpdated
             try
             {
                 await DisconnectSocket();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Logger?.Error(ex);
             }
@@ -267,20 +282,19 @@ namespace OrderBookUpdated
                             }
                             catch (Exception ex)
                             {
+                                string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bin", "Debug", "net6.0-windows7.0", "log.txt");
+                                WriteToLogFile(logFilePath, completeMessage);
                                 Logger.Error(ex);
                             }
                             messageBuilder.Clear();
                         }
                     }
                 }
-            } catch (Exception ex)
-            {
-                Logger?.Error(ex); 
             }
-        }
-        public void UpdateOutput()
-        {
-            //label1.Text = Orderbook.Length.ToString();
+            catch (Exception ex)
+            {
+                Logger?.Error(ex);
+            }
         }
         public void ProcessDataReceived(ActionData ActionData)
         {
@@ -315,7 +329,6 @@ namespace OrderBookUpdated
                         {
                             Logger.Info($"{action} is not catered for yet");
                         }
-                        UpdateOutput();
                     }
                 }
                 catch (Exception ex)
@@ -328,7 +341,20 @@ namespace OrderBookUpdated
                 Logger.Error(ex);
             }
         }
-
+        public void WriteToLogFile(string filePath, string message)
+        {
+            try
+            {
+                using (StreamWriter writer = File.AppendText(filePath))
+                {
+                    writer.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {message}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger?.Error(ex);
+            }
+        }
         // Action methods:
         public void PartialAction(List<Order> Data, int OrderbookI)
         {            // loop through orders and add to orderbook object
@@ -336,6 +362,8 @@ namespace OrderBookUpdated
             {
                 Orderbooks[OrderbookI].AddOrder(order);
             }
+            //Panels[OrderbookI].SetLargestTotals(Orderbooks[OrderbookI].BuyOrders[^1].TotalUSD, Orderbooks[OrderbookI].SellOrders[^1].TotalUSD);
+            Panels[OrderbookI].SetLargestTotals(10000, 100);
         }
         public void DeleteAction(List<Order> Data, int OrderbookI)
         {
@@ -378,7 +406,7 @@ namespace OrderBookUpdated
             {
                 int CellColour = order.GetCellColour();
                 int CellIndex = Orderbooks[OrderbookI].GetOrderIndex(order);
-                if ( CellIndex > -1)
+                if (CellIndex > -1)
                 {
                     ChangeCellColour(order.Side, CellIndex, CellColour, OrderbookI);
                 }
@@ -399,20 +427,16 @@ namespace OrderBookUpdated
                 Logger?.Error($"cellIndex Received: {cellIndex}. Error: {ex}");
             }
         }
-        public void Form1_Load(object sender, EventArgs e) { 
+        public void Form1_Load(object sender, EventArgs e)
+        {
             cbSubscriptionTopics.DataSource = Enum.GetNames(typeof(TopicType));
             cbSelectToken.DataSource = Enum.GetNames(typeof(Symbols));
-            cbSubscriptionTopics.SelectedIndex = 4;
+            cbSubscriptionTopics.SelectedIndex = 0;
         }
         private void OrderBindingSource_CurrentChanged(object sender, EventArgs e)
         {
 
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private async void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -423,6 +447,15 @@ namespace OrderBookUpdated
             {
                 Logger?.Error(ex);
             }
+        }
+        private void tabControlSubscriptions_Selected(object sender, TabControlEventArgs e)
+        {
+            lbActiveSubs.SelectedIndex = tabControlSubscriptions.SelectedIndex;
+        }
+
+        private void TestBut_Click(object sender, EventArgs e)
+        {
+            Panels[0].SetLargestTotals(100000, 10000);
         }
     }
     public class ActionData
@@ -480,6 +513,7 @@ namespace OrderBookUpdated
         public int OldSize { get; set; }
         public double Price { get; set; }
         public DateTime Timestamp { get; set; }
+        public int TotalUSD { get; set; }
 
 
 
@@ -492,14 +526,22 @@ namespace OrderBookUpdated
             this.Price = price;
             this.Timestamp = timestamp;
             this.OldSize = -1;
+            this.TotalUSD = size;
         }
-
-
+        public void UpdateTotalUSD(BindingList<Order> orders, int index) {
+            this.TotalUSD = this.Size;
+            if (index != 0)
+            {
+                for (int i = index-1; i >= 0; i--)
+                {
+                    this.TotalUSD += orders[i].Size;
+                }
+            }
+        }
         public Order()
         {
 
         }
-
         public int GetCellColour()
         {
             if (this.OldSize == -1)
@@ -515,28 +557,30 @@ namespace OrderBookUpdated
                 return 2;
             }
         }
-
         public override string ToString()
         {
             return $"Order [Symbol: {Symbol}, ID: {Id}, Side: {Side}, Size: {Size}, Price: {Price}, Timestamp: {Timestamp}]";
         }
-
     }
     public class Orderbook
     {
-        public BindingList<Order> SellOrders = new BindingList<Order>();
-        public BindingList<Order> BuyOrders = new BindingList<Order>();
+        public BindingList<Order> SellOrders = new();
+        public BindingList<Order> BuyOrders = new();
         public int Length { get; set; }
         public void AddOrder(Order order)
         {
             if (order.Side == SideType.Buy)
             {
                 BuyOrders.Add(order);
-
+                BuyOrders[^1].UpdateTotalUSD(BuyOrders, BuyOrders.Count-1);
             }
             else
             {
                 SellOrders.Insert(0, order);
+                for (int i = 0; i < SellOrders.Count; i++)
+                {
+                    SellOrders[i].TotalUSD += order.Size;
+                }
             }
 
             this.Length++;
@@ -563,10 +607,20 @@ namespace OrderBookUpdated
             if (order.Side == SideType.Buy)
             {
                 this.BuyOrders.Insert(index, order);
+                this.BuyOrders[index].UpdateTotalUSD(this.BuyOrders, index);
+                for (int i =  index; i < orderList.Count; i++)
+                {
+                    BuyOrders[i].TotalUSD += order.Size;
+                }
             }
             else
             {
                 this.SellOrders.Insert(index, order);
+                this.SellOrders[index].UpdateTotalUSD(this.SellOrders, index);
+                for (int i = index; i < orderList.Count; i++)
+                {
+                    SellOrders[i].TotalUSD += order.Size;
+                }
             }
             this.Length++;
         }
@@ -575,8 +629,12 @@ namespace OrderBookUpdated
             BindingList<Order> orders = (order.Side == SideType.Buy) ? this.BuyOrders : this.SellOrders;
             for (int i = orders.Count -1; i >= 0; i--)
             {
-                if (orders[i].Id == order.Id)
+                if (orders[i].Price == order.Price)
                 {
+                    for (int j = i + 1; j < orders.Count; j++)
+                    {
+                        orders[j].TotalUSD -= orders[i].Size;
+                    }
                     orders.RemoveAt(i);
                 }
             }
@@ -587,11 +645,18 @@ namespace OrderBookUpdated
             for (int i = 0; i < orders.Count; i++)
             {
                 {
-                    if (order.Id == orders[i].Id)
+                    if (order.Price == orders[i].Price)
                     {
                         int OldSize = orders[i].Size;
                         orders[i] = order;
                         orders[i].OldSize = OldSize;
+                        int SizeDif = order.Size - OldSize;
+                        orders[i].UpdateTotalUSD(orders, i);
+                        for (int j = i+1; j < orders.Count; j++)
+                        {
+                            orders[j].TotalUSD += SizeDif;
+                        }
+
                     }
                 }
             }
@@ -655,6 +720,7 @@ namespace OrderBookUpdated
     }
     public enum Symbols
     {
+        NEARUSD,
         XBTUSD,
         SOLUSD,
         ETHUSD,
@@ -663,24 +729,8 @@ namespace OrderBookUpdated
     }
     public enum TopicType
     {
-        [Description("funding")] funding,
-        [Description("instrument")] instrument,
-        [Description("insurance")] insurance,
-        [Description("liquidation")] liquidation,
         orderBookL2_25,
-        [Description("orderBookL2")] orderBookL2,
-        [Description("orderBook10")] orderBook10,
-        [Description("quote")] quote,
-        [Description("quoteBin1m")] quoteBin1m,
-        [Description("quoteBin5m")] quoteBin5m,
-        [Description("quoteBin1h")] quoteBin1h,
-        [Description("quoteBin1d")] quoteBin1d,
-        [Description("settlement")] settlement,
-        [Description("trade")] trade,
-        [Description("tradeBin1m")] tradeBin1m,
-        [Description("tradeBin1d")] tradeBin1d,
-        [Description("tradeBin1h")] tradeBin1h,
-        [Description("tradeBin5m")] tradeBin5m,
+        orderBookL2
     }
     public class Subscription
     {
