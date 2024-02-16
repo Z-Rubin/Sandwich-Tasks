@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net.Repository.Hierarchy;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using log4net.Core;
 using System.Windows.Forms;
 
 namespace OrderBookUpdated
@@ -29,17 +31,17 @@ namespace OrderBookUpdated
                 {
                     if (cellColour == 1)
                     {
-                        this.dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Green;
+                        this.dgvBuy[1, cellIndex].Style.ForeColor = Color.Green;
 
                     }
                     else if (cellColour == 2)
                     {
-                        this.dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Red;
+                        this.dgvBuy[1, cellIndex].Style.ForeColor = Color.Red;
 
                     }
                     else if (cellColour == 0)
                     {
-                        this.dgvBuy[BuySizeColumnIndex, cellIndex].Style.ForeColor = Color.Black;
+                        this.dgvBuy[1, cellIndex].Style.ForeColor = Color.Black;
 
                     }
                 }
@@ -75,39 +77,42 @@ namespace OrderBookUpdated
         }
         public void AddTotalColumns(float LargestTotalBuy, float LargestTotalSell)
         {
-            dgvBuy.Columns.Insert(0, new DataGridViewProgressColumn(10000));
+            DataGridViewProgressColumn dgvProgressCol = new DataGridViewProgressColumn();
+            //dgvProgressCol.SetLargestTotal(100);
+            dgvBuy.Columns.Insert(0, dgvProgressCol);
             dgvBuy.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvBuy.Columns[0].DataPropertyName = "TotalUSD";
             dgvBuy.Columns[0].HeaderText = "Total (USD)";
+            dgvProgressCol = new DataGridViewProgressColumn();
+            dgvSell.Columns.Add(dgvProgressCol);
+            dgvSell.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvSell.Columns[2].DataPropertyName = "TotalUSD";
+            dgvSell.Columns[2].HeaderText = "Total (USD)";
 
-            dgvSell.Columns.Insert(0, new DataGridViewProgressColumn(10000));
-            dgvSell.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgvSell.Columns[0].DataPropertyName = "TotalUSD";
-            dgvSell.Columns[0].HeaderText = "Total (USD)";
-        }
-        public void SetLargestTotals(float LargestTotalBuy, float LargestTotalSell)
-        {
-
-
-            if (dgvBuy.Rows.Count > 3)
+            if (dgvBuy.Rows[0].Cells[0].OwningColumn is DataGridViewProgressColumn OwningColumn)
             {
-                if (dgvBuy.Rows[3].Cells[0] is DataGridViewProgressCell cell)
+                OwningColumn.SetLargestTotal(LargestTotalBuy);
+                OwningColumn.SetSide("Buy");
+            }
+            if (dgvSell.Rows[0].Cells[2].OwningColumn is DataGridViewProgressColumn OwningColumn2)
+            {
+                OwningColumn2.SetLargestTotal(LargestTotalSell);
+                OwningColumn2.SetSide("Sell");
+            }
+        }
+        public void SetLargestTotalsAll(float LargestTotalBuy, float LargestTotalSell)        {
+  
+                if (dgvBuy.Columns[0] is DataGridViewProgressColumn Column)
                 {
-                    cell.LargestTotal = LargestTotalBuy;
-                    MessageBox.Show(cell.LargestTotal.ToString());
+                    Column.SetLargestTotal(LargestTotalBuy);
                 }
-            }
+                if (dgvSell.Columns[2] is DataGridViewProgressColumn Column1)
+                {
+                    Column1.SetLargestTotal(LargestTotalSell);
+                }
 
-        }
-        public void SetLargestTotalsTest(float LargestTotalBuy)
-        {
-            if (dgvBuy.Rows[3].Cells[0] is DataGridViewProgressCell cell)
-            {
-                MessageBox.Show(cell.LargestTotal.ToString());
-                cell.LargestTotal = 1000;
-                MessageBox.Show(cell.LargestTotal.ToString());
-                dgvBuy.InvalidateCell(cell);
-            }
+            dgvBuy.InvalidateColumn(0);
+            dgvSell.InvalidateColumn(2);
         }
 
         public void SetSymbolLabel(string symbolLabel)

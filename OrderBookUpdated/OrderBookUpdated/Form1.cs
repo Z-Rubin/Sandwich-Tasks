@@ -88,8 +88,8 @@ namespace OrderBookUpdated
                     int index = ActiveSubscriptions.FindIndex(Subscription => Subscription.args == lbActiveSubs.SelectedItem.ToString());
                     if (index > -1)
                     {
-                        await Unsubscribe(ActiveSubscriptions[index]);
-                        lbActiveSubs.Items.RemoveAt(index);
+                       await Unsubscribe(ActiveSubscriptions[index]);
+                       lbActiveSubs.Items.RemoveAt(index);
                     }
                 }
             }
@@ -148,7 +148,7 @@ namespace OrderBookUpdated
                 byte[] buffer = Encoding.UTF8.GetBytes(Subscription.UnsubscribeToJsonMessage());
                 await WebSocket.SendAsync(new ArraySegment<byte>(buffer), WebSocketMessageType.Text, true, CancellationToken.None);
                 int index = ActiveSubscriptions.IndexOf(Subscription);
-                RemovesForUnsubscribe(index); // removes panels, list entries etc...
+                //RemovesForUnsubscribe(index); // removes panels, list entries etc...
                 Logger?.Info($"Successfully unsubscribed with {Subscription.UnsubscribeToJsonMessage()}");
 
             }
@@ -362,8 +362,7 @@ namespace OrderBookUpdated
             {
                 Orderbooks[OrderbookI].AddOrder(order);
             }
-            //Panels[OrderbookI].SetLargestTotals(Orderbooks[OrderbookI].BuyOrders[^1].TotalUSD, Orderbooks[OrderbookI].SellOrders[^1].TotalUSD);
-            Panels[OrderbookI].AddTotalColumns(10000, 10000);
+            Panels[OrderbookI].AddTotalColumns(Orderbooks[OrderbookI].BuyOrders[^1].TotalUSD, Orderbooks[OrderbookI].SellOrders[^1].TotalUSD);
         }
         public void DeleteAction(List<Order> Data, int OrderbookI)
         {
@@ -372,7 +371,7 @@ namespace OrderBookUpdated
             {
                 Orderbooks[OrderbookI].DeleteOrder(order);
             }
-
+            Panels[OrderbookI].SetLargestTotalsAll(Orderbooks[OrderbookI].BuyOrders[^1].TotalUSD, Orderbooks[OrderbookI].SellOrders[^1].TotalUSD);
         }
         public void InsertAction(List<Order> Data, int OrderbookI)
         {
@@ -381,11 +380,10 @@ namespace OrderBookUpdated
                 Orderbooks[OrderbookI].InsertOrder(order);
                 UpdateCellColour(order, OrderbookI);
             }
+            Panels[OrderbookI].SetLargestTotalsAll(Orderbooks[OrderbookI].BuyOrders[^1].TotalUSD, Orderbooks[OrderbookI].SellOrders[^1].TotalUSD);
         }
         public void UpdateAction(List<Order> Data, int OrderbookI)
         {
-            Panels[OrderbookI].SetLargestTotals(10000, 10000);
-
             try
             {
                 foreach (var order in Data)
@@ -394,6 +392,7 @@ namespace OrderBookUpdated
 
                     UpdateCellColour(order, OrderbookI);
                 }
+                Panels[OrderbookI].SetLargestTotalsAll(Orderbooks[OrderbookI].BuyOrders[^1].TotalUSD, Orderbooks[OrderbookI].SellOrders[^1].TotalUSD);
             }
             catch (Exception ex)
             {
@@ -454,10 +453,9 @@ namespace OrderBookUpdated
         {
             lbActiveSubs.SelectedIndex = tabControlSubscriptions.SelectedIndex;
         }
-
         private void TestBut_Click(object sender, EventArgs e)
         {
-            Panels[0].SetLargestTotalsTest(10000);
+            Panels[0].SetLargestTotalsAll(Orderbooks[0].BuyOrders[^1].TotalUSD, Orderbooks[0].SellOrders[^1].TotalUSD);
         }
     }
     public class ActionData
@@ -610,7 +608,7 @@ namespace OrderBookUpdated
             {
                 this.BuyOrders.Insert(index, order);
                 this.BuyOrders[index].UpdateTotalUSD(this.BuyOrders, index);
-                for (int i =  index; i < orderList.Count; i++)
+                for (int i =  index+1; i < orderList.Count; i++)
                 {
                     BuyOrders[i].TotalUSD += order.Size;
                 }
@@ -619,7 +617,7 @@ namespace OrderBookUpdated
             {
                 this.SellOrders.Insert(index, order);
                 this.SellOrders[index].UpdateTotalUSD(this.SellOrders, index);
-                for (int i = index; i < orderList.Count; i++)
+                for (int i = index+1; i < orderList.Count; i++)
                 {
                     SellOrders[i].TotalUSD += order.Size;
                 }
