@@ -457,7 +457,7 @@ namespace OrderBookUpdated
 
         private void TestBut_Click(object sender, EventArgs e)
         {
-           
+            Panels[0].SetLargestTotalsTest(10000);
         }
     }
     public class ActionData

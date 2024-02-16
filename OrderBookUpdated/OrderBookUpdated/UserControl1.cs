@@ -79,9 +79,15 @@ namespace OrderBookUpdated
             dgvBuy.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgvBuy.Columns[0].DataPropertyName = "TotalUSD";
             dgvBuy.Columns[0].HeaderText = "Total (USD)";
+
+            dgvSell.Columns.Insert(0, new DataGridViewProgressColumn(10000));
+            dgvSell.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvSell.Columns[0].DataPropertyName = "TotalUSD";
+            dgvSell.Columns[0].HeaderText = "Total (USD)";
         }
         public void SetLargestTotals(float LargestTotalBuy, float LargestTotalSell)
         {
+
 
             if (dgvBuy.Rows.Count > 3)
             {
@@ -93,6 +99,17 @@ namespace OrderBookUpdated
             }
 
         }
+        public void SetLargestTotalsTest(float LargestTotalBuy)
+        {
+            if (dgvBuy.Rows[3].Cells[0] is DataGridViewProgressCell cell)
+            {
+                MessageBox.Show(cell.LargestTotal.ToString());
+                cell.LargestTotal = 1000;
+                MessageBox.Show(cell.LargestTotal.ToString());
+                dgvBuy.InvalidateCell(cell);
+            }
+        }
+
         public void SetSymbolLabel(string symbolLabel)
         {
             lblSymbol.Text = symbolLabel;
