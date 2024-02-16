@@ -73,19 +73,23 @@ namespace OrderBookUpdated
             dgvBuy.CurrentCell = null;
             dgvSell.CurrentCell = null;
         }
+        public void AddTotalColumns(float LargestTotalBuy, float LargestTotalSell)
+        {
+            dgvBuy.Columns.Insert(0, new DataGridViewProgressColumn(10000));
+            dgvBuy.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvBuy.Columns[0].DataPropertyName = "TotalUSD";
+            dgvBuy.Columns[0].HeaderText = "Total (USD)";
+        }
         public void SetLargestTotals(float LargestTotalBuy, float LargestTotalSell)
         {
 
-            if (dgvBuy.Columns[0] is DataGridViewProgressColumn progressColumn)
+            if (dgvBuy.Rows.Count > 3)
             {
-                // Set the new LargestTotal value
-                progressColumn.SetLargestTotal(LargestTotalBuy);
-                dgvBuy.InvalidateColumn(0);
-                MessageBox.Show("");
-            }
-            if (dgvSell.Columns[2] is DataGridViewProgressColumn TotalColumnSell)
-            {
-                TotalColumnSell.SetLargestTotal(LargestTotalSell);
+                if (dgvBuy.Rows[3].Cells[0] is DataGridViewProgressCell cell)
+                {
+                    cell.LargestTotal = LargestTotalBuy;
+                    MessageBox.Show(cell.LargestTotal.ToString());
+                }
             }
 
         }

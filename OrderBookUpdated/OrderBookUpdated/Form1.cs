@@ -363,7 +363,7 @@ namespace OrderBookUpdated
                 Orderbooks[OrderbookI].AddOrder(order);
             }
             //Panels[OrderbookI].SetLargestTotals(Orderbooks[OrderbookI].BuyOrders[^1].TotalUSD, Orderbooks[OrderbookI].SellOrders[^1].TotalUSD);
-            Panels[OrderbookI].SetLargestTotals(10000, 100);
+            Panels[OrderbookI].AddTotalColumns(10000, 10000);
         }
         public void DeleteAction(List<Order> Data, int OrderbookI)
         {
@@ -384,6 +384,8 @@ namespace OrderBookUpdated
         }
         public void UpdateAction(List<Order> Data, int OrderbookI)
         {
+            Panels[OrderbookI].SetLargestTotals(10000, 10000);
+
             try
             {
                 foreach (var order in Data)
@@ -455,7 +457,7 @@ namespace OrderBookUpdated
 
         private void TestBut_Click(object sender, EventArgs e)
         {
-            Panels[0].SetLargestTotals(100000, 10000);
+           
         }
     }
     public class ActionData

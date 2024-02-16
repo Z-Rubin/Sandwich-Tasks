@@ -4965,3 +4965,95 @@ Actual value was 1.
 2024-02-16 11:14:32,044 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
 2024-02-16 11:14:46,312 INFO - Connection Established: wss://ws.bitmex.com/realtime
 2024-02-16 11:14:46,372 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:16:50,021 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:16:50,082 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:16:50,340 ERROR - Error processing action partial, index is 0, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.ArrayList.get_Item(Int32 index)
+   at System.Windows.Forms.DataGridViewColumnCollection.get_Item(Int32 index)
+   at OrderBookUpdated.pnlOrderbook.SetLargestTotals(Single LargestTotalBuy, Single LargestTotalSell) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\UserControl1.cs:line 86
+   at OrderBookUpdated.Form1.PartialAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 366
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-16 11:16:57,665 WARN - Symbol Topic combo is already subscribed to
+2024-02-16 11:17:00,426 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:SOLUSD"}
+2024-02-16 11:17:00,594 ERROR - Error processing action partial, index is 1, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.ArrayList.get_Item(Int32 index)
+   at System.Windows.Forms.DataGridViewColumnCollection.get_Item(Int32 index)
+   at OrderBookUpdated.pnlOrderbook.SetLargestTotals(Single LargestTotalBuy, Single LargestTotalSell) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\UserControl1.cs:line 86
+   at OrderBookUpdated.Form1.PartialAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 366
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-16 11:17:02,102 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:17:02,106 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:SOLUSD"}
+2024-02-16 11:19:46,203 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:19:46,258 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:19:46,483 ERROR - Error processing action partial, index is 0, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.ArrayList.get_Item(Int32 index)
+   at System.Windows.Forms.DataGridViewColumnCollection.get_Item(Int32 index)
+   at OrderBookUpdated.pnlOrderbook.SetLargestTotals(Single LargestTotalBuy, Single LargestTotalSell) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\UserControl1.cs:line 90
+   at OrderBookUpdated.Form1.PartialAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 366
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-16 11:21:08,360 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:21:08,423 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:21:08,639 ERROR - Error processing action partial, index is 0, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.ArrayList.get_Item(Int32 index)
+   at System.Windows.Forms.DataGridViewColumnCollection.get_Item(Int32 index)
+   at OrderBookUpdated.pnlOrderbook.SetLargestTotals(Single LargestTotalBuy, Single LargestTotalSell) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\UserControl1.cs:line 93
+   at OrderBookUpdated.Form1.PartialAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 366
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-16 11:21:10,122 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:22:09,749 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:22:09,815 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:22:10,054 ERROR - Error processing action partial, index is 0, exception: System.MissingMethodException: Cannot dynamically create an instance of type 'OrderBookUpdated.DataGridViewProgressCell'. Reason: No parameterless constructor defined.
+   at System.RuntimeType.ActivatorCache..ctor(RuntimeType rt)
+   at System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean wrapExceptions)
+   at System.Activator.CreateInstance(Type type, Boolean nonPublic, Boolean wrapExceptions)
+   at System.Activator.CreateInstance(Type type)
+   at System.Windows.Forms.DataGridViewImageCell.Clone()
+   at System.Windows.Forms.DataGridView.OnInsertingColumn(Int32 columnIndexInserted, DataGridViewColumn dataGridViewColumn, Point& newCurrentCell)
+   at System.Windows.Forms.DataGridViewColumnCollection.Insert(Int32 columnIndex, DataGridViewColumn dataGridViewColumn)
+   at OrderBookUpdated.pnlOrderbook.AddTotalColumns(Single LargestTotalBuy, Single LargestTotalSell) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\UserControl1.cs:line 78
+   at OrderBookUpdated.Form1.PartialAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 366
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-16 11:22:11,319 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:24:13,320 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:24:13,373 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:24:17,769 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:24:47,573 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:24:47,623 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:24:50,859 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:30:06,638 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:30:06,694 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:30:22,003 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:30:22,068 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:31:55,228 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:31:55,292 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:32:01,743 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:32:10,477 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:32:10,532 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:32:10,734 ERROR - Error processing action partial, index is 0, exception: System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')
+   at System.Collections.ArrayList.get_Item(Int32 index)
+   at System.Windows.Forms.DataGridViewRowCollection.SharedRow(Int32 rowIndex)
+   at System.Windows.Forms.DataGridViewRowCollection.get_Item(Int32 index)
+   at OrderBookUpdated.pnlOrderbook.AddTotalColumns(Single LargestTotalBuy, Single LargestTotalSell) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\UserControl1.cs:line 81
+   at OrderBookUpdated.Form1.PartialAction(List`1 Data, Int32 OrderbookI) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 366
+   at OrderBookUpdated.Form1.ProcessDataReceived(ActionData ActionData) in C:\Users\zac\source\repos\Sandwich-Tasks\OrderBookUpdated\OrderBookUpdated\Form1.cs:line 313
+2024-02-16 11:32:50,316 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:32:50,386 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:32:53,783 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:33:35,270 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:33:35,325 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:33:48,311 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:33:48,362 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:34:32,954 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:34:33,015 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:35:03,737 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:35:03,792 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:35:42,820 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:35:42,883 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:36:13,179 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:36:13,278 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:36:18,810 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:37:25,875 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:37:25,932 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:39:18,793 INFO - Connection Established: wss://ws.bitmex.com/realtime
+2024-02-16 11:39:18,888 INFO - Successfully subscribed with: {"op":"subscribe","args":"orderBookL2_25:NEARUSD"}
+2024-02-16 11:39:34,266 INFO - Successfully unsubscribed with {"op":"unsubscribe","args":"orderBookL2_25:NEARUSD"}

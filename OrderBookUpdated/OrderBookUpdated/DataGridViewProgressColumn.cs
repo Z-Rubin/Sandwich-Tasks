@@ -11,9 +11,9 @@ namespace OrderBookUpdated
 {
     public class DataGridViewProgressColumn : DataGridViewImageColumn
     {
-        public DataGridViewProgressColumn()
+        public DataGridViewProgressColumn(float LargestTotal)
         {
-            CellTemplate = new DataGridViewProgressCell();
+            CellTemplate = new DataGridViewProgressCell(LargestTotal);
         }
 
         // Method to set LargestTotal for the cell template
@@ -36,8 +36,12 @@ namespace OrderBookUpdated
         {
             emptyImage = new Bitmap(1, 1, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
         }
-        public DataGridViewProgressCell()
+        public DataGridViewProgressCell() : this(100f) { }
+
+        // Constructor with LargestTotal parameter
+        public DataGridViewProgressCell(float largestTotal)
         {
+            LargestTotal = largestTotal;
             this.ValueType = typeof(int);
         }
         // Method required to make the Progress Cell consistent with the default Image Cell. 
