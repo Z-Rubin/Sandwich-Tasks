@@ -720,7 +720,6 @@ namespace OrderBookUpdated
     }
     public enum Symbols
     {
-        NEARUSD,
         XBTUSD,
         SOLUSD,
         ETHUSD,
