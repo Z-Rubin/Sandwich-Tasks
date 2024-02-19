@@ -14,10 +14,10 @@ namespace Callbacks
 {
     interface ILogger
     {
-        void LogError(string ex);
+        void LogError(Exception ex);
         void LogWarning(string ex) ;
         void LogInfo(string ex) ;
-        void LogFatal(string ex) ;
+        void LogFatal(Exception ex) ;
 
     }
     public sealed class Logger : ILogger
@@ -37,7 +37,6 @@ namespace Callbacks
         }
 
         #endregion
-
         private Logger()
         {
             ILoggerRepository repository = LogManager.GetRepository(Assembly.GetCallingAssembly());
@@ -46,7 +45,7 @@ namespace Callbacks
 
             log4net.Config.XmlConfigurator.Configure(repository, fileInfo);
         }
-        public void LogError(string ex) 
+        public void LogError(Exception ex) 
         {
             try
             {
@@ -62,7 +61,7 @@ namespace Callbacks
             }
             catch { }
         }
-        public void LogFatal(string ex) 
+        public void LogFatal(Exception ex) 
         {
             try
             {

@@ -4,67 +4,92 @@ namespace Callbacks
 {
     public partial class Form1 : Form
     {
-        string logFile = $".\\Logs\\logs.log";
 
-        SimpleMessageProvider SMP = new SimpleMessageProvider();
-        Logger logger = Logger.Instance;
-
-
+        private SimpleMessageProvider _simpleMessaveProvider = SimpleMessageProvider.Instance;
+        public Logger Logger = Logger.Instance;
         public Form1()
         {
             InitializeComponent();
         }
-
-        private async Task PrintEven(SimpleCustomArgs args)
+        private async Task PrintEven(SimpleEventArgs args)
         {
-            rtbEven.Invoke((Action)(() => rtbEven.AppendText($"{args.CurrentDateTime}\n")));
+            try
+            {
+                rtbEven.Invoke((Action)(() => rtbEven.AppendText($"{args.CurrentDateTime}\n")));
+            }
+            catch (Exception ex)
+            {
+                Logger?.LogError(ex);
+            }
         }
-        private async Task PrintOdd(SimpleCustomArgs args)
+        private async Task PrintOdd(SimpleEventArgs args)
         {
-            rtbOdd.Invoke((Action)(() => rtbOdd.AppendText($"{args.CurrentDateTime}\n")));
+            try
+            {
+                rtbOdd.Invoke((Action)(() => rtbOdd.AppendText($"{args.CurrentDateTime}\n")));
+            }
+            catch (Exception ex)
+            {
+                Logger?.LogError(ex);
+            }
         }
-
-        private async void Print(object sender, ElapsedEventArgs e)
+        private void Print(object sender, SimpleEventArgs e)
         {
-            rtbNormal.Invoke(() => rtbNormal.AppendText($"{DateTime.Now}\n"));
+            try
+            {
+                rtbNormal.Invoke(() => rtbNormal.AppendText($"{DateTime.Now}\n"));
+            }
+            catch (Exception ex)
+            {
+                Logger?.LogError(ex);
+            }
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private async Task PrintWorkerName(SimpleEventArgs e)
         {
-            SMP.AddOnTimerEvent(Print);
-            logger.LogInfo("Printing Even");
-
+            try
+            {
+                rtbWorkerName.Invoke(() => rtbWorkerName.AppendText($"Worker Name: {Thread.CurrentThread.ManagedThreadId} - {DateTime.Now}\n"));
+            }
+            catch (Exception ex)
+            {
+                Logger?.LogError(ex);
+            }
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-            SMP.StartTimer();
+            _simpleMessaveProvider.StartTimer();
         }
-
-        private void button6_Click(object sender, EventArgs e)
+        private void btnNormalSubscribe_Click(object sender, EventArgs e)
         {
-            SMP.AddSubscription(PrintOdd, "Odd");
+            _simpleMessaveProvider.AddSimpleSubscription(Print);
         }
-
-        private void button4_Click(object sender, EventArgs e)
+        private void btnNormalUnsubscribe_Click(object sender, EventArgs e)
         {
-            SMP.AddSubscription(PrintEven, "Even");
-
+            _simpleMessaveProvider.RemoveSimpleSubscription(Print);
         }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void btnEvenSubscribe_Click(object sender, EventArgs e)
         {
-            SMP.RemoveOnTimerEvent(Print);
+            _simpleMessaveProvider.AddSubscription(PrintEven, "Even");
         }
-
-        private void button3_Click(object sender, EventArgs e)
+        private void btnEvenUnsunscribe_Click(object sender, EventArgs e)
         {
-            SMP.RemoveSubscription("Even");
+            _simpleMessaveProvider.RemoveSubscription(PrintEven, "Even");
         }
-
-        private void button5_Click(object sender, EventArgs e)
+        private void btnOddSubscribe_Click(object sender, EventArgs e)
         {
-            SMP.RemoveSubscription("Odd");
+            _simpleMessaveProvider.AddSubscription(PrintOdd, "Odd");
+        }
+        private void btnOddUnsubscribe_Click(object sender, EventArgs e)
+        {
+            _simpleMessaveProvider.RemoveSubscription(PrintOdd, "Odd");
+        }
+        private void btnSubscribeEvenThreadName_Click(object sender, EventArgs e)
+        {
+            _simpleMessaveProvider.AddSubscription(PrintWorkerName, "Even");
+        }
+        private void btnUnsubscribeEvenThreadName_Click(object sender, EventArgs e)
+        {
+            _simpleMessaveProvider.RemoveSubscription(PrintWorkerName, "Even");
         }
     }
 }

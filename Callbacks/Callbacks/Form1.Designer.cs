@@ -37,6 +37,9 @@
             btnOddUnsubscribe = new Button();
             btnOddSubscribe = new Button();
             rtbOdd = new RichTextBox();
+            rtbWorkerName = new RichTextBox();
+            btnSubscribeEvenThreadName = new Button();
+            btnUnsubscribeEvenThreadName = new Button();
             SuspendLayout();
             // 
             // rtbNormal
@@ -55,7 +58,7 @@
             btnNormalSubscribe.TabIndex = 4;
             btnNormalSubscribe.Text = "Subscribe";
             btnNormalSubscribe.UseVisualStyleBackColor = true;
-            btnNormalSubscribe.Click += button1_Click;
+            btnNormalSubscribe.Click += btnNormalSubscribe_Click;
             // 
             // btnNormalUnsubscribe
             // 
@@ -65,7 +68,7 @@
             btnNormalUnsubscribe.TabIndex = 12;
             btnNormalUnsubscribe.Text = "Unsubscribe";
             btnNormalUnsubscribe.UseVisualStyleBackColor = true;
-            btnNormalUnsubscribe.Click += button2_Click;
+            btnNormalUnsubscribe.Click += btnNormalUnsubscribe_Click;
             // 
             // btnEvenUnsunscribe
             // 
@@ -75,7 +78,7 @@
             btnEvenUnsunscribe.TabIndex = 15;
             btnEvenUnsunscribe.Text = "Unsubscribe Even";
             btnEvenUnsunscribe.UseVisualStyleBackColor = true;
-            btnEvenUnsunscribe.Click += button3_Click;
+            btnEvenUnsunscribe.Click += btnEvenUnsunscribe_Click;
             // 
             // btnEvenSubscribe
             // 
@@ -85,7 +88,7 @@
             btnEvenSubscribe.TabIndex = 14;
             btnEvenSubscribe.Text = "Subscribe Even";
             btnEvenSubscribe.UseVisualStyleBackColor = true;
-            btnEvenSubscribe.Click += button4_Click;
+            btnEvenSubscribe.Click += btnEvenSubscribe_Click;
             // 
             // rtbEven
             // 
@@ -103,7 +106,7 @@
             btnOddUnsubscribe.TabIndex = 18;
             btnOddUnsubscribe.Text = "Unsubscribe Odd";
             btnOddUnsubscribe.UseVisualStyleBackColor = true;
-            btnOddUnsubscribe.Click += button5_Click;
+            btnOddUnsubscribe.Click += btnOddUnsubscribe_Click;
             // 
             // btnOddSubscribe
             // 
@@ -113,7 +116,7 @@
             btnOddSubscribe.TabIndex = 17;
             btnOddSubscribe.Text = "Subscribe Odd";
             btnOddSubscribe.UseVisualStyleBackColor = true;
-            btnOddSubscribe.Click += button6_Click;
+            btnOddSubscribe.Click += btnOddSubscribe_Click;
             // 
             // rtbOdd
             // 
@@ -123,11 +126,42 @@
             rtbOdd.TabIndex = 16;
             rtbOdd.Text = "";
             // 
+            // rtbWorkerName
+            // 
+            rtbWorkerName.Location = new Point(876, 61);
+            rtbWorkerName.Name = "rtbWorkerName";
+            rtbWorkerName.Size = new Size(241, 497);
+            rtbWorkerName.TabIndex = 19;
+            rtbWorkerName.Text = "";
+            // 
+            // btnSubscribeEvenThreadName
+            // 
+            btnSubscribeEvenThreadName.Location = new Point(876, 12);
+            btnSubscribeEvenThreadName.Name = "btnSubscribeEvenThreadName";
+            btnSubscribeEvenThreadName.Size = new Size(116, 43);
+            btnSubscribeEvenThreadName.TabIndex = 20;
+            btnSubscribeEvenThreadName.Text = "Subscribe Even Worker Name";
+            btnSubscribeEvenThreadName.UseVisualStyleBackColor = true;
+            btnSubscribeEvenThreadName.Click += btnSubscribeEvenThreadName_Click;
+            // 
+            // btnUnsubscribeEvenThreadName
+            // 
+            btnUnsubscribeEvenThreadName.Location = new Point(998, 12);
+            btnUnsubscribeEvenThreadName.Name = "btnUnsubscribeEvenThreadName";
+            btnUnsubscribeEvenThreadName.Size = new Size(116, 43);
+            btnUnsubscribeEvenThreadName.TabIndex = 21;
+            btnUnsubscribeEvenThreadName.Text = "Unsubscribe Even Worker Name";
+            btnUnsubscribeEvenThreadName.UseVisualStyleBackColor = true;
+            btnUnsubscribeEvenThreadName.Click += btnUnsubscribeEvenThreadName_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(863, 570);
+            ClientSize = new Size(1129, 570);
+            Controls.Add(btnUnsubscribeEvenThreadName);
+            Controls.Add(btnSubscribeEvenThreadName);
+            Controls.Add(rtbWorkerName);
             Controls.Add(btnOddUnsubscribe);
             Controls.Add(btnOddSubscribe);
             Controls.Add(rtbOdd);
@@ -154,5 +188,8 @@
         private Button btnOddUnsubscribe;
         private Button btnOddSubscribe;
         private RichTextBox rtbOdd;
+        private RichTextBox rtbWorkerName;
+        private Button btnSubscribeEvenThreadName;
+        private Button btnUnsubscribeEvenThreadName;
     }
 }
